@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rainbow_new/common/popup.dart';
+import 'package:rainbow_new/helper.dart';
+import 'package:rainbow_new/screens/auth/newpassword/newpassword_api/newpasword_api.dart';
+import 'package:rainbow_new/utils/strings.dart';
+
+class NewPasswordController extends GetxController {
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  RxBool loader = false.obs;
+  bool? showNewPwd = false;
+  bool? showConfirmPwd = false;
+
+  void onTapShowNewPwd() {
+    if (showNewPwd == false) {
+      showNewPwd = true;
+    } else {
+      showNewPwd = false;
+    }
+    update(["newPassword"]);
+  }
+
+  void onTapShowConfirmPwd() {
+    if (showConfirmPwd == false) {
+      showConfirmPwd = true;
+    } else {
+      showConfirmPwd = false;
+    }
+    update(["newPassword"]);
+  }
+
+  void onSignUpTap() {
+    // Get.to(() => RegisterScreen());
+  }
+
+  void onRegisterTap() {
+    if (validation()) {
+      createNewPassword();
+    }
+  }
+
+  bool validation() {
+    if (newPasswordController.text.isEmpty) {
+      errorToast(Strings.newPasswordError);
+      return false;
+    } else if (validatePassword(newPasswordController.text) == false) {
+      errorToast(Strings.confirmShortPassword);
+      return false;
+    } else if (confirmPasswordController.text.isEmpty) {
+      errorToast(Strings.coPasswordEmpty);
+      return false;
+    } else if (validatePassword(confirmPasswordController.text) == false) {
+      errorToast(Strings.confirmShortPassword);
+      return false;
+    } else if (confirmPasswordController.text != newPasswordController.text) {
+      errorToast(Strings.confirmPasswordMismatch);
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> createNewPassword() async {
+    try {
+      loader.value = true;
+      await CreateNewPasswordApi.postRegister(newPasswordController.text);
+      loader.value = false;
+    } catch (e) {
+      flutterToast(e.toString());
+      loader.value = false;
+    }
+  }
+}

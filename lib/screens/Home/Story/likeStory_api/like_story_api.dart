@@ -1,0 +1,45 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:rainbow_new/common/popup.dart';
+import 'package:rainbow_new/model/like_story_model.dart';
+import 'package:rainbow_new/service/http_services.dart';
+import 'package:rainbow_new/service/pref_services.dart';
+import 'package:rainbow_new/utils/end_points.dart';
+import 'package:rainbow_new/utils/pref_keys.dart';
+
+class LikeStoryApi {
+  static Future postRegister(String id) async {
+    String accesToken = PrefService.getString(PrefKeys.registerToken);
+    try {
+      String url = EndPoints.likeStory;
+
+      Map<String, String> param = {"id_story": id.toString()};
+      if (kDebugMode) {
+        print(param);
+      }
+      http.Response? response = await HttpService.postApi(
+          url: url,
+          body: jsonEncode(param),
+          header: {
+            "Content-Type": "application/json",
+            "x-access-token": accesToken
+          });
+      if (response != null && response.statusCode == 200) {
+        bool? status = jsonDecode(response.body)["status"];
+        if (status == false) {
+          errorToast(jsonDecode(response.body)["message"]);
+        } else if (status == true) {
+          flutterToast(jsonDecode(response.body)["message"]);
+        }
+        return likeStoryModelFromJson(response.body);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return [];
+    }
+  }
+}
