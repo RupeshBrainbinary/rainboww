@@ -51,7 +51,7 @@ class RegisterApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          Get.offAll(() => const RegisterOtpScreen());
+          Get.to(() => const RegisterOtpScreen());
           await PrefService.setValue(
               PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
           await PrefService.setValue(PrefKeys.referrallCode,

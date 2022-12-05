@@ -155,7 +155,8 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
                         appBar(title: "Find ${widget.title}"),
                         //const SizedBox(height: 60),
                         /*    searchUser(),*/
-                        userProfile(),
+                        homeController.controller.viewProfile
+                            .data!.latitude.toString().isEmpty?const SizedBox():  userProfile(),
                         listOfUser(controller),
                       ],
                     ),

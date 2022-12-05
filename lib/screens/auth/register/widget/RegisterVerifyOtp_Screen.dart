@@ -4,9 +4,11 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/screens/auth/phonenumber/phonenumber_controller.dart';
-import 'package:rainbow_new/screens/auth/register/register_controller.dart';
 import 'package:rainbow_new/screens/auth/register/widget/registerVerify_controller.dart';
+import 'package:rainbow_new/service/pref_services.dart';
+import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
+import 'package:rainbow_new/utils/pref_keys.dart';
 import 'package:rainbow_new/utils/strings.dart';
 
 class RegisterOtpScreen extends StatefulWidget {
@@ -18,7 +20,7 @@ class RegisterOtpScreen extends StatefulWidget {
 
 class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final controller = Get.put(RegisterVerifyController());
+  RegisterVerifyController controller = Get.put(RegisterVerifyController());
 
   PhoneNumberController phoneNumberController =
       Get.put(PhoneNumberController());
@@ -27,13 +29,12 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
   void initState() {
     controller.startTimer();
     controller.verifyController = TextEditingController();
+    controller.getPhoneNumber();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    controller.getPhoneNumber();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(
@@ -63,18 +64,20 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                                 SizedBox(
                                   height: Get.height * 0.03,
                                 ),
-                                /*    GestureDetector(
+                                GestureDetector(
                                   onTap: () {
-                                    Get.back();
+                                    Navigator.pop(context);
                                   },
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Icon(
-                                      Icons.arrow_back_ios_outlined,
-                                      size: 16.72,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(7),
+                                    height: 30,
+                                    width: 30,
+                                    child: Image.asset(
+                                      AssetRes.backIcon,
+                                      height: 15,
                                     ),
                                   ),
-                                ),*/
+                                ),
                                 SizedBox(
                                   height: Get.height * 0.09,
                                 ),
@@ -87,26 +90,21 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                                 SizedBox(
                                   height: Get.height * 0.009,
                                 ),
-                                GetBuilder<RegisterController>(
-                                  builder: (controller1) {
-                                    return Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "${Strings.codeSent} ${controller.showPhoneNumber.toString().isEmpty ? controller.phoneNumber.toString() : controller.showPhoneNumber.toString()}",
-                                              style: TextStyle(
-                                                  color: ColorRes.white
-                                                      .withOpacity(0.5),
-                                                  fontSize: 14,
-                                                  fontFamily: "Gilroy-Light",
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                          ],
-                                        ));
-                                  },
-                                ),
+                                Padding(
+                                    padding: const EdgeInsets.only(left: 15),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "${Strings.codeSent} ${PrefService.getString(PrefKeys.phonSaveNumberEndUser)}",
+                                          style: TextStyle(
+                                              color: ColorRes.white
+                                                  .withOpacity(0.5),
+                                              fontSize: 14,
+                                              fontFamily: "Gilroy-Light",
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ],
+                                    )),
                                 SizedBox(
                                   height: Get.height * 0.04,
                                 ),
@@ -192,24 +190,33 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                                 SizedBox(
                                   height: Get.height * 0.022,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    controller.startTimer();
-                                    controller.phoneNumberRegister(controller
-                                                .phoneNumber ==
-                                            null
-                                        ? controller.showPhoneNumber.toString()
-                                        : controller.phoneNumber.toString());
+                                GetBuilder<RegisterVerifyController>(
+                                  id: "count_timer",
+                                  builder: (controller) {
+                                    return controller.seconds == 0
+                                        ? InkWell(
+                                            onTap: () {
+                                              controller.startTimer();
+                                              controller.phoneNumberRegister(
+                                                  controller.phoneNumber == null
+                                                      ? controller
+                                                          .showPhoneNumber
+                                                          .toString()
+                                                      : controller.phoneNumber
+                                                          .toString());
+                                            },
+                                            child: Center(
+                                              child: Text(
+                                                Strings.resendOtp,
+                                                style: gilroyBoldTextStyle(
+                                                  fontSize: 16,
+                                                  color: ColorRes.color_69C200,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : const SizedBox();
                                   },
-                                  child: Center(
-                                    child: Text(
-                                      Strings.resendOtp,
-                                      style: gilroyBoldTextStyle(
-                                        fontSize: 16,
-                                        color: ColorRes.color_69C200,
-                                      ),
-                                    ),
-                                  ),
                                 ),
                                 SizedBox(
                                   height: Get.height * 0.04,

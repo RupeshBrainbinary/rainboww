@@ -1372,6 +1372,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Image(
                                             image: AssetImage(AssetRes.eye))),
                                   ),
+                                  SizedBox(width: 5,),
                                   Text(
                                     controller
                                         .friendPostListData[index].postViewcount

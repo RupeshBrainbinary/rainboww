@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 import 'package:rainbow_new/common/helper.dart';
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/helper.dart';
@@ -269,7 +270,7 @@ class RegisterController extends GetxController {
 
   var now = DateTime.now();
 
-  void showDatePicker(ctx) {
+/*  void showDatePicker(ctx) {
     // showCupertinoModalPopup is a built-in function of the cupertino library
     showCupertinoModalPopup(
       context: ctx,
@@ -303,8 +304,26 @@ class RegisterController extends GetxController {
         ),
       ),
     );
-  }
+  }*/
+  void date(ctx) async {
+    DateTime? pickedDate  = await showDatePicker(
+        context: ctx,
+        initialDate: DateTime(2001),
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2100));
+    if (pickedDate != null) {
+      print(
+          pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate =
+      DateFormat('yyyy-MM-dd').format(pickedDate);
+      print(
+          formattedDate); //formatted date output using intl package =>  2021-03-16
+      dobController.text =
+          formattedDate;
+      update();
+    } else {}
 
+  }
   void onLoginTap() {
     Get.off(() => LoginScreen(), transition: Transition.cupertino);
   }
@@ -321,7 +340,7 @@ class RegisterController extends GetxController {
     try {
       token = await NotificationService.getFcmToken();
       loader.value = true;
-      await PrefService.setValue(PrefKeys.phoneNumber,
+      await PrefService.setValue(PrefKeys.phonSaveNumberEndUser,
           "+${countryModel.phoneCode + phoneController.text}");
       registerUser = await RegisterApi.postRegister(
           fullNameController.text,

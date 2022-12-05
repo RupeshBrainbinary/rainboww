@@ -27,7 +27,8 @@ class RegisterVerifyController extends GetxController {
   }
 
   getPhoneNumber() {
-    showPhoneNumber = PrefService.getString(PrefKeys.phoneNumber);
+    showPhoneNumber = PrefService.getString(PrefKeys.phonSaveNumberEndUser);
+    print(showPhoneNumber);
   }
 
   bool validation() {
@@ -66,9 +67,8 @@ class RegisterVerifyController extends GetxController {
     try {
       loader.value = true;
 
-      await PhoneNumberApi.resendOtp(ph == ""
-          ? PrefService.getString(PrefKeys.phonSaveNumberEndUser)
-          : ph);
+      await PhoneNumberApi.resendOtp( ph
+          );
       /*  await PrefService.setValue(
           PrefKeys.id, phoneNumberModel.data!.id.toString());*/
       loader.value = false;

@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
             return SafeArea(
               child: Container(
                 width: Get.width,
-                padding: const EdgeInsets.only(bottom: 50),
+                padding: const EdgeInsets.only(bottom: 5),
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -578,6 +578,7 @@ class SettingsScreen extends StatelessWidget {
             )),
           ),
         ),
+        const SizedBox(height: 15,)
       ],
     );
   }
