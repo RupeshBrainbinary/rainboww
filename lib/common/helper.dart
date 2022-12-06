@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:rainbow_new/screens/auth/register/list_nationalites/list_nationalites_json.dart';
 import 'package:rainbow_new/screens/auth/registerfor_adviser/listOfCountry/list_of_country_json.dart';
@@ -128,4 +130,26 @@ String getAlertString(DateTime time) {
     return "Yesterday";
   }
   return DateFormat('dd MMMM yyyy').format(time);
+}
+
+
+/// Get Current Location LatLong
+Future<LatLng> getCurrentLatLang() async {
+  LocationPermission permission = await Geolocator.checkPermission();
+  // loader.value = true;
+  if (permission == LocationPermission.denied) {
+    LocationPermission result = await Geolocator.requestPermission();
+    if (result == LocationPermission.always ||
+        result == LocationPermission.whileInUse) {
+      getCurrentLatLang();
+    }
+    return const LatLng(0, 0);
+  } else {
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    return LatLng(position.latitude, position.longitude);
+  }
+  // loader.value = false;
 }

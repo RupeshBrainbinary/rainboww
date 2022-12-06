@@ -85,7 +85,7 @@ class SupportCreateEndUserScreen extends StatelessWidget {
                         body(com.toString()),
 
                         const SizedBox(
-                          height: 15,
+                          // height: 15,
                         ),
 
                         Align(
@@ -646,7 +646,7 @@ class SupportCreateEndUserScreen extends StatelessWidget {
                                                         ],
                                                       ),
                                     const SizedBox(
-                                      height: 20,
+                                      // height: 20,
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 60),
@@ -730,7 +730,7 @@ class SupportCreateEndUserScreen extends StatelessWidget {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: Get.height * 0.0190,
+                                            height: Get.height * 0.01,
                                           ),
                                           Center(
                                             child: Text(
@@ -747,7 +747,7 @@ class SupportCreateEndUserScreen extends StatelessWidget {
                               }),
                         ),
                         SizedBox(
-                          height: Get.height * 0.05,
+                          height: Get.height * 0.03,
                         ),
                         SubmitButton(
                           onTap: () async {
@@ -875,7 +875,7 @@ class SupportCreateEndUserScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.0233,
+                height: Get.height * 0.02,
               ),
               ReadMoreText(
 
@@ -894,7 +894,7 @@ class SupportCreateEndUserScreen extends StatelessWidget {
               ),
 
               SizedBox(
-                height: Get.height * 0.0184,
+                // height: Get.height * 0.0184,
               ),
               //image
               controller.viewSupportTicketModel.data![index].itmeList!.isEmpty
@@ -1079,7 +1079,7 @@ class SupportCreateEndUserScreen extends StatelessWidget {
                         ),
 
               SizedBox(
-                height: Get.height * 0.05,
+                height: Get.height * 0.02,
               ),
             ],
           ),

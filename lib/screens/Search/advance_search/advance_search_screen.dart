@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
+import 'package:rainbow_new/common/helper.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_controller.dart';
 
@@ -34,6 +35,8 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
   BitmapDescriptor? mapMakers;
   List<Marker> markers = <Marker>[];
   GoogleMapController? googleMapController;
+  double currentLatitude = 0.0;
+  double currentLongitude = 0.0;
 
   double latitude = 0;
   double longitude = 0;
@@ -44,43 +47,45 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
 
   @override
   void initState() {
+    markers.clear();
     loadData();
     super.initState();
   }
 
   Future<void> loadData() async {
-    for (int i = 0; i < searchController.listLatLongData.length; i++) {
+    var currentLatLong = await getCurrentLatLang();
 
-      markers.add(Marker(
-          visible: true,
-          markerId: MarkerId(
-            searchController.listLatLongData[i].fullName.toString(),
-          ),
-          position: LatLng(searchController.listLatLongData[i].latitude!,
-              searchController.listLatLongData[i].longitude!),
-          icon: BitmapDescriptor.defaultMarker,
-          infoWindow: InfoWindow(
-            title: searchController.listLatLongData[i].fullName,
-          )
-          /*await MarkerIcon.downloadResizePictureCircle(
+    currentLatitude = currentLatLong.latitude;
+    currentLongitude = currentLatLong.longitude;
+
+    if (searchController.listLatLongData.length != 0) {
+      for (int i = 0; i < searchController.listLatLongData.length; i++) {
+        markers.add(Marker(
+            visible: true,
+            markerId: MarkerId(
+              searchController.listLatLongData[i].fullName.toString(),
+            ),
+            position: LatLng(searchController.listLatLongData[i].latitude!,
+                searchController.listLatLongData[i].longitude!),
+            icon: BitmapDescriptor.defaultMarker,
+            infoWindow: InfoWindow(
+              title: searchController.listLatLongData[i].fullName,
+            )
+            /*await MarkerIcon.downloadResizePictureCircle(
           searchController.listLatLongData[i].profileImage.toString(),
           size: 200,
         ),*/
 
-          ));
+            ));
 
-      getCameraPosition(
-          lat: searchController.listLatLongData[i].latitude!,
-          long: searchController.listLatLongData[i].longitude!);
-
-      markerLoader = false;
-
-      latitude = searchController.listLatLongData[i].latitude!;
-      longitude = searchController.listLatLongData[i].longitude!;
-
-      /*Uint8List? image1 = await loadNetWorkImage(
+        getCameraPosition(
+            lat: searchController.listLatLongData[i].latitude!,
+            long: searchController.listLatLongData[i].longitude!);
+        markerLoader = false;
+        latitude = searchController.listLatLongData[i].latitude!;
+        longitude = searchController.listLatLongData[i].longitude!;
+        /*Uint8List? image1 = await loadNetWorkImage(
           searchController.listLatLongData[i].profileImage.toString());
-
       final ui.Codec markerImageCodec = await ui.instantiateImageCodec(
           image1.buffer.asUint8List(),
           targetHeight: 80,
@@ -97,6 +102,30 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
             searchController.listLatLongData[i].longitude!),
         icon: BitmapDescriptor.fromBytes(resizedImagePicker),
       ));*/
+      }
+    } else {
+      // markers.add(Marker(
+      //     visible: true,
+      //     markerId: MarkerId(
+      //       "Current Location",
+      //     ),
+      //     position: LatLng(currentLatitude, currentLongitude),
+      //     icon: BitmapDescriptor.defaultMarker,
+      //     infoWindow: InfoWindow(
+      //       title: "My Location",
+      //     )));
+      // getCameraPosition(lat: currentLatitude, long: currentLongitude);
+
+      googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+          //innital position in map
+          target: LatLng(currentLatitude, currentLongitude),
+          //initial position
+          zoom: 50.0, //initial zoom level
+        ),
+      ));
+
+      markerLoader = false;
     }
     markerLoader = false;
 
@@ -107,11 +136,12 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
     googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
         //innital position in map
-        target: LatLng(lat!, long!),
+        target: LatLng(lat ?? currentLatitude, long ?? currentLongitude),
         //initial position
         zoom: 50.0, //initial zoom level
       ),
     ));
+
     setState(() {});
   }
 
@@ -155,8 +185,11 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
                         appBar(title: "Find ${widget.title}"),
                         //const SizedBox(height: 60),
                         /*    searchUser(),*/
-                        homeController.controller.viewProfile
-                            .data!.latitude.toString().isEmpty?const SizedBox():  userProfile(),
+                        homeController.controller.viewProfile.data!.latitude
+                                .toString()
+                                .isEmpty
+                            ? const SizedBox()
+                            : userProfile(),
                         listOfUser(controller),
                       ],
                     ),
@@ -473,10 +506,12 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
                                 markers: Set<Marker>.of(markers),
                                 initialCameraPosition: CameraPosition(
                                   target: LatLng(
-                                      homeController.controller.viewProfile
-                                          .data!.latitude!,
-                                      homeController.controller.viewProfile
-                                          .data!.longitude!),
+                                      homeController.controller.viewProfile.data
+                                              ?.latitude ??
+                                          currentLatitude,
+                                      homeController.controller.viewProfile.data
+                                              ?.longitude ??
+                                          currentLongitude),
                                   zoom: 30,
                                 ),
                                 onMapCreated: (GoogleMapController controller) {
@@ -581,9 +616,7 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
             );
           },
         ),
-        markerLoader
-            ? const FullScreenLoader()
-            : const SizedBox(),
+        markerLoader ? const FullScreenLoader() : const SizedBox(),
       ],
     );
   }

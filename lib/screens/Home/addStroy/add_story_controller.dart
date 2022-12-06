@@ -14,20 +14,24 @@ import 'package:rainbow_new/screens/Home/addStroy/widgets/addStoryView.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 
 class AddStoryController extends GetxController {
+  FocusNode isfocusNode = FocusNode();
   int currentPage = 0;
   int? lastPage;
   File? image;
   AdStoryModel adStoryModel = AdStoryModel();
   RxBool loader = false.obs;
   bool textShow = false;
+  bool isBlur = false;
   UploadImage uploadImage = UploadImage();
 
   void onTextTap() {
     if (textShow == false) {
       textShow = true;
+      isBlur = true;
       update(["adStory"]);
     } else {
       textShow = false;
+      isBlur = false;
       update(["adStory"]);
     }
     update(["adStory"]);
@@ -152,6 +156,9 @@ class AddStoryController extends GetxController {
   void onTagTap(UserData userData) {
     tagUserList.add(userData);
     String sent = msgController.text;
+    isfocusNode.unfocus();
+    isBlur =false;
+    
 
     List<String> list = sent.split(' ');
 
@@ -161,6 +168,7 @@ class AddStoryController extends GetxController {
         "${list.join(' ')}${list.isEmpty ? '' : ' '}@${userData.fullName}";
     filterList = [];
     update(['mention_popUp']);
+    update(["adStory"]);
     msgController.selection =
         TextSelection.collapsed(offset: msgController.text.length);
   }

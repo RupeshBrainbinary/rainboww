@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,6 +31,16 @@ class AddStoryViewScreen extends StatelessWidget {
                       width: Get.width,
                       fit: BoxFit.cover,
                     ),
+                    controller.isBlur == true
+                        ? Positioned. fill(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                              child: Container(
+                                color: ColorRes.black.withOpacity(0),
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
                     Container(
                       height: Get.height,
                       width: Get.width,
@@ -267,28 +279,33 @@ class AddStoryViewScreen extends StatelessWidget {
                                 },
                               ),
                               const SizedBox(height: 20),
-                              controller.textShow == true
-                                  ? Center(
-                                      child: SizedBox(
-                                        height: 50,
-                                        width: Get.width,
-                                        child: TextField(
-                                          controller: controller.msgController,
-                                          style: const TextStyle(fontSize: 20),
-                                          onChanged: controller.onChange,
-                                          decoration: const InputDecoration(
-                                            hintText: Strings.writeSomethings,
-                                            border: InputBorder.none,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  : const SizedBox(),
                             ],
                           ),
                         ),
                       ),
                     ),
+                    controller.textShow == true
+                        ? Container(
+                            height: Get.height,
+                            width: Get.width,
+                            child: Center(
+                              child: SizedBox(
+                                height: 50,
+                                width: Get.width,
+                                child: TextField(
+                                  focusNode: controller.isfocusNode,
+                                  controller: controller.msgController,
+                                  style: const TextStyle(fontSize: 20),
+                                  onChanged: controller.onChange,
+                                  decoration: const InputDecoration(
+                                    hintText: Strings.writeSomethings,
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
                     controller.loader.isTrue
                         ? const FullScreenLoader()
                         : const SizedBox()

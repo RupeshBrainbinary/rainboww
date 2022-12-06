@@ -98,9 +98,11 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                             height: Get.height * 0.2857,
                             width: Get.width,
                             decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: AssetImage(AssetRes.portraitPlaceholder))),
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: AssetImage(AssetRes.portraitPlaceholder),
+                              ),
+                            ),
                           ),
                         ),
                       ],

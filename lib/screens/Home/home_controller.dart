@@ -101,14 +101,11 @@ class HomeController extends GetxController {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-
         activeConnection = true;
         T = "Turn off the data and repress again";
         update(["network"]);
-
       }
     } on SocketException catch (_) {
-
       activeConnection = false;
       T = "Turn On the data and repress again";
       update(["network"]);
@@ -401,7 +398,7 @@ class HomeController extends GetxController {
 
     countryName();
     countryNationalites();
-   await getNotifications();
+    await getNotifications();
     await friendPostDataWithOutPagination();
     await connectionsController.callRequestApi();
     /*  changeLoader(false);*/
@@ -427,6 +424,7 @@ class HomeController extends GetxController {
       Get.to(() => AddStoryScreen());
     }*/
   }
+
   Future<void> getNotifications() async {
     loader.value = true;
     notificationModel = await NotificationApi.getNotificationList();
@@ -440,6 +438,7 @@ class HomeController extends GetxController {
     await refreshCode();
     // refreshController!.refreshCompleted();
   }
+
   void changeLoader(bool status) {
     /*if (refreshController == null || refreshController!.headerMode == null) {
       loader.value = status;
