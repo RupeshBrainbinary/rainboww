@@ -6,6 +6,7 @@ import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/common/helper.dart';
 import 'package:rainbow_new/screens/Message/message_controller.dart';
+import 'package:rainbow_new/screens/dashboard/dashboard_controller.dart';
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
@@ -52,62 +53,66 @@ class MessageScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        (backArrow == true)
-                            ? Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: Get.width * 0.05, top: 20),
-                                      child: Container(
-                                        height: 15,
-                                        width: 35,
-                                        decoration: const BoxDecoration(
-                                            image: DecorationImage(
-                                          image: AssetImage(
-                                            AssetRes.backIcon,
-                                          ),
-                                        )),
-                                      ),
+                        // (backArrow == true)
+                        //     ?
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                DashboardController dashboardController =
+                                    Get.find();
+                                dashboardController.onBottomBarChange(0);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: Get.width * 0.05, top: 20),
+                                child: Container(
+                                  height: 15,
+                                  width: 35,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                    image: AssetImage(
+                                      AssetRes.backIcon,
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 50, top: 20),
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: SizedBox(
-                                          height: 50,
-                                          child: Center(
-                                            child: Text(
-                                              "Chats",
-                                              style: gilroyMediumTextStyle(
-                                                  fontSize: 18),
-                                            ),
-                                          ),
-                                        ),
+                                  )),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(right: 50, top: 20),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: SizedBox(
+                                    height: 50,
+                                    child: Center(
+                                      child: Text(
+                                        "Chats",
+                                        style:
+                                            gilroyMediumTextStyle(fontSize: 18),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: SizedBox(
-                                  height: 50,
-                                  child: Center(
-                                    child: Text(
-                                      "Chats",
-                                      style:
-                                          gilroyMediumTextStyle(fontSize: 18),
                                     ),
                                   ),
                                 ),
                               ),
+                            ),
+                          ],
+                        ),
+                        // :
+                        //  Padding(
+                        //     padding: const EdgeInsets.only(top: 20),
+                        //     child: SizedBox(
+                        //       height: 50,
+                        //       child: Center(
+                        //         child: Text(
+                        //           "Chats",
+                        //           style:
+                        //               gilroyMediumTextStyle(fontSize: 18),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 20,
@@ -151,6 +156,8 @@ class MessageScreen extends StatelessWidget {
                             ],
                           ),
                         ),
+
+                        /// Online / Offline
                         Expanded(
                           child: SingleChildScrollView(
                             child: Column(
@@ -199,7 +206,7 @@ class MessageScreen extends StatelessWidget {
                                                     ? Column(
                                                         children: [
                                                           const SizedBox(
-                                                              height: 20),
+                                                              height: 10),
                                                           Stack(
                                                             children: [
                                                               data['image']
@@ -278,15 +285,17 @@ class MessageScreen extends StatelessWidget {
                                                                   width: 13,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: ColorRes
-                                                                        .color5AD439,
-                                                                    border: Border.all(
-                                                                        color: ColorRes
-                                                                            .white,
-                                                                        width:
-                                                                            2.4,),
-                                                                            shape: BoxShape.circle
-                                                                  ),
+                                                                          color: ColorRes
+                                                                              .color5AD439,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                ColorRes.white,
+                                                                            width:
+                                                                                2.4,
+                                                                          ),
+                                                                          shape:
+                                                                              BoxShape.circle),
                                                                 ),
                                                               )
                                                             ],
@@ -302,6 +311,9 @@ class MessageScreen extends StatelessWidget {
                                                             child: Text(
                                                                 data['name']),
                                                           ),
+                                                          SizedBox(
+                                                            height: 15,
+                                                          )
                                                         ],
                                                       )
                                                     : const SizedBox();
@@ -338,6 +350,9 @@ class MessageScreen extends StatelessWidget {
                                               return SizedBox(
                                                 height: Get.height * 0.53,
                                                 child: ListView.builder(
+                                                  physics:
+                                                      BouncingScrollPhysics(),
+                                                  padding: EdgeInsets.all(0),
                                                   itemCount: snapshot
                                                       .data!.docs.length,
                                                   shrinkWrap: true,
@@ -408,7 +423,7 @@ class MessageScreen extends StatelessWidget {
                                                                 const EdgeInsets
                                                                         .symmetric(
                                                                     vertical:
-                                                                        10),
+                                                                        2),
                                                             child: Row(
                                                               children: [
                                                                 const SizedBox(
@@ -580,6 +595,8 @@ class MessageScreen extends StatelessWidget {
                                                   : SizedBox(
                                                       height: Get.height * 0.53,
                                                       child: ListView.builder(
+                                                        padding:
+                                                            EdgeInsets.all(0),
                                                         itemCount: snapshot
                                                             .data!.docs.length,
                                                         shrinkWrap: true,
@@ -665,7 +682,7 @@ class MessageScreen extends StatelessWidget {
                                                                 padding: const EdgeInsets
                                                                         .symmetric(
                                                                     vertical:
-                                                                        10),
+                                                                        5),
                                                                 child: Row(
                                                                   children: [
                                                                     const SizedBox(

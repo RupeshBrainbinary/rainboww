@@ -163,6 +163,7 @@ class ProfileScreen extends StatelessWidget {
                     : Column(
                   children: [
                     const SizedBox(height: 20),
+                    /// AppBar
                     profileAppbar(data.fullName.toString(), false, false,
                         context, 2, connectionsProfileController.onTapGetBack,
                         onTap2: () =>

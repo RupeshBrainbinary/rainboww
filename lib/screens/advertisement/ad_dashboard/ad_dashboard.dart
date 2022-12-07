@@ -241,85 +241,95 @@ class AdvertisementDashBord extends StatelessWidget {
                                 ),
 
                                 ///Change Password
-                               GetBuilder<AdHomeController>(
-                                 id: "network",
-                                   builder: (controller){
-                                     adHomeController.checkUserConnection();
-                                 return  InkWell(
-                                   onTap: adHomeController.activeConnection ==
-                                       false
-                                       ? () {
+                                GetBuilder<AdHomeController>(
+                                    id: "network",
+                                    builder: (controller) {
+                                      adHomeController.checkUserConnection();
+                                      return InkWell(
+                                        onTap:
+                                            adHomeController.activeConnection ==
+                                                    false
+                                                ? () {
+                                                    errorToast(
+                                                        "No internet connection");
+                                                    adHomeController
+                                                        .update(["network"]);
+                                                  }
+                                                : () {
+                                                    AdvertiserVerifyController
+                                                        adController = Get.put(
+                                                            AdvertiserVerifyController());
 
-                                     errorToast("No internet connection");
-                                     adHomeController.update(["network"]);
-
-                                   }
-                                       : () {
-                                     AdvertiserVerifyController
-                                     adController = Get.put(
-                                         AdvertiserVerifyController());
-
-                                     adController.backScreen =
-                                     'AdvertisementDashBord';
-                                     adController.startTimer();
-                                     adController.phoneNumberRegister();
-                                     Get.to(() =>
-                                     const AdvertiserVerifyOtpScreen())!.then((value) =>  adHomeController.checkUserConnection());
-                                   },
-                                   child: SizedBox(
-                                     height: Get.height * 0.06,
-                                     child: Row(
-                                       children: [
-                                         Image.asset(
-                                           AssetRes.lockicon,
-                                           width: Get.width * 0.04706,
-                                         ),
-                                         SizedBox(
-                                           width: Get.width * 0.0853,
-                                         ),
-                                         Text(
-                                           Strings.changePassword,
-                                           style: gilroyMediumTextStyle(
-                                             fontSize: 16,
-                                             color: ColorRes.color_09110E,
-                                           ),
-                                         ),
-                                       ],
-                                     ),
-                                   ),
-                                 );
-                               }),
+                                                    adController.backScreen =
+                                                        'AdvertisementDashBord';
+                                                    adController.startTimer();
+                                                    adController
+                                                        .phoneNumberRegister();
+                                                    Get.to(() =>
+                                                            const AdvertiserVerifyOtpScreen())!
+                                                        .then((value) =>
+                                                            adHomeController
+                                                                .checkUserConnection());
+                                                  },
+                                        child: SizedBox(
+                                          height: Get.height * 0.06,
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                AssetRes.lockicon,
+                                                width: Get.width * 0.04706,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.0853,
+                                              ),
+                                              Text(
+                                                Strings.changePassword,
+                                                style: gilroyMediumTextStyle(
+                                                  fontSize: 16,
+                                                  color: ColorRes.color_09110E,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }),
                                 //Account Information
                                 GetBuilder<AdHomeController>(
-                                  id: "network",
-                                    builder: (controller){
+                                    id: "network",
+                                    builder: (controller) {
                                       adHomeController.checkUserConnection();
-                                  return InkWell(
-                                    onTap: adHomeController.activeConnection ==
-                                        false?() =>  errorToast("No internet connection"):() => advertisementController.inTapAccountInfo(),
-                                    child: SizedBox(
-                                      height: Get.height * 0.06,
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            AssetRes.profileicon,
-                                            width: Get.width * 0.04706,
+                                      return InkWell(
+                                        onTap:
+                                            adHomeController.activeConnection ==
+                                                    false
+                                                ? () => errorToast(
+                                                    "No internet connection")
+                                                : () => advertisementController
+                                                    .inTapAccountInfo(),
+                                        child: SizedBox(
+                                          height: Get.height * 0.06,
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                AssetRes.profileicon,
+                                                width: Get.width * 0.04706,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.0853,
+                                              ),
+                                              Text(
+                                                Strings.accountInformation,
+                                                style: gilroyMediumTextStyle(
+                                                  fontSize: 16,
+                                                  color: ColorRes.color_09110E,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            width: Get.width * 0.0853,
-                                          ),
-                                          Text(
-                                            Strings.accountInformation,
-                                            style: gilroyMediumTextStyle(
-                                              fontSize: 16,
-                                              color: ColorRes.color_09110E,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }),
+                                        ),
+                                      );
+                                    }),
                                 // Notification
                                 GetBuilder<AdvertisementController>(
                                   id: 'settings',
@@ -352,17 +362,21 @@ class AdvertisementDashBord extends StatelessWidget {
                                               scale: .7,
                                               child: CupertinoSwitch(
                                                 value: controller.isSwitched!,
-                                                onChanged: adHomeController.activeConnection ==
-                                                    false? (value){
-                                                  errorToast("No internet connection");
-                                                }
-                                                    :(value) {
-                                                  controller.isSwitched = value;
-                                                  controller
-                                                      .notificationOnOffApi();
-                                                  controller
-                                                      .update(["settings"]);
-                                                },
+                                                onChanged: adHomeController
+                                                            .activeConnection ==
+                                                        false
+                                                    ? (value) {
+                                                        errorToast(
+                                                            "No internet connection");
+                                                      }
+                                                    : (value) {
+                                                        controller.isSwitched =
+                                                            value;
+                                                        controller
+                                                            .notificationOnOffApi();
+                                                        controller.update(
+                                                            ["settings"]);
+                                                      },
                                                 activeColor:
                                                     ColorRes.colorCE8CEC,
                                                 trackColor:
@@ -451,87 +465,90 @@ class AdvertisementDashBord extends StatelessWidget {
                 ),
               ),
               bottomNavigationBar: GetBuilder<AdHomeController>(
-                id: "network",
-                  builder: (adHomeController){
-                  adHomeController.checkUserConnection();
-                return GetBuilder<AdvertisementController>(
-                  id: 'bottom_bar',
-                  builder: (_) => SalomonBottomBar(
-                    margin: const EdgeInsets.all(12),
-                    selectedItemColor: ColorRes.color_2F80ED,
-                    unselectedItemColor: ColorRes.color_9597A1,
-                    currentIndex: advertisementController.currentTab,
-                    onTap: adHomeController.activeConnection == false ? (i){
-                      errorToast("No internet connection");
-                    } :(i) => advertisementController.onBottomBarChange(i),
-                    items: [
-                      /// Home
-                      SalomonBottomBarItem(
-                        icon: Image.asset(
-                          AssetRes.home,
-                          height: 16,
-                          color: advertisementController.currentTab == 0
-                              ? ColorRes.color_2F80ED
-                              : ColorRes.color_9597A1,
-                        ),
-                        title: Text(
-                          "Home",
-                          style: gilroyBoldTextStyle(
-                              color: ColorRes.color_2F80ED, fontSize: 14),
-                        ),
-                      ),
+                  id: "network",
+                  builder: (adHomeController) {
+                    adHomeController.checkUserConnection();
+                    return GetBuilder<AdvertisementController>(
+                      id: 'bottom_bar',
+                      builder: (_) => SalomonBottomBar(
+                        margin: const EdgeInsets.all(12),
+                        selectedItemColor: ColorRes.color_2F80ED,
+                        unselectedItemColor: ColorRes.color_9597A1,
+                        currentIndex: advertisementController.currentTab,
+                        onTap: adHomeController.activeConnection == false
+                            ? (i) {
+                                errorToast("No internet connection");
+                              }
+                            : (i) =>
+                                advertisementController.onBottomBarChange(i),
+                        items: [
+                          /// Home
+                          SalomonBottomBarItem(
+                            icon: Image.asset(
+                              AssetRes.home,
+                              height: 16,
+                              color: advertisementController.currentTab == 0
+                                  ? ColorRes.color_2F80ED
+                                  : ColorRes.color_9597A1,
+                            ),
+                            title: Text(
+                              "Home",
+                              style: gilroyBoldTextStyle(
+                                  color: ColorRes.color_2F80ED, fontSize: 14),
+                            ),
+                          ),
 
-                      /// search
-                      SalomonBottomBarItem(
-                        icon: Image.asset(
-                          AssetRes.paymentIcon,
-                          height: 16,
-                          color: advertisementController.currentTab == 1
-                              ? ColorRes.color_2F80ED
-                              : ColorRes.color_9597A1,
-                        ),
-                        title: Text(
-                          "Payment",
-                          style: gilroyBoldTextStyle(
-                              color: ColorRes.color_2F80ED, fontSize: 14),
-                        ),
-                      ),
+                          /// search
+                          SalomonBottomBarItem(
+                            icon: Image.asset(
+                              AssetRes.paymentIcon,
+                              height: 16,
+                              color: advertisementController.currentTab == 1
+                                  ? ColorRes.color_2F80ED
+                                  : ColorRes.color_9597A1,
+                            ),
+                            title: Text(
+                              "Payment",
+                              style: gilroyBoldTextStyle(
+                                  color: ColorRes.color_2F80ED, fontSize: 14),
+                            ),
+                          ),
 
-                      /// message
-                      SalomonBottomBarItem(
-                        icon: Image.asset(
-                          AssetRes.adeNotificationIcon,
-                          height: 20,
-                          color: advertisementController.currentTab == 2
-                              ? ColorRes.color_2F80ED
-                              : ColorRes.color_9597A1,
-                        ),
-                        title: Text(
-                          "Notification",
-                          style: gilroyBoldTextStyle(
-                              color: ColorRes.color_2F80ED, fontSize: 14),
-                        ),
-                      ),
+                          /// message
+                          SalomonBottomBarItem(
+                            icon: Image.asset(
+                              AssetRes.adeNotificationIcon,
+                              height: 20,
+                              color: advertisementController.currentTab == 2
+                                  ? ColorRes.color_2F80ED
+                                  : ColorRes.color_9597A1,
+                            ),
+                            title: Text(
+                              "Notification",
+                              style: gilroyBoldTextStyle(
+                                  color: ColorRes.color_2F80ED, fontSize: 14),
+                            ),
+                          ),
 
-                      /// support
-                      SalomonBottomBarItem(
-                        icon: Image.asset(
-                          AssetRes.supportIcon,
-                          height: 16,
-                          color: advertisementController.currentTab == 3
-                              ? ColorRes.color_2F80ED
-                              : ColorRes.color_9597A1,
-                        ),
-                        title: Text(
-                          "Support",
-                          style: gilroyBoldTextStyle(
-                              color: ColorRes.color_2F80ED, fontSize: 14),
-                        ),
+                          /// support
+                          SalomonBottomBarItem(
+                            icon: Image.asset(
+                              AssetRes.supportIcon,
+                              height: 16,
+                              color: advertisementController.currentTab == 3
+                                  ? ColorRes.color_2F80ED
+                                  : ColorRes.color_9597A1,
+                            ),
+                            title: Text(
+                              "Support",
+                              style: gilroyBoldTextStyle(
+                                  color: ColorRes.color_2F80ED, fontSize: 14),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              }),
+                    );
+                  }),
             ),
           );
         });

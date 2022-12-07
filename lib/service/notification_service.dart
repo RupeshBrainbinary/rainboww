@@ -10,7 +10,6 @@ import 'package:rainbow_new/screens/notification/notification_controller.dart';
 import 'package:rainbow_new/screens/notification/notification_screen.dart';
 import 'package:http/http.dart' as http;
 
-
 class NotificationService {
   static final NotificationsController _notyController =
       Get.put(NotificationsController());
@@ -52,7 +51,7 @@ class NotificationService {
           notification.body,
           NotificationDetails(
             android: AndroidNotificationDetails(
-              channel.id,
+              channel.id, number: 1,
               channel.name,
               icon: android.smallIcon,
               // other properties...
@@ -136,11 +135,9 @@ class NotificationService {
 
   static FirebaseMessaging message = FirebaseMessaging.instance;
 
-
-
-///final
-  static const String serverToken = "AAAAGtivm7A:APA91bE9gn9PIUo2AxRo8ADwUcYkiBFFg-XjKrlTok95L6rVdlwjseh-0HitR5rFt_hrAZUXFSxdlmfzGfG3UciEuAq4nTpumTsDOK35_ZVt0p-gKyrBQNomGROY5gkz7vUnVJFIenfv";
-
+  ///final
+  static const String serverToken =
+      "AAAAGtivm7A:APA91bE9gn9PIUo2AxRo8ADwUcYkiBFFg-XjKrlTok95L6rVdlwjseh-0HitR5rFt_hrAZUXFSxdlmfzGfG3UciEuAq4nTpumTsDOK35_ZVt0p-gKyrBQNomGROY5gkz7vUnVJFIenfv";
 
   static Future<String?> getFcmToken() async {
     return await message.getToken();
@@ -148,8 +145,6 @@ class NotificationService {
 
   static Future<void> sendNotification(
       SendNotificationModel notification) async {
-
-
     await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),
       headers: <String, String>{
