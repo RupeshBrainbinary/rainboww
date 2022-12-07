@@ -32,7 +32,7 @@ class AddStoryViewScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     controller.isBlur == true
-                        ? Positioned. fill(
+                        ? Positioned.fill(
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                               child: Container(

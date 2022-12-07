@@ -62,3 +62,31 @@ class FullScreenLoader extends StatelessWidget {
     );
   }
 }
+class FullScreenLoaderWhiteBack extends StatelessWidget {
+  const FullScreenLoaderWhiteBack({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      height: Get.height,
+      width: Get.width,
+      child: InkWell(
+        onTap: () {},
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.all(35),
+            height: 110,
+            width: 110,
+            decoration: BoxDecoration(
+                color: Colors.white70, borderRadius: BorderRadius.circular(25)),
+            child: const CircularProgressIndicator(
+              backgroundColor: Colors.white,
+              color: Colors.black45,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

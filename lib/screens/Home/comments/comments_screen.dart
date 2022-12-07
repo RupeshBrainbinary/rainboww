@@ -61,10 +61,14 @@ class CommentScreen extends StatelessWidget {
                 return Stack(
                   children: [
                     (controller.loader.value == true)
-                        ? const SizedBox()
+                        ? Container(
+                            height: Get.height,
+                            width: Get.width,
+                            color: ColorRes.white,
+                          )
                         : commentList(context),
                     controller.refreshLoader.isFalse && controller.loader.isTrue
-                        ? const FullScreenLoader()
+                        ? const FullScreenLoaderWhiteBack()
                         : const SizedBox()
                   ],
                 );
