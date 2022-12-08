@@ -25,7 +25,28 @@ class NotificationService {
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel', // id
       'High Importance Notifications', // title
-      importance: Importance.max,
+      importance: Importance.high,
+      showBadge: true
+    );
+    NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          //channel.description,
+          number: 1,
+          color: Colors.blue,
+          sound: RawResourceAndroidNotificationSound('notification'),
+          colorized: true,
+          enableLights: true,
+          channelShowBadge: true,
+          icon: '@mipmap/ic_launcher',
+        ),
+        iOS: IOSNotificationDetails(
+          presentBadge: true,
+          sound: 'notification.aiff',
+          badgeNumber: 1,
+          presentSound: true,
+        )
     );
 
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -98,7 +119,16 @@ class NotificationService {
         InitializationSettings(
             android: initializationSettingsAndroid,
             iOS: initializationSettingsIOS);
-
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) async {
       if (payload != null) {
