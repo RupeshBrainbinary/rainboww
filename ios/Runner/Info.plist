@@ -83,10 +83,7 @@
 	<string>This application requires location services to work</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Please grant microphone access</string>
-	<key>googleMapsApiKey</key>
-    <string>$(AIzaSyAh74-e_IDYN53QL3EpLDk6BvcOCxIiyE0)</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-
 	<string> photos description.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
