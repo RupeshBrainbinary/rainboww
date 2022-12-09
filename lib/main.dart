@@ -74,9 +74,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: [
         GetPage(
-            name: "/RegisterOtpScreen",
-            page: () => const RegisterOtpScreen(),
-            binding: BindingsBuilder(() => RegisterVerifyController())),
+          name: "/RegisterOtpScreen",
+          page: () => const RegisterOtpScreen(),
+          binding: BindingsBuilder(
+            () => RegisterVerifyController(),
+          ),
+        ),
       ],
       // home: ScanYourFaceScreen(),
       home: /*const GoogleMapScreen()*/ /*SupportDetailsScreen(com: "")*/ !PrefService

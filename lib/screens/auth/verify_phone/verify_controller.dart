@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/popup.dart';
@@ -8,7 +10,8 @@ import 'package:rainbow_new/utils/strings.dart';
 class VerifyPhoneController extends GetxController {
   TextEditingController verifyController = TextEditingController();
   RxBool loader = false.obs;
-
+  Timer? _countDown;
+  int seconds = 60;
   bool validation() {
     if (verifyController.text.isEmpty) {
       errorToast(Strings.enterYourOtp);
@@ -42,4 +45,27 @@ class VerifyPhoneController extends GetxController {
       loader.value = false;
     }
   }*/
+
+  Future startTimer() async {
+    seconds = 60;
+    update(['count_timer']);
+    const oneSec = Duration(seconds: 1);
+    _countDown = Timer.periodic(
+      oneSec,
+      (timer) {
+        if (seconds == 0) {
+          _countDown!.cancel();
+          timer.cancel();
+          update(['count_timer']);
+          update(["time"]);
+        } else {
+          seconds--;
+          update(['count_timer']);
+          update(["time"]);
+        }
+      },
+    );
+    update(['count_timer']);
+    update(["time"]);
+  }
 }

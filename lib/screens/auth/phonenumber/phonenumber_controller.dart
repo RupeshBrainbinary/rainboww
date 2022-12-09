@@ -10,7 +10,6 @@ class PhoneNumberController extends GetxController {
   TextEditingController phoneNumber = TextEditingController();
   RxBool loader = false.obs;
 
-
   bool validation() {
     if (phoneNumber.text.isEmpty) {
       errorToast(Strings.phoneNumberError);

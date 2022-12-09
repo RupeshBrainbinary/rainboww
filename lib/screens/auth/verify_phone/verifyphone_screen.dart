@@ -17,7 +17,8 @@ class VerifyPhoneScreen extends StatefulWidget {
 
 class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final VerifyPhoneController controller = Get.put(VerifyPhoneController());
+  final VerifyPhoneController verifyPhoneController =
+      Get.put(VerifyPhoneController());
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +142,8 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                         enableActiveFill: true,
                                         enabled: true,
                                         // errorAnimationController: controller.errorController,
-                                        controller: controller.verifyController,
+                                        controller: verifyPhoneController
+                                            .verifyController,
                                         keyboardType: TextInputType.number,
                                         boxShadows: const [
                                           BoxShadow(
@@ -160,6 +162,14 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                 SizedBox(
                                   height: Get.height * 0.02,
                                 ),
+                                GetBuilder<VerifyPhoneController>(
+                                  id: 'count_timer',
+                                  builder: (controller) {
+                                    return Center(
+                                        child: Text(
+                                            "${controller.seconds.toString()} Seconds"));
+                                  },
+                                ),
                                 Center(
                                   child: Text(
                                     Strings.receivedCode,
@@ -172,21 +182,30 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                   height: Get.height * 0.022,
                                 ),
                                 GetBuilder<PhoneNumberController>(
+                                  id: "time",
                                   builder: (controller) {
-                                    return InkWell(
-                                      onTap: () {
-                                        controller.phoneNumberRegister();
-                                      },
-                                      child: Center(
-                                        child: Text(
-                                          Strings.resendOtp,
-                                          style: gilroyBoldTextStyle(
-                                            fontSize: 16,
-                                            color: ColorRes.color_69C200,
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    return verifyPhoneController.seconds == 0
+                                        ? InkWell(
+                                            onTap: () {
+                                              controller.phoneNumberRegister();
+                                              verifyPhoneController
+                                                  .startTimer();
+                                                  // controller.update(["time"]);
+                                                  //   controller.update(["count_timer"]);
+                                            },
+                                            child: Center(
+                                              child: Text(
+                                                Strings.resendOtp,
+                                                style: gilroyBoldTextStyle(
+                                                  fontSize: 16,
+                                                  color: ColorRes.color_69C200,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : SizedBox(
+                                            height: 19,
+                                          );
                                   },
                                 ),
                                 SizedBox(
@@ -195,7 +214,7 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                 GestureDetector(
                                   onTap: () async {
                                     if (formKey.currentState!.validate()) {
-                                      controller.verifyCode();
+                                      verifyPhoneController.verifyCode();
                                     }
                                   },
                                   child: Center(
@@ -227,7 +246,9 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                   ),
                 ),
               ),
-              controller.loader.isTrue ? const FullScreenLoader() : const SizedBox(),
+              verifyPhoneController.loader.isTrue
+                  ? const FullScreenLoader()
+                  : const SizedBox(),
             ],
           );
         },
