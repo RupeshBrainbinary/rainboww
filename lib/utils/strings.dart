@@ -213,6 +213,10 @@ class Strings {
   static const twitterError = 'Enter twitter';
   static const aboutMeError = 'Please enter about me';
   static const hobbiesError = 'Please enter your hobbies';
+  static const instagramError = "Please enter valid instagram";
+  static const youtubeValidError = "Please enter valid youtube";
+  static const facebookValidError = "Please enter valid facebook";
+  static const twitterValidError = "Please enter valid twitter";
 
   ///___________________________dashboard--Home_______________________________________
   static const aA = "Aa";
@@ -419,7 +423,6 @@ class Strings {
 
   ///____________________________________Support123__________________________________________
   static const delete = "Delete";
-  
 
   ///-----------------------------------support creat ---------------------
   static const attachImage = "Attach images or proof";

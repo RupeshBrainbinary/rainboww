@@ -22,7 +22,7 @@ class AddCartController extends GetxController {
   TextEditingController cvvController = TextEditingController();
   String? selectCountry;
   String? myId;
-String? cardNumber;
+  String? cardNumber;
   RxBool loader = false.obs;
 
   bool countryBox = false;
@@ -82,6 +82,12 @@ String? cardNumber;
     }
   }
 
+  dropCloced(context) {
+    countryBox = false;
+    FocusScope.of(context).unfocus();
+    update(["addCard"]);
+  }
+
   bool validation() {
     for (int i = 0; i < countryCity.length; i++) {
       if (countryCity[i] == countryController.text) {
@@ -115,10 +121,11 @@ String? cardNumber;
     } else if (expiryYearController.text.isEmpty) {
       errorToast(Strings.expiryYearError);
       return false;
-    }/* else if (expiryMonthController.text.isEmpty) {
+    } /* else if (expiryMonthController.text.isEmpty) {
       errorToast(Strings.expiryYearError);
       return false;
-    }*/ else if (cvvController.text.isEmpty) {
+    }*/
+    else if (cvvController.text.isEmpty) {
       errorToast(Strings.cVVError);
       return false;
     } else if (cvvController.text.length != 3) {
@@ -144,8 +151,8 @@ String? cardNumber;
       String first;
       String second;
       String str2 = expiryYearController.text;
-     first= str.split('/').first;
-     second= str2.split('/').last;
+      first = str.split('/').first;
+      second = str2.split('/').last;
       AddCartApi.addCartDetailsApi(
         context,
         cardNumber: cardNumber,
@@ -173,7 +180,7 @@ String? cardNumber;
     } catch (e) {
       loader.value = false;
       errorToast("No internet connection");
-     debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 }

@@ -57,6 +57,12 @@ class RegisterController extends GetxController {
     update();
   }
 
+  dropCloced(context) {
+    countryBox = false;
+    FocusScope.of(context).unfocus();
+    update(["register_form"]);
+  }
+
   String socialId = "";
   List<String> martialStatusList = [
     Strings.single,
@@ -95,10 +101,8 @@ class RegisterController extends GetxController {
   void onTapShowPassword() {
     if (showPassword == false) {
       showPassword = true;
-
     } else {
       showPassword = false;
-
     }
     update(["register_form"]);
   }
@@ -106,10 +110,8 @@ class RegisterController extends GetxController {
   void onTapShowRetypePassword() {
     if (showRetype == false) {
       showRetype = true;
-
     } else {
       showRetype = false;
-
     }
     update(["register_form"]);
   }
@@ -126,11 +128,9 @@ class RegisterController extends GetxController {
   }
 
   void onStatusChangeCountry(String value) {
-
     selectedEthicity = value.toString();
     ethnicityController.text = value.toString();
     update(['register_screen']);
-
   }
 
   void onStatusSelect() {
@@ -182,11 +182,10 @@ class RegisterController extends GetxController {
 
     if (validation()) {
       for (int i = 0; i < listNationalities.data!.length; i++) {
-        if (listNationalities.data![i].name == ethnicityController.text) {
+        if (listNationalities.data![i].name ==
+            ethnicityController.text.toString().trim()) {
           codeId = listNationalities.data![i].id!.toString();
-
         }
-
       }
 
       registerDetails();
@@ -197,12 +196,11 @@ class RegisterController extends GetxController {
 
   void serching(value) {
     filterList = (listNationalities.data?.where((element) {
-
-      return element.name
-          .toString()
-          .toLowerCase()
-          .contains(value.toString().toLowerCase());
-    }).toList()) ??
+          return element.name
+              .toString()
+              .toLowerCase()
+              .contains(value.toString().toLowerCase());
+        }).toList()) ??
         [];
     update(["drop"]);
   }
@@ -306,27 +304,25 @@ class RegisterController extends GetxController {
     );
   }*/
   void date(ctx) async {
-    DateTime? pickedDate  = await showDatePicker(
+    DateTime? pickedDate = await showDatePicker(
         context: ctx,
         initialDate: DateTime(2001),
         firstDate: DateTime(1950),
         lastDate: DateTime(2100));
     if (pickedDate != null) {
-      print(
-          pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-      String formattedDate =
-      DateFormat('yyyy-MM-dd').format(pickedDate);
+      print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       print(
           formattedDate); //formatted date output using intl package =>  2021-03-16
-      dobController.text =
-          formattedDate;
+      dobController.text = formattedDate;
       update();
     } else {}
-
   }
+
   void onLoginTap() {
     Get.off(() => LoginScreen(), transition: Transition.cupertino);
   }
+
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   RegisterUserModel registerUser = RegisterUserModel();
@@ -341,7 +337,7 @@ class RegisterController extends GetxController {
       token = await NotificationService.getFcmToken();
       loader.value = true;
       await PrefService.setValue(PrefKeys.phonSaveNumberEndUser,
-          "+${countryModel.phoneCode + phoneController.text}");
+          "+${countryModel.phoneCode+" "+ phoneController.text}");
       registerUser = await RegisterApi.postRegister(
           fullNameController.text,
           emailController.text,
@@ -366,17 +362,16 @@ class RegisterController extends GetxController {
       );
       String? uid;
       User? user;
-      if(pwdController.text!=""){
+      if (pwdController.text != "") {
         uid = (await AuthService.loginUser(
             userModel: userModel,
             email: emailController.text,
             pwd: pwdController.text)) as String?;
         userModel.uid = uid;
-      }else
-      {
+      } else {
         final GoogleSignInAccount? account = await googleSignIn.signIn();
         final GoogleSignInAuthentication authentication =
-        await account!.authentication;
+            await account!.authentication;
 
         final OAuthCredential credential = GoogleAuthProvider.credential(
           idToken: authentication.idToken,
@@ -384,7 +379,7 @@ class RegisterController extends GetxController {
         );
         //loading.value = false;
         final UserCredential authResult =
-        await auth.signInWithCredential(credential);
+            await auth.signInWithCredential(credential);
         user = authResult.user;
         print(user!.email);
         print(user.uid);
@@ -405,8 +400,7 @@ class RegisterController extends GetxController {
                 .doc(uid)
                 .update({"online": true});
             await PrefService.setValue(PrefKeys.uid, uid);
-          } else
-          {
+          } else {
             await firebaseFirestore.collection("users").doc(uid).set({
               "id": registerUser.data!.id.toString(),
               "email": registerUser.data!.email.toString(),
@@ -418,21 +412,20 @@ class RegisterController extends GetxController {
             });
           }
         });
-      }if(user!.uid !=""){
+      }
+      if (user!.uid != "") {
         await firebaseFirestore
             .collection("users")
             .doc(user.uid)
             .get()
             .then((value) async {
           if (value.exists) {
-            await firebaseFirestore
-                .collection("users")
-                .doc(user!.uid)
-                .update({"online": true,"id":registerUser.data!.id.toString()});
+            await firebaseFirestore.collection("users").doc(user!.uid).update(
+                {"online": true, "id": registerUser.data!.id.toString()});
             await PrefService.setValue(PrefKeys.uid, user.uid);
           } else {
             await firebaseFirestore.collection("users").doc(user!.uid).set({
-              "id":registerUser.data!.id.toString(),
+              "id": registerUser.data!.id.toString(),
               "email": user.email,
               "uid": user.uid,
               "name": user.displayName,
@@ -442,7 +435,6 @@ class RegisterController extends GetxController {
             });
           }
         });
-
       }
       loader.value = false;
       fullNameController.clear();

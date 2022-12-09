@@ -50,6 +50,12 @@ class AdviserRegisterController extends GetxController {
     update();
   }
 
+  dropCloced(context) {
+    countryBox = false;
+    FocusScope.of(context).unfocus();
+    update(["register_form"]);
+  }
+
   List filterList = [];
 
   void serching(value) {
@@ -63,7 +69,6 @@ class AdviserRegisterController extends GetxController {
     update(["drop"]);
   }
 
-
   void onStatusSelect() {
     if (martialStatusDropdown == false) {
       martialStatusDropdown = true;
@@ -75,11 +80,9 @@ class AdviserRegisterController extends GetxController {
   }
 
   void onStatusChange(String value) {
-
     selectedValue = value.toString();
     country.text = value.toString();
     update(['country']);
-
   }
 
   void onCountryCitySelect() {
@@ -94,10 +97,8 @@ class AdviserRegisterController extends GetxController {
   void onTapShowPassword() {
     if (showPassword == false) {
       showPassword = true;
-
     } else {
       showPassword = false;
-
     }
     update(["register_form"]);
   }
@@ -105,10 +106,8 @@ class AdviserRegisterController extends GetxController {
   void onTapShowRetypePassword() {
     if (showRetype == false) {
       showRetype = true;
-
     } else {
       showRetype = false;
-
     }
     update(["register_form"]);
   }
@@ -145,12 +144,12 @@ class AdviserRegisterController extends GetxController {
 
   String? passId;
 
-  void onRegisterTap() {
+  void onRegisterTap(context) {
+    dropCloced(context);
     if (validation()) {
       for (int i = 0; i < listCountryModel.data!.length; i++) {
-        if (listCountryModel.data![i].name == country.text) {
+        if (listCountryModel.data![i].name == country.text.toString().trim()) {
           passId = listCountryModel.data![i].id!.toString();
-
         }
       }
 
@@ -188,8 +187,10 @@ class AdviserRegisterController extends GetxController {
   String? myId;
 
   bool validation() {
+    
     for (int i = 0; i < listCountryModel.data!.length; i++) {
-      if (listCountryModel.data![i].name == country.text) {
+      print(country.text.toString().trim());
+      if (listCountryModel.data![i].name == country.text.toString().trim()) {
         myId = country.text;
       }
     }

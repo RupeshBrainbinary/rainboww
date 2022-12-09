@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_controller.dart';
+import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_screen.dart';
 import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 
@@ -149,7 +151,13 @@ class PostViewBottomScreen extends StatelessWidget {
                                 connectionsProfileController.callApi(controller
                                     .postViewUser![index].id
                                     .toString());
-
+                                Get.to(() => ConnectionsProfileScreen(
+                                      show2: true,
+                                    ))?.then((value) {
+                                  if (kDebugMode) {
+                                    print("PROFILE SCREEN BACK ");
+                                  }
+                                });
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -178,8 +186,8 @@ class PostViewBottomScreen extends StatelessWidget {
                                       decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
-                                              image: AssetImage(
-                                                  AssetRes.portraitPlaceholder))),
+                                              image: AssetImage(AssetRes
+                                                  .portraitPlaceholder))),
                                     ),
                                     fit: BoxFit.fill,
                                   ),

@@ -12,14 +12,15 @@ import 'package:rainbow_new/utils/strings.dart';
 
 class DoctorRegisterScreen extends StatelessWidget {
   DoctorRegisterScreen({Key? key}) : super(key: key);
-  final DoctorRegisterController controller = Get.put(DoctorRegisterController());
+  final DoctorRegisterController controller =
+      Get.put(DoctorRegisterController());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
-
+        controller.dropCloced(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
@@ -61,7 +62,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                                   const DoctorRegisterForm(),
 
                                   /// register button
-                                  registerButtons(controller),
+                                  registerButtons(controller, context),
                                 ],
                               ),
 
@@ -100,7 +101,7 @@ class DoctorRegisterScreen extends StatelessWidget {
     );
   }
 
-  Widget registerButtons(DoctorRegisterController controller) {
+  Widget registerButtons(DoctorRegisterController controller, context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +109,9 @@ class DoctorRegisterScreen extends StatelessWidget {
         SizedBox(height: Get.height * 0.015),
         SubmitButton(
           text: Strings.register,
-          onTap: controller.onRegisterTap,
+          onTap: () {
+            controller.onRegisterTap(context);
+          },
         ),
         SizedBox(height: Get.height * 0.04680),
         Row(

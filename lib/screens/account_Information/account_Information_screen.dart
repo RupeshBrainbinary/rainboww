@@ -26,257 +26,266 @@ class AccountInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            height: Get.height,
-            width: Get.width,
-            decoration: const BoxDecoration(color: ColorRes.color_4F359B),
-            child: Obx(() => Stack(
-                  children: [
-                    Column(children: [
-                      appBar(),
-                      SizedBox(
-                        width: Get.width * 0.35181,
-                        child: Stack(
-                          children: [
-                            GetBuilder<AccountInformationController>(
-                              id: "Getpic",
-                              builder: (controller) => (
-                                  adHomeController
-                                          .viewAdvertiserModel
-                                          .data!
-                                          .profileImage!
-                                          .isEmpty ||
-                                      adHomeController.viewAdvertiserModel.data!
-                                              .profileImage ==
-                                          "")
-                                  ? (controller.imagePath == null)
-                                      ? Container(
-                                          height: Get.width * 0.336,
-                                          width: Get.width * 0.336,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: ColorRes.white,
-                                                width: 7),
-                                            image: const DecorationImage(
-                                              image:
-                                                  AssetImage(AssetRes.account),
+      body: GestureDetector(
+        onTap: () {
+          controller.dropCloced(context);
+          FocusScope.of(context).unfocus();
+        },
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              height: Get.height,
+              width: Get.width,
+              decoration: const BoxDecoration(color: ColorRes.color_4F359B),
+              child: Obx(() => Stack(
+                    children: [
+                      Column(children: [
+                        appBar(),
+                        SizedBox(
+                          width: Get.width * 0.35181,
+                          child: Stack(
+                            children: [
+                              GetBuilder<AccountInformationController>(
+                                id: "Getpic",
+                                builder: (controller) => (adHomeController
+                                            .viewAdvertiserModel
+                                            .data!
+                                            .profileImage!
+                                            .isEmpty ||
+                                        adHomeController.viewAdvertiserModel
+                                                .data!.profileImage ==
+                                            "")
+                                    ? (controller.imagePath == null)
+                                        ? Container(
+                                            height: Get.width * 0.336,
+                                            width: Get.width * 0.336,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: ColorRes.white,
+                                                  width: 7),
+                                              image: const DecorationImage(
+                                                image: AssetImage(
+                                                    AssetRes.account),
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      : Container(
-                                          height: Get.width * 0.336,
-                                          width: Get.width * 0.336,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: ColorRes.white,
-                                                width: 7),
-                                            image: DecorationImage(
-                                                image: FileImage(
-                                                  File(controller
-                                                      .imagePath!.path),
-                                                ),
-                                                fit: BoxFit.cover),
-                                          ),
-                                        )
-                                  : Container(
-                                      height: Get.width * 0.336,
-                                      width: Get.width * 0.336,
-                                      padding: const EdgeInsets.all(7),
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(99),
-                                        child: Container(
-                                          height: Get.width * 0.336,
-                                          width: Get.width * 0.336,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: CachedNetworkImage(
-                                            imageUrl: adHomeController
-                                                .viewAdvertiserModel
-                                                .data!
-                                                .profileImage!
-                                                .toString(),
-                                            fit: BoxFit.cover,
-                                            placeholder: ((context, url) =>
-                                                Image.asset(
-                                                  AssetRes.account,
-                                                  height: Get.width * 0.336,
-                                                  width: Get.width * 0.336,
-                                                  fit: BoxFit.cover,
-                                                )),
-                                            errorWidget:
-                                                ((context, url, error) =>
-                                                    Image.asset(
-                                                      AssetRes.account,
-                                                      height: Get.width * 0.336,
-                                                      width: Get.width * 0.336,
-                                                      fit: BoxFit.cover,
-                                                    )),
+                                          )
+                                        : Container(
+                                            height: Get.width * 0.336,
+                                            width: Get.width * 0.336,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: ColorRes.white,
+                                                  width: 7),
+                                              image: DecorationImage(
+                                                  image: FileImage(
+                                                    File(controller
+                                                        .imagePath!.path),
+                                                  ),
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          )
+                                    : Container(
+                                        height: Get.width * 0.336,
+                                        width: Get.width * 0.336,
+                                        padding: const EdgeInsets.all(7),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(99),
+                                          child: Container(
+                                            height: Get.width * 0.336,
+                                            width: Get.width * 0.336,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: CachedNetworkImage(
+                                              imageUrl: adHomeController
+                                                  .viewAdvertiserModel
+                                                  .data!
+                                                  .profileImage!
+                                                  .toString(),
+                                              fit: BoxFit.cover,
+                                              placeholder: ((context, url) =>
+                                                  Image.asset(
+                                                    AssetRes.account,
+                                                    height: Get.width * 0.336,
+                                                    width: Get.width * 0.336,
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                              errorWidget: ((context, url,
+                                                      error) =>
+                                                  Image.asset(
+                                                    AssetRes.account,
+                                                    height: Get.width * 0.336,
+                                                    width: Get.width * 0.336,
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                            ),
-                            Positioned(
-                              bottom: Get.width * 0.01333,
-                              right: Get.width * 0.01333,
-                              child: Container(
-                                height: Get.width * 0.09,
-                                width: Get.width * 0.09,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: ColorRes.white,
-                                  border: Border.all(
-                                      color: ColorRes.colorCE8CEC, width: 4),
-                                ),
-                                child: Center(
-                                  child: InkWell(
-                                    onTap: () {
-                                      controller.img = true;
-                                      showModalBottomSheet(
-                                          elevation: 10,
-                                          barrierColor:
-                                              ColorRes.black.withOpacity(0.4),
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0),
+                              ),
+                              Positioned(
+                                bottom: Get.width * 0.01333,
+                                right: Get.width * 0.01333,
+                                child: Container(
+                                  height: Get.width * 0.09,
+                                  width: Get.width * 0.09,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: ColorRes.white,
+                                    border: Border.all(
+                                        color: ColorRes.colorCE8CEC, width: 4),
+                                  ),
+                                  child: Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.img = true;
+                                        showModalBottomSheet(
+                                            elevation: 10,
+                                            barrierColor:
+                                                ColorRes.black.withOpacity(0.4),
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0),
+                                              ),
                                             ),
-                                          ),
-                                          backgroundColor:
-                                              ColorRes.color_4F359B,
-                                          context: context,
-                                          builder: (context) {
-                                            return Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                GestureDetector(
-                                                  onTap: controller
-                                                      .navigateToCamera,
-                                                  child: const ListTile(
-                                                    leading: Icon(Icons.camera),
-                                                    title: Text(Strings.camera),
+                                            backgroundColor:
+                                                ColorRes.color_4F359B,
+                                            context: context,
+                                            builder: (context) {
+                                              return Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  GestureDetector(
+                                                    onTap: controller
+                                                        .navigateToCamera,
+                                                    child: const ListTile(
+                                                      leading:
+                                                          Icon(Icons.camera),
+                                                      title:
+                                                          Text(Strings.camera),
+                                                    ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: 0.5,
-                                                  width: Get.width,
-                                                  color: ColorRes.white,
-                                                ),
-                                                GestureDetector(
-                                                  onTap: controller
-                                                      .navigateToGallary,
-                                                  child: const ListTile(
-                                                    leading: Icon(Icons
-                                                        .photo_size_select_actual_outlined),
-                                                    title:
-                                                        Text(Strings.gallery),
+                                                  Container(
+                                                    height: 0.5,
+                                                    width: Get.width,
+                                                    color: ColorRes.white,
                                                   ),
-                                                ),
-                                              ],
-                                            );
-                                          });
+                                                  GestureDetector(
+                                                    onTap: controller
+                                                        .navigateToGallary,
+                                                    child: const ListTile(
+                                                      leading: Icon(Icons
+                                                          .photo_size_select_actual_outlined),
+                                                      title:
+                                                          Text(Strings.gallery),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      child: SizedBox(
+                                        width: Get.width * 0.038,
+                                        height: Get.width * 0.038,
+                                        child: Image.asset(AssetRes.edit),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        GetBuilder<AccountInformationController>(
+                          id: 'update',
+                          builder: (controller) => Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      controller.selectAccount();
                                     },
                                     child: SizedBox(
-                                      width: Get.width * 0.038,
-                                      height: Get.width * 0.038,
-                                      child: Image.asset(AssetRes.edit),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      GetBuilder<AccountInformationController>(
-                        id: 'update',
-                        builder: (controller) => Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    controller.selectAccount();
-                                  },
-                                  child: SizedBox(
-                                    width: Get.width * 0.5,
-                                    height: Get.height * 0.05,
-                                    child: Center(
-                                      child: Text(
-                                        Strings.account,
-                                        textAlign: TextAlign.start,
-                                        style:
-                                            gilroyBoldTextStyle(fontSize: 12),
+                                      width: Get.width * 0.5,
+                                      height: Get.height * 0.05,
+                                      child: Center(
+                                        child: Text(
+                                          Strings.account,
+                                          textAlign: TextAlign.start,
+                                          style:
+                                              gilroyBoldTextStyle(fontSize: 12),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    controller.selectCompny();
-                                  },
-                                  child: SizedBox(
-                                    width: Get.width * 0.5,
-                                    height: Get.height * 0.05,
-                                    child: Center(
-                                      child: Text(
-                                        Strings.company,
-                                        style:
-                                            gilroyBoldTextStyle(fontSize: 12),
+                                  InkWell(
+                                    onTap: () {
+                                      controller.selectCompny();
+                                    },
+                                    child: SizedBox(
+                                      width: Get.width * 0.5,
+                                      height: Get.height * 0.05,
+                                      child: Center(
+                                        child: Text(
+                                          Strings.company,
+                                          style:
+                                              gilroyBoldTextStyle(fontSize: 12),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  width: Get.width * .5,
-                                  height: !controller.companySelected ? 3 : 1,
-                                  color: !controller.companySelected
-                                      ? ColorRes.colorFFED62
-                                      : ColorRes.white,
-                                ),
-                                Container(
-                                  width: Get.width * .5,
-                                  height: controller.companySelected ? 3 : 1,
-                                  color: controller.companySelected
-                                      ? ColorRes.colorFFED62
-                                      : ColorRes.white,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: Get.height - (Get.height * 0.379),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.072),
-                                child: SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(),
-                                    child: controller.companySelected
-                                        ? companyPart()
-                                        : accountPart(context)),
+                                ],
                               ),
-                            ),
-                          ],
+                              Row(
+                                children: [
+                                  Container(
+                                    width: Get.width * .5,
+                                    height: !controller.companySelected ? 3 : 1,
+                                    color: !controller.companySelected
+                                        ? ColorRes.colorFFED62
+                                        : ColorRes.white,
+                                  ),
+                                  Container(
+                                    width: Get.width * .5,
+                                    height: controller.companySelected ? 3 : 1,
+                                    color: controller.companySelected
+                                        ? ColorRes.colorFFED62
+                                        : ColorRes.white,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: Get.height - (Get.height * 0.379),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: Get.width * 0.072),
+                                  child: SingleChildScrollView(
+                                      physics: const BouncingScrollPhysics(),
+                                      child: controller.companySelected
+                                          ? companyPart(context)
+                                          : accountPart(context)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ]),
-                    controller.loader.isTrue
-                        ? const FullScreenLoader()
-                        : const SizedBox()
-                  ],
-                )),
+                      ]),
+                      controller.loader.isTrue
+                          ? const FullScreenLoader()
+                          : const SizedBox()
+                    ],
+                  )),
+            ),
           ),
         ),
       ),
@@ -494,81 +503,85 @@ class AccountInformationScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-
-        GetBuilder<AccountInformationController>(id: "phone",
+        GetBuilder<AccountInformationController>(
+          id: "phone",
           builder: (controller) {
-          return controller.idCon==""?const SizedBox(): Container(
-            height: 60,
-            width: 350,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20)),
-            child: Padding(
-              padding: const EdgeInsets.only( left: 15),
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  IntlPhoneField(
-                    //controller: controller.phoneNumberController,
-                    enabled: false,
-                    initialValue: controller.idCon==""?controller.adViewProfile.data?.phoneNumber?.split(' ').first:controller.idCon,
-                    autovalidateMode: AutovalidateMode.disabled,
-                    decoration: const InputDecoration(
-                      iconColor: Colors.black,
-                      hintMaxLines: 0,
-                      prefixIconColor: Colors.black,
-                      suffixIconColor: Colors.black,
-                      counterText: "0",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
+            return controller.idCon == ""
+                ? const SizedBox()
+                : Container(
+                    height: 60,
+                    width: 350,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          IntlPhoneField(
+                            //controller: controller.phoneNumberController,
+                            enabled: false,
+                            initialValue: controller.idCon == ""
+                                ? controller.adViewProfile.data?.phoneNumber
+                                    ?.split(' ')
+                                    .first
+                                : controller.idCon,
+                            autovalidateMode: AutovalidateMode.disabled,
+                            decoration: const InputDecoration(
+                              iconColor: Colors.black,
+                              hintMaxLines: 0,
+                              prefixIconColor: Colors.black,
+                              suffixIconColor: Colors.black,
+                              counterText: "0",
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            style: gilroySemiBoldTextStyle(
+                                fontSize: 14, color: Colors.black),
+                            dropdownTextStyle: textFieldText,
+                            dropdownIconPosition: IconPosition.trailing,
+
+                            dropdownIcon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
+                            ),
+                            onChanged: (phone) {
+                              print(phone.completeNumber);
+                              controller.idCon = phone.countryCode;
+                            },
+                            onCountryChanged: (country) {
+                              print('Country changed to: ' + country.name);
+                              controller.idCon = "${country.dialCode}";
+                            },
+                          ),
+                          Container(
+                            height: 60,
+                            width: Get.width / 1.7,
+                            padding: EdgeInsets.only(left: 5, top: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: TextField(
+                              controller: controller.phoneNumberController,
+                              style: textFieldText,
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintStyle: gilroyMediumTextStyle(
+                                    fontSize: 18,
+                                    color: ColorRes.black.withOpacity(0.3)),
+                                hintText: Strings.phoneNumberHint,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    style: gilroySemiBoldTextStyle(fontSize: 14, color: Colors.black),
-                    dropdownTextStyle:
-                    textFieldText,
-                    dropdownIconPosition: IconPosition.trailing,
-
-                    dropdownIcon: const Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black,
-                    ),
-                    onChanged: (phone) {
-                      print(phone.completeNumber);
-                      controller.idCon = phone.countryCode;
-                    },
-                    onCountryChanged: (country) {
-                      print('Country changed to: ' + country.name);
-                      controller.idCon ="${country.dialCode}" ;
-                    },
-                  ),
-                  Container(
-                    height: 60,
-                    width: Get.width / 1.7,
-                    padding: EdgeInsets.only(left: 5, top: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: TextField(
-                    controller: controller.phoneNumberController,
-
-                    style: textFieldText,
-                    keyboardType: TextInputType.phone,
-
-                      decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: gilroyMediumTextStyle(
-                          fontSize: 18,
-                          color: ColorRes.black.withOpacity(0.3)),
-                      hintText: Strings.phoneNumberHint,
-                    ),
-                  ),
-
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
+                  );
+          },
         ),
         /*  Container(height: 60,
           decoration: BoxDecoration(color: Colors.white),
@@ -597,7 +610,8 @@ class AccountInformationScreen extends StatelessWidget {
     );
   }
 
-  Widget companyPart() {
+  /// Company
+  Widget companyPart(context) {
     return Column(
       children: [
         SizedBox(height: Get.height * 0.0197),
@@ -611,6 +625,9 @@ class AccountInformationScreen extends StatelessWidget {
                   onTap: controller.onCountryProfession,
                 )),
         AppTextFiled(
+          onTap: () {
+            controller.dropCloced(context);
+          },
           controller: controller.companyName,
           title: Strings.companyName,
           hintText: Strings.myCompany,
@@ -702,61 +719,62 @@ class AccountInformationScreen extends StatelessWidget {
                       ),
                       child: SingleChildScrollView(
                         child: Column(
-                          children: (controller.companyCountryController.text.isEmpty)
-                              ? listNationalities.data!.map((e) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 7, bottom: 7),
-                                    child: InkWell(
-                                      onTap: () {
-                                        controller.companyCountryController.text =
-                                            e.name ?? "";
-                                        controller.countryBox = false;
-                                        controller.update(["drop"]);
-                                      },
-                                      child: SizedBox(
-                                        height: 25,
-                                        width: Get.width,
-                                        child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            e.name!,
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
+                          children:
+                              (controller.companyCountryController.text.isEmpty)
+                                  ? listNationalities.data!.map((e) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, top: 7, bottom: 7),
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.companyCountryController
+                                                .text = e.name ?? "";
+                                            controller.countryBox = false;
+                                            controller.update(["drop"]);
+                                          },
+                                          child: SizedBox(
+                                            height: 25,
+                                            width: Get.width,
+                                            child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                e.name!,
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                }).toList()
-                              : controller.filterList.map((e) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 7, bottom: 7),
-                                    child: InkWell(
-                                      onTap: () {
-                                        controller.companyCountryController.text =
-                                            e.name!;
-                                        controller.countryBox = false;
-                                        controller.update(["drop"]);
-                                      },
-                                      child: SizedBox(
-                                        height: 25,
-                                        width: Get.width,
-                                        child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            e.name!,
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
+                                      );
+                                    }).toList()
+                                  : controller.filterList.map((e) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, top: 7, bottom: 7),
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.companyCountryController
+                                                .text = e.name!;
+                                            controller.countryBox = false;
+                                            controller.update(["drop"]);
+                                          },
+                                          child: SizedBox(
+                                            height: 25,
+                                            width: Get.width,
+                                            child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                e.name!,
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
+                                      );
+                                    }).toList(),
                         ),
                       ),
                     )

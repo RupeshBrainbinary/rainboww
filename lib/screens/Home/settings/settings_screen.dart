@@ -239,8 +239,7 @@ class SettingsScreen extends StatelessWidget {
         //Messages
         InkWell(
           onTap: () async {
-
-           await messageController.init();
+            await messageController.init();
 
             homeController.viewProfile.data?.userType == "free"
                 ? premiumPopUpBox(context: context)
@@ -266,10 +265,12 @@ class SettingsScreen extends StatelessWidget {
                   Strings.messages,
                   style: textStyleFont15White,
                 ),
-               const Spacer(),
+                const Spacer(),
                 SizedBox(
                     height: 10, width: 6, child: Image.asset(AssetRes.next)),
-                const SizedBox(width: 25,)
+                const SizedBox(
+                  width: 25,
+                )
               ],
             ),
           ),
@@ -309,7 +310,9 @@ class SettingsScreen extends StatelessWidget {
                 const Spacer(),
                 SizedBox(
                     height: 10, width: 6, child: Image.asset(AssetRes.next)),
-                const SizedBox(width: 25,)
+                const SizedBox(
+                  width: 25,
+                )
               ],
             ),
           ),
@@ -346,7 +349,9 @@ class SettingsScreen extends StatelessWidget {
                 const Spacer(),
                 SizedBox(
                     height: 10, width: 6, child: Image.asset(AssetRes.next)),
-                const SizedBox(width: 25,)
+                const SizedBox(
+                  width: 25,
+                )
               ],
             ),
           ),
@@ -381,7 +386,9 @@ class SettingsScreen extends StatelessWidget {
                 const Spacer(),
                 SizedBox(
                     height: 10, width: 6, child: Image.asset(AssetRes.next)),
-                const SizedBox(width: 25,)
+                const SizedBox(
+                  width: 25,
+                )
               ],
             ),
           ),
@@ -417,7 +424,9 @@ class SettingsScreen extends StatelessWidget {
                 const Spacer(),
                 SizedBox(
                     height: 10, width: 6, child: Image.asset(AssetRes.next)),
-                const SizedBox(width: 25,)
+                const SizedBox(
+                  width: 25,
+                )
               ],
             ),
           ),
@@ -436,7 +445,7 @@ class SettingsScreen extends StatelessWidget {
                 height: 18.98,
                 width: 20.83,
                 child: Image.asset(
-                  AssetRes.notify,
+                  AssetRes.adeNotificationIcon,
                   color: Colors.yellow,
                 )),
             SizedBox(
@@ -450,7 +459,7 @@ class SettingsScreen extends StatelessWidget {
               width: Get.width * 0.395,
             ),
 
-            //notification
+            /// Notification
             GetBuilder<SettingsController>(
               id: "switch",
               builder: (controller) {
@@ -476,77 +485,76 @@ class SettingsScreen extends StatelessWidget {
           color: ColorRes.color_4F359B.withOpacity(0.4),
         ),
         //Subscription
-         InkWell(
-            onTap: () {
-              homeController.viewProfile.data?.userType == "free"
-                  ? premiumPopUpBox(context: context)
-                  : Get.to(() => SubscriptionScreen());
-
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 5),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: Get.width * 0.08,
-                  ),
-                  SizedBox(
-                      height: 18.98,
-                      width: 20.83,
-                      child: Image.asset(
-                        AssetRes.profileSettinges,
-                        color: Colors.yellow,
-                      )),
-                  SizedBox(
-                    width: Get.width * 0.06,
-                  ),
-                  Text(
-                    Strings.subscription,
-                    style: textStyleFont15White,
-                  ),
-                  SizedBox(
-                    width: Get.width * 0.5,
-                  ),
-                  SizedBox(
-                      height: 10, width: 6, child: Image.asset(AssetRes.next))
-                ],
-              ),
+        InkWell(
+          onTap: () {
+            homeController.viewProfile.data?.userType == "free"
+                ? premiumPopUpBox(context: context)
+                : Get.to(() => SubscriptionScreen());
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5, bottom: 5),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: Get.width * 0.08,
+                ),
+                SizedBox(
+                    height: 18.98,
+                    width: 20.83,
+                    child: Image.asset(
+                      AssetRes.profileSettinges,
+                      color: Colors.yellow,
+                    )),
+                SizedBox(
+                  width: Get.width * 0.06,
+                ),
+                Text(
+                  Strings.subscription,
+                  style: textStyleFont15White,
+                ),
+                SizedBox(
+                  width: Get.width * 0.5,
+                ),
+                SizedBox(
+                    height: 10, width: 6, child: Image.asset(AssetRes.next))
+              ],
             ),
           ),
-          SizedBox(
-            height: Get.height * 0.03,
-          ),
+        ),
+        SizedBox(
+          height: Get.height * 0.03,
+        ),
         Text(
-            Strings.yourReferralCode,
-            style: textStyleFont15White,
+          Strings.yourReferralCode,
+          style: textStyleFont15White,
+        ),
+        SizedBox(
+          height: Get.height * 0.01,
+        ),
+        Text(
+          controller.refferalCode.toString(),
+          style: gilroyBoldTextStyle(fontSize: 32),
+        ),
+        SizedBox(
+          height: Get.height * 0.02,
+        ),
+        InkWell(
+          onTap: () {
+            controller.share();
+          },
+          child: Container(
+            height: 44.43,
+            width: Get.width * 0.312,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(13.67),
+                color: ColorRes.color_6306B2),
+            child: Center(
+                child: Text(
+              Strings.inviteNow,
+              style: gilroyBoldTextStyle(fontSize: 11.9619),
+            )),
           ),
-          SizedBox(
-            height: Get.height * 0.01,
-          ),
-          Text(
-            controller.refferalCode.toString(),
-            style: gilroyBoldTextStyle(fontSize: 32),
-          ),
-          SizedBox(
-            height: Get.height * 0.02,
-          ),
-          InkWell(
-            onTap: () {
-              controller.share();
-            },
-            child: Container(
-              height: 44.43,
-              width: Get.width * 0.312,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(13.67),
-                  color: ColorRes.color_6306B2),
-              child: Center(
-                  child: Text(
-                Strings.inviteNow,
-                style: gilroyBoldTextStyle(fontSize: 11.9619),
-              )),
-            ),
-          ),
+        ),
         SizedBox(
           height: Get.height * 0.045,
         ),
@@ -578,7 +586,9 @@ class SettingsScreen extends StatelessWidget {
             )),
           ),
         ),
-        const SizedBox(height: 15,)
+        const SizedBox(
+          height: 15,
+        )
       ],
     );
   }

@@ -53,6 +53,11 @@ class DoctorRegisterController extends GetxController {
     country.text = value;
     update(['doctor']);
   }*/
+  dropCloced(context) {
+    countryBox = false;
+    FocusScope.of(context).unfocus();
+    update(["doctor"]);
+  }
 
   void onCountryCoCityChange(String value) {
     selectCountry = value;
@@ -109,7 +114,8 @@ class DoctorRegisterController extends GetxController {
     update(['doctor']);
   }
 
-  Future<void> onRegisterTap() async {
+  Future<void> onRegisterTap(context) async {
+    dropCloced(context);
     if (validation()) {
       companyRegister();
     }
@@ -166,10 +172,10 @@ class DoctorRegisterController extends GetxController {
   Future<void> companyRegister() async {
     loader.value = true;
     try {
+      
       for (int i = 0; i < listCountryModel.data!.length; i++) {
-        if (listCountryModel.data![i].name == country.text) {
+        if (listCountryModel.data![i].name == country.text.toString().trim()) {
           codeId = listCountryModel.data![i].id!.toString();
-
         }
         /*       countryCity.add(listCountryModel.data![i].name!);
         countryId.add(listCountryModel.data![i].id!.toString());*/
@@ -205,7 +211,6 @@ class DoctorRegisterController extends GetxController {
       await PrefService.setValue(PrefKeys.userId, advertiserRegister.data!.id);
       status = advertiserRegister.data!.status.toString();
       role = advertiserRegister.data!.role.toString();
-
     } catch (e) {
       loader.value = false;
       debugPrint(e.toString());

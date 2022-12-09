@@ -36,7 +36,7 @@ class SearchController extends GetxController {
   TextEditingController searchBar = TextEditingController();
   List<ListUserData> data = [];
   int page = 1;
-  int limit = 3;
+  int limit = 15;
   ScrollController scrollController = ScrollController();
 
   int length = 5;

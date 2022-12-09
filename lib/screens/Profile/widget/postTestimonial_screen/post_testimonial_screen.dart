@@ -125,7 +125,7 @@ class PostTestimonialScreen extends StatelessWidget {
             ),
             SubmitButton(
               text: Strings.post,
-              onTap: () {
+              onTap: () async {
                 FocusScopeNode currentfocus = FocusScope.of(context);
                 if (!currentfocus.hasPrimaryFocus) {
                   currentfocus.unfocus();
@@ -134,8 +134,8 @@ class PostTestimonialScreen extends StatelessWidget {
                 if (controller.postTestimonials.text == "") {
                   errorToast("Testimonials field is empty");
                 } else {
-                  controller.postTestimonialsApi(id.toString(), context);
-                  Get.back();
+                  await controller.postTestimonialsApi(id.toString(), context);
+                  // Get.back();
                 }
               },
             )

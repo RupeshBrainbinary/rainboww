@@ -32,14 +32,14 @@ class ConnectionsScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              appBar(),
-              Expanded(
-                child: Stack(
-                  children: [
-                    SingleChildScrollView(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  appBar(),
+                  Expanded(
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
                           listOfRequest(),
@@ -47,16 +47,16 @@ class ConnectionsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Obx(() {
-                      if (controller.loader.isTrue) {
-                        return const FullScreenLoader();
-                      } else {
-                        return const SizedBox();
-                      }
-                    }),
-                  ],
-                ),
+                  ),
+                ],
               ),
+              Obx(() {
+                if (controller.loader.isTrue) {
+                  return const FullScreenLoader();
+                } else {
+                  return const SizedBox();
+                }
+              }),
             ],
           ),
         ),

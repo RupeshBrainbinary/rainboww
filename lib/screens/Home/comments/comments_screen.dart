@@ -228,7 +228,7 @@ class CommentScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 7, top: 7, bottom: 7, right: 7),
                       decoration: BoxDecoration(
-                        color: ColorRes.color_959595.withOpacity(0.5),
+                        color: ColorRes.black.withOpacity(0.05),
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         ),

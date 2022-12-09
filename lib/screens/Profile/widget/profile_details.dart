@@ -176,9 +176,9 @@ Widget profileDetails() {
               children: [
                 InkWell(
                   onTap: () async {
+                    print(controller.viewProfile.data!.instagram.toString());
                     await launchUrl(Uri.parse(
                         controller.viewProfile.data!.instagram.toString()));
-
                   },
                   child: controller.viewProfile.data!.instagram == ""
                       ? const SizedBox()
@@ -200,7 +200,6 @@ Widget profileDetails() {
                     onTap: () async {
                       await launchUrl(Uri.parse(
                           controller.viewProfile.data!.youtube.toString()));
-
                     },
                     child: controller.viewProfile.data!.youtube == ""
                         ? const SizedBox()
@@ -226,8 +225,6 @@ Widget profileDetails() {
                     onTap: () async {
                       await launchUrl(Uri.parse(
                           controller.viewProfile.data!.facebook.toString()));
-
-
                     },
                     child: controller.viewProfile.data!.facebook == ""
                         ? const SizedBox()
@@ -248,8 +245,6 @@ Widget profileDetails() {
                     onTap: () async {
                       await launchUrl(Uri.parse(
                           controller.viewProfile.data!.twitter.toString()));
-
-
                     },
                     child: controller.viewProfile.data!.twitter == ''
                         ? const SizedBox()

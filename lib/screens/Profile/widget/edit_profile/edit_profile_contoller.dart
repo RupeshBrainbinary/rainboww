@@ -15,6 +15,7 @@ import 'package:rainbow_new/screens/Profile/widget/edit_profile/edit_api/edit_mo
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
 import 'package:rainbow_new/utils/strings.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EditProfileController extends GetxController {
   TextEditingController fullName = TextEditingController(/*text: "ramika"*/);
@@ -75,6 +76,12 @@ class EditProfileController extends GetxController {
     update();
   }
 
+  dropCloced(context) {
+    countryBox = false;
+    FocusScope.of(context).unfocus();
+    update(["register_form"]);
+  }
+
   Future<void> init() async {
     await determinePosition();
     position = await getCurrentPosition();
@@ -90,17 +97,19 @@ class EditProfileController extends GetxController {
   ];
 
   Future<void> onTapTextField(context) async {
-    if (validation()) {
-      for (int i = 0; i < listNationalities.data!.length; i++) {
-        if (listNationalities.data![i].name == ethnicity.text) {
-          codeId = listNationalities.data![i].id!.toString();
-
+    dropCloced(context);
+    if (await validation()) {
+      if (urlValidation()) {
+        for (int i = 0; i < listNationalities.data!.length; i++) {
+          if (listNationalities.data![i].name ==
+              ethnicity.text.toString().trim()) {
+            codeId = listNationalities.data![i].id!.toString();
+          }
         }
-
+        await editProfileApi(context);
+        profileController.update(["profile"]);
+        await profileController.viewProfileDetails();
       }
-      await editProfileApi(context);
-      profileController.update(["profile"]);
-      await profileController.viewProfileDetails();
     }
   }
 
@@ -151,7 +160,7 @@ class EditProfileController extends GetxController {
     update(["drop"]);
   }
 
-  bool validation() {
+  Future<bool> validation() async {
     /*   if (backImage == null) {
       errorToast(Strings.captureImageBack);
       return false;
@@ -192,7 +201,55 @@ class EditProfileController extends GetxController {
     } else if (hobbies.text.isEmpty) {
       errorToast(Strings.hobbiesError);
       return false;
+    } else if (instagram.text.isNotEmpty &&
+        !Uri.parse(instagram.text.toString()).isAbsolute) {
+      errorToast(Strings.instagramError);
+      return false;
+    } else if (youTube.text.isNotEmpty &&
+        !Uri.parse(youTube.text.toString()).isAbsolute) {
+      errorToast(Strings.youtubeValidError);
+      return false;
+    } else if (faceBook.text.isNotEmpty &&
+        !Uri.parse(faceBook.text.toString()).isAbsolute) {
+      errorToast(Strings.facebookValidError);
+      return false;
+    } else if (twitter.text.isNotEmpty &&
+        !Uri.parse(twitter.text.toString()).isAbsolute) {
+      errorToast(Strings.twitterValidError);
+      return false;
     }
+    return true;
+  }
+
+  /// Validation URL or Not
+  bool urlValidation() {
+    // if (instagram.text.isNotEmpty && youTube.text.isNotEmpty) {
+    //   if (Uri.parse(instagram.text.toString()).isAbsolute &&
+    //       Uri.parse(youTube.text.toString()).isAbsolute) {
+    //     return true;
+    //   } else {
+    //     if (!Uri.parse(instagram.text.toString()).isAbsolute) {
+    //       errorToast(Strings.instagramError);
+    //     } else if (!Uri.parse(youTube.text.toString()).isAbsolute) {
+    //       errorToast(Strings.youtubeValidError);
+    //     }
+    //     return false;
+    //   }
+    // } else if (instagram.text.isNotEmpty) {
+    //   if (Uri.parse(instagram.text.toString()).isAbsolute) {
+    //     return true;
+    //   } else {
+    //     errorToast(Strings.instagramError);
+    //     return false;
+    //   }
+    // } else if (Uri.parse(youTube.text.toString()).isAbsolute) {
+    //   if (Uri.parse(youTube.text.toString()).isAbsolute) {
+    //     return true;
+    //   } else {
+    //     errorToast(Strings.youtubeValidError);
+    //     return false;
+    //   }
+    // }
     return true;
   }
 

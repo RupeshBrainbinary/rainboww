@@ -86,12 +86,21 @@ class PhoneNumberScreen extends StatelessWidget {
           onTap: () {
             Get.back();
           },
-          child: const Padding(
-            padding: EdgeInsets.only(left: 15),
-            child: Icon(
-              Icons.arrow_back_ios_outlined,
-              size: 16.72,
-            ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 5,
+              ),
+              SizedBox(
+                height: 16,
+                child: Image.asset(
+                  AssetRes.backIcon,
+                  height: 16,
+                  width: 35,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
         ),
         SizedBox(
@@ -162,7 +171,7 @@ class PhoneNumberScreen extends StatelessWidget {
           width: Get.width * 0.8450,
           height: 60,
           decoration: BoxDecoration(
-            color: ColorRes.colorE7D01F, 
+            color: ColorRes.colorE7D01F,
             borderRadius: BorderRadius.circular(20),
             gradient: const LinearGradient(
               colors: [ColorRes.colorFFEC5C, ColorRes.colorDFC60B],

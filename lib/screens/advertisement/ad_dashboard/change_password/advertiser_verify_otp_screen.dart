@@ -5,7 +5,6 @@ import 'package:rainbow_new/screens/advertisement/ad_dashboard/change_password/a
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
 
-
 import '../../../../common/Widget/loaders.dart';
 import '../../../../common/Widget/text_styles.dart';
 import '../../../../utils/color_res.dart';
@@ -197,20 +196,27 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
                               SizedBox(
                                 height: Get.height * 0.022,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  controller.startTimer();
-                                  controller.phoneNumberRegister();
-                                },
-                                child: Center(
-                                  child: Text(
-                                    Strings.resendOtp,
-                                    style: gilroyBoldTextStyle(
-                                      fontSize: 16,
-                                      color: ColorRes.color_69C200,
-                                    ),
-                                  ),
-                                ),
+                              GetBuilder<AdvertiserVerifyController>(
+                                id: "time",
+                                builder: (controller) => controller.seconds == 0
+                                    ? InkWell(
+                                        onTap: () {
+                                          controller.startTimer();
+                                          controller.phoneNumberRegister();
+                                        },
+                                        child: Center(
+                                          child: Text(
+                                            Strings.resendOtp,
+                                            style: gilroyBoldTextStyle(
+                                              fontSize: 16,
+                                              color: ColorRes.color_69C200,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox(
+                                        height: 20,
+                                      ),
                               ),
                               SizedBox(
                                 height: Get.height * 0.04,

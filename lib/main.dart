@@ -1,6 +1,4 @@
-
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -18,8 +16,6 @@ import 'package:rainbow_new/service/notification_service.dart';
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
-
-
 import 'screens/auth/register/widget/registerVerify_controller.dart';
 
 Future<void> main() async {
@@ -64,7 +60,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScanYourFaceController scanYourFaceController = Get.put(ScanYourFaceController());
+    ScanYourFaceController scanYourFaceController =
+        Get.put(ScanYourFaceController());
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -79,27 +76,25 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: "/RegisterOtpScreen",
             page: () => const RegisterOtpScreen(),
-            binding: BindingsBuilder(() => RegisterVerifyController())
-        ),
-
+            binding: BindingsBuilder(() => RegisterVerifyController())),
       ],
       // home: ScanYourFaceScreen(),
       home: /*const GoogleMapScreen()*/ /*SupportDetailsScreen(com: "")*/ !PrefService
-          .getBool(PrefKeys.skipBoardingScreen)
+              .getBool(PrefKeys.skipBoardingScreen)
           ? SplashScreen()
           : (PrefService.getBool(PrefKeys.register) ||
-          PrefService.getBool(PrefKeys.isLogin))
-          ? PrefService.getBool(PrefKeys.showTermsCondition)
-          ? TermsConditionsScreen(showBackBtn: false)
-          : PrefService.getString(PrefKeys.loginRole) == "end_user"
-          ? const Dashboard()
-          : PrefService.getString(PrefKeys.loginRole) ==
-          "advertisers"
-          ? AdvertisementDashBord()
-          : PrefService.getBool(PrefKeys.isLogin)
-          ? const Dashboard()
-          : AuthDashboard()
-          : AuthDashboard(),
+                  PrefService.getBool(PrefKeys.isLogin))
+              ? PrefService.getBool(PrefKeys.showTermsCondition)
+                  ? TermsConditionsScreen(showBackBtn: false)
+                  : PrefService.getString(PrefKeys.loginRole) == "end_user"
+                      ? const Dashboard()
+                      : PrefService.getString(PrefKeys.loginRole) ==
+                              "advertisers"
+                          ? AdvertisementDashBord()
+                          : PrefService.getBool(PrefKeys.isLogin)
+                              ? const Dashboard()
+                              : AuthDashboard()
+              : AuthDashboard(),
     );
   }
 }

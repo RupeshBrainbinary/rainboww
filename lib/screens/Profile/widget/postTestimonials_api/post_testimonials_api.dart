@@ -34,8 +34,9 @@ class PostTestimonialsApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          flutterToast(jsonDecode(response.body)["message"]);
           Navigator.pop(context);
+          flutterToast(jsonDecode(response.body)["message"]);
+          
         }
         return postTestimonialsModelFromJson(response.body);
       }

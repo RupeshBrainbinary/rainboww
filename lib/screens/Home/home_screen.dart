@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_decorated_text/flutter_decorated_text.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ import 'package:rainbow_new/screens/Home/comments/comments_controller.dart';
 import 'package:rainbow_new/screens/Home/comments/comments_screen.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_controller.dart';
+import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_screen.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_screen.dart';
 import 'package:rainbow_new/screens/Home/view_story/view_story_controller.dart';
 import 'package:rainbow_new/screens/notification/notification_controller.dart';
@@ -146,12 +148,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           id: 'notification_badge',
                                           builder: (controller) {
                                             return homeController
+                                                            .notificationModel ==
+                                                        null ||
+                                                    homeController
                                                             .notificationModel
-                                                             ==
-                                                        null || homeController
-                                                .notificationModel?.pendingCount.toString()
-                                                ==
-                                                'null'||
+                                                            ?.pendingCount
+                                                            .toString() ==
+                                                        'null' ||
                                                     homeController
                                                             .notificationModel!
                                                             .pendingCount
@@ -358,8 +361,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 80,
                                     child: Stack(
                                       children: [
-                                        controller.controller.viewProfile.data
-                                                        ==
+                                        controller.controller.viewProfile
+                                                        .data ==
                                                     null ||
                                                 controller
                                                         .controller
@@ -998,77 +1001,95 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, top: 20),
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(50),
-                                      child: /* FadeInImage(
-                                              height: 40,
-                                              width: 40,
-                                              placeholder: const AssetImage(
-                                                  AssetRes
-                                                      .portraitPlaceholder),
-                                              image: NetworkImage(controller
-                                                  .friendPostListData[
-                                                      index]
-                                                  .postUser!
-                                                  .profileImage
-                                                  .toString()),
-                                              fit: BoxFit.cover,
-                                            )*/
-                                          CachedNetworkImage(
-                                        height: 40,
-                                        width: 40,
-                                        imageUrl: controller
-                                            .friendPostListData[index]
-                                            .postUser!
-                                            .profileImage
-                                            .toString(),
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) =>
-                                            Image.asset(
-                                          AssetRes.portraitPlaceholder,
+                            GestureDetector(
+                              onTap: () {
+                                connectionsProfileController.callApi(controller
+                                    .friendPostListData[index].postUser!.id
+                                    .toString());
+                                Get.to(() => ConnectionsProfileScreen(
+                                      show2: true,
+                                    ))?.then((value) {
+                                  if (kDebugMode) {
+                                    print("PROFILE SCREEN BACK ");
+                                  }
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, top: 20),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(50),
+                                        child:
+                                            /* FadeInImage(
+                                                height: 40,
+                                                width: 40,
+                                                placeholder: const AssetImage(
+                                                    AssetRes
+                                                        .portraitPlaceholder),
+                                                image: NetworkImage(controller
+                                                    .friendPostListData[
+                                                        index]
+                                                    .postUser!
+                                                    .profileImage
+                                                    .toString()),
+                                                fit: BoxFit.cover,
+                                              )*/
+                                            CachedNetworkImage(
                                           height: 40,
                                           width: 40,
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            Image.asset(
-                                          AssetRes.portraitPlaceholder,
-                                          height: 40,
-                                          width: 40,
-                                        ),
-                                      )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 20.0, left: 12),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        controller.friendPostListData[index]
-                                            .postUser!.fullName
-                                            .toString(),
-                                        style:
-                                            gilroyBoldTextStyle(fontSize: 16),
-                                      ),
-                                      const SizedBox(
-                                        height: 3,
-                                      ),
-                                      Text(
-                                        controller.timeAgo(controller
-                                            .friendPostListData[index]
-                                            .createdAt!),
-                                        style: textStyleFont12White400,
-                                      ),
-                                    ],
+                                          imageUrl: controller
+                                              .friendPostListData[index]
+                                              .postUser!
+                                              .profileImage
+                                              .toString(),
+                                          fit: BoxFit.cover,
+                                          placeholder: (context, url) =>
+                                              Image.asset(
+                                            AssetRes.portraitPlaceholder,
+                                            height: 40,
+                                            width: 40,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
+                                            AssetRes.portraitPlaceholder,
+                                            height: 40,
+                                            width: 40,
+                                          ),
+                                        )),
                                   ),
-                                )
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0, left: 12),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        /// Full Name
+                                        Text(
+                                          controller.friendPostListData[index]
+                                              .postUser!.fullName
+                                              .toString(),
+                                          style:
+                                              gilroyBoldTextStyle(fontSize: 16),
+                                        ),
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
+
+                                        /// Time left
+                                        Text(
+                                          controller.timeAgo(controller
+                                              .friendPostListData[index]
+                                              .createdAt!),
+                                          style: textStyleFont12White400,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: Get.height * 0.02,
@@ -1192,6 +1213,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     .postList![index2]
                                                     .isEmpty
                                                 ? const SizedBox()
+
+                                                /// Comment post Image
                                                 : CachedNetworkImage(
                                                     height: 80,
                                                     width: 80,
@@ -1333,7 +1356,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     .lt3))),
                                               ),
                                             ),*/
-
                                           /*   Positioned(
                                                 left: Get.width * 0.25,
                                                 top: Get.height * 0.01,
@@ -1372,7 +1394,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Image(
                                             image: AssetImage(AssetRes.eye))),
                                   ),
-                                  SizedBox(width: 5,),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
                                   Text(
                                     controller
                                         .friendPostListData[index].postViewcount

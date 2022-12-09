@@ -10,17 +10,17 @@ import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/strings.dart';
 
-class
-AdviserRegisterScreen extends StatelessWidget {
+class AdviserRegisterScreen extends StatelessWidget {
   AdviserRegisterScreen({Key? key}) : super(key: key);
-  final AdviserRegisterController controller = Get.put(AdviserRegisterController());
+  final AdviserRegisterController controller =
+      Get.put(AdviserRegisterController());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
-
+        controller.dropCloced(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
@@ -62,7 +62,7 @@ AdviserRegisterScreen extends StatelessWidget {
                                   AdviserRegisterForm(),
 
                                   /// register button
-                                  registerButtons(controller),
+                                  registerButtons(controller,context),
                                 ],
                               ),
                               GetBuilder<AdviserRegisterController>(
@@ -104,7 +104,7 @@ AdviserRegisterScreen extends StatelessWidget {
     );
   }
 
-  Widget registerButtons(AdviserRegisterController controller) {
+  Widget registerButtons(AdviserRegisterController controller,context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +112,7 @@ AdviserRegisterScreen extends StatelessWidget {
         SizedBox(height: Get.height * 0.015),
         SubmitButton(
           text: Strings.next,
-          onTap: controller.onRegisterTap,
+          onTap:(){ controller.onRegisterTap(context);},
         ),
         SizedBox(height: Get.height * 0.082),
       ],

@@ -262,7 +262,7 @@ class AdvertisementDashBord extends StatelessWidget {
 
                                                     adController.backScreen =
                                                         'AdvertisementDashBord';
-                                                    adController.startTimer();
+                                                    // adController.startTimer();
                                                     adController
                                                         .phoneNumberRegister();
                                                     Get.to(() =>

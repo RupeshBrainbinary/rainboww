@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +30,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        controller.dropCloced(context);
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
@@ -599,10 +599,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               ? listNationalities.data!
                                                   .map((e) {
                                                   return Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        left: 20,
-                                                        top: 7,
-                                                        bottom: 7),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 20,
+                                                            top: 7,
+                                                            bottom: 7),
                                                     child: InkWell(
                                                       onTap: () {
                                                         controller.ethnicity
@@ -632,10 +633,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 }).toList()
                                               : controller.filterList.map((e) {
                                                   return Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        left: 20,
-                                                        top: 7,
-                                                        bottom: 7),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 20,
+                                                            top: 7,
+                                                            bottom: 7),
                                                     child: InkWell(
                                                       onTap: () {
                                                         controller.ethnicity
@@ -995,9 +997,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     height: Get.height * 0.04,
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       FocusScope.of(context).unfocus();
-                      controller.onTapTextField(context);
+                      await controller.onTapTextField(context);
                     },
                     child: Container(
                       width: Get.width * 0.84,
