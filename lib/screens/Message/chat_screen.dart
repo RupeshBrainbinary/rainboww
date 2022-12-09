@@ -236,7 +236,8 @@ class ChatScreen extends StatelessWidget {
                             scrollController: controller.listScrollController,
                             isLive: true,
                             reverse: true,
-                            itemBuilder: (context, docementSnapshot, index) {
+                            itemBuilder: (context, docementSnapshot, index)  {
+
                               Map<String, dynamic>? data =
                                   docementSnapshot[index].data()
                                       as Map<String, dynamic>?;
@@ -251,6 +252,14 @@ class ChatScreen extends StatelessWidget {
                                   data['senderUid'].toString() != userUid) {
                                 controller
                                     .setReadTrue(docementSnapshot[index].id);
+                              }
+                              if( data[
+                              'image']!=null){
+                                precacheImage(
+                                    NetworkImage(
+                                        data[
+                                        'image'].toString()),
+                                    context);
                               }
 
                               Widget box = data['type'] == "alert"
@@ -432,7 +441,6 @@ class ChatScreen extends StatelessWidget {
                                             )
                                           ],
                                         ),
-                                        const SizedBox(height: 10),
                                       ],
                                     );
                               if ((index + 1) == docementSnapshot.length) {
