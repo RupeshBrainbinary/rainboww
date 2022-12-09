@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/screens/auth/phonenumber/phonenumber_api/phonenumber_json.dart';
 import 'package:rainbow_new/screens/auth/register/widget/RegisterVerifyOtp_Screen.dart';
+import 'package:rainbow_new/screens/auth/verify_phone/verify_controller.dart';
 import 'package:rainbow_new/screens/auth/verify_phone/verifyphone_screen.dart';
 import 'package:rainbow_new/service/http_services.dart';
 import 'package:rainbow_new/service/pref_services.dart';
@@ -15,13 +16,12 @@ class PhoneNumberApi {
   static Future postRegister(
     String phoneNumber,
   ) async {
-   // List<PhoneNumber> phoneList = [];
+    // List<PhoneNumber> phoneList = [];
     try {
       String url = EndPoints.mobileCheck;
       Map<String, String> param = {
         'phoneNumber': phoneNumber,
       };
-
 
       http.Response? response = await HttpService.postApi(
           url: url,
@@ -35,6 +35,8 @@ class PhoneNumberApi {
           await PrefService.setValue(PrefKeys.register, true);
           await PrefService.setValue(
               PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
+          VerifyPhoneController controller = Get.put(VerifyPhoneController());
+          controller.startTimer();
           Get.to(() => const VerifyPhoneScreen());
           flutterToast(jsonDecode(response.body)["message"]);
         }
@@ -45,7 +47,6 @@ class PhoneNumberApi {
           ? errorToast(message)
           : */
     } catch (e) {
-
       return [];
     }
   }
@@ -58,7 +59,6 @@ class PhoneNumberApi {
       Map<String, String> param = {
         'phoneNumber': phoneNumber,
       };
-
 
       http.Response? response = await HttpService.postApi(
           url: url,
@@ -83,7 +83,6 @@ class PhoneNumberApi {
           ? errorToast(message)
           : */
     } catch (e) {
-
       return [];
     }
   }
@@ -97,7 +96,6 @@ class PhoneNumberApi {
         'phoneNumber': phoneNumber,
       };
 
-
       http.Response? response = await HttpService.postApi(
           url: url,
           body: jsonEncode(param),
@@ -119,7 +117,6 @@ class PhoneNumberApi {
           ? errorToast(message)
           : */
     } catch (e) {
-
       return [];
     }
   }
@@ -133,7 +130,6 @@ class PhoneNumberApi {
         'phoneNumber': phoneNumber,
       };
 
-
       http.Response? response = await HttpService.postApi(
           url: url,
           body: jsonEncode(param),
@@ -156,9 +152,7 @@ class PhoneNumberApi {
           ? errorToast(message)
           : */
     } catch (e) {
-
-
-            //errorToast("No internet connection");
+      //errorToast("No internet connection");
 
       return [];
     }
