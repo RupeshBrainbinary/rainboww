@@ -5,6 +5,7 @@ import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/screens/auth/phonenumber/phonenumber_controller.dart';
 import 'package:rainbow_new/screens/auth/verify_phone/verify_controller.dart';
+import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/strings.dart';
 
@@ -19,6 +20,19 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final VerifyPhoneController verifyPhoneController =
       Get.put(VerifyPhoneController());
+
+  @override
+  void initState() {
+    verifyPhoneController.seconds = 60;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    verifyPhoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,18 +63,27 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                  height: Get.height * 0.03,
+                                  height: Get.height * 0.04,
                                 ),
                                 GestureDetector(
                                   onTap: () {
                                     Get.back();
                                   },
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Icon(
-                                      Icons.arrow_back_ios_outlined,
-                                      size: 16.72,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      SizedBox(
+                                        height: 16,
+                                        child: Image.asset(
+                                          AssetRes.backIcon,
+                                          height: 16,
+                                          width: 35,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(
@@ -76,6 +99,7 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                   height: Get.height * 0.009,
                                 ),
                                 GetBuilder<PhoneNumberController>(
+                                  id: "phone",
                                   builder: (controller) {
                                     return Padding(
                                         padding:
@@ -167,7 +191,7 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                   builder: (controller) {
                                     return Center(
                                         child: Text(
-                                            "${controller.seconds.toString()} Seconds"));
+                                            "${verifyPhoneController.seconds.toString()} Seconds"));
                                   },
                                 ),
                                 Center(
@@ -181,17 +205,22 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                 SizedBox(
                                   height: Get.height * 0.022,
                                 ),
-                                GetBuilder<PhoneNumberController>(
+                                GetBuilder<VerifyPhoneController>(
                                   id: "time",
                                   builder: (controller) {
                                     return verifyPhoneController.seconds == 0
                                         ? InkWell(
                                             onTap: () {
-                                              controller.phoneNumberRegister();
+                                              PhoneNumberController
+                                                  phoneNumberController =
+                                                  Get.find<
+                                                      PhoneNumberController>();
+                                              phoneNumberController
+                                                  .phoneNumberRegister();
                                               verifyPhoneController
                                                   .startTimer();
-                                                  // controller.update(["time"]);
-                                                  //   controller.update(["count_timer"]);
+                                              // controller.update(["time"]);
+                                              //   controller.update(["count_timer"]);
                                             },
                                             child: Center(
                                               child: Text(

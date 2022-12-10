@@ -10,7 +10,7 @@ import 'package:rainbow_new/utils/strings.dart';
 class VerifyPhoneController extends GetxController {
   TextEditingController verifyController = TextEditingController();
   RxBool loader = false.obs;
-  Timer? _countDown;
+  Timer? _countDown = Timer(Duration(seconds: 0), () {});
   int seconds = 60;
   bool validation() {
     if (verifyController.text.isEmpty) {
