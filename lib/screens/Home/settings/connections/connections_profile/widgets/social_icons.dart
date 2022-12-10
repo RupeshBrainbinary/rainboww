@@ -4,6 +4,8 @@ import 'package:rainbow_new/model/profile_model.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_controller.dart';
 import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:rainbow_new/screens/Profile/profile_api/profile_model.dart' as model;
+
 
 class SocialIcons extends StatelessWidget {
   final ConnectionsProfileController controller = Get.find();
@@ -12,7 +14,8 @@ class SocialIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProfileData? data = controller.profileModel.data;
+    model.Data? data = controller.profileController.viewProfile.data;
+
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Row(

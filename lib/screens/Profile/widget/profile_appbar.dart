@@ -53,6 +53,8 @@ Widget profileAppbar(
                      Navigator.of(context).pop();
                    } else {
                      profileController.screen.value = false;
+                     profileController.viewProfileDetails();
+                     i=1;
                    }
                  } else if (i == 1) {
                    onTap!();

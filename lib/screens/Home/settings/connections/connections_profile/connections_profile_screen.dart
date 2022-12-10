@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
-import 'package:rainbow_new/model/profile_model.dart';
+import 'package:rainbow_new/screens/Profile/profile_api/profile_model.dart' as model;
+
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/widgets/hobbies_area.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/widgets/social_icons.dart';
@@ -31,7 +32,8 @@ class ConnectionsProfileScreen extends StatelessWidget {
         id: "connections",
         builder: (controller) {
           return Obx(() {
-            ProfileData data = controller.profileModel.data ?? ProfileData();
+            model.Data? data = controller.profileController.viewProfile.data;
+
             return Stack(
               children: [
                 Container(
@@ -48,7 +50,7 @@ class ConnectionsProfileScreen extends StatelessWidget {
                       end: Alignment.bottomCenter,
                     ),
                   ),
-                  child: data.id == null
+                  child: data!.id == null
                       ? const SizedBox()
                       : data.isBlock == "block"
                           ? Container(

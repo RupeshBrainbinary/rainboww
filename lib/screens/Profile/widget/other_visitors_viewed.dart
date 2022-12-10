@@ -56,9 +56,7 @@ Widget otherVisitorsViewed() {
                           connectionsProfileController.callApi(controller
                               .viewProfile.data!.userView![index].id
                               .toString()).then((value) {
-
-                                  controller.screen.value = true;
-
+                                controller.screen.value = true;
                               });
 
 

@@ -5,13 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/model/cancle_fried_request_model.dart';
 import 'package:rainbow_new/model/profile_model.dart';
+import 'package:rainbow_new/screens/Profile/profile_api/profile_model.dart';
 import 'package:rainbow_new/service/http_services.dart';
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/end_points.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
 
 class OtherProfileApi {
-  static Future<ProfileModel?> getOtherUerData(String userId) async {
+  static getOtherUerData(String userId) async {
     try {
       String accesToken = PrefService.getString(PrefKeys.registerToken);
       Map<String, dynamic> body = {"userId": userId};
@@ -20,7 +21,7 @@ class OtherProfileApi {
           body: body,
           header: {"x-access-token": accesToken});
       if (response != null && response.statusCode == 200) {
-        return profileModelFromJson(response.body);
+        return viewProfileFromJson(response.body);
       }
       return null;
     } catch (e) {

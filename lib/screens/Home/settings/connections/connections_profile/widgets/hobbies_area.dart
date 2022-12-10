@@ -5,7 +5,8 @@ import 'package:rainbow_new/utils/strings.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../../../common/Widget/text_styles.dart';
-import '../../../../../../model/profile_model.dart';
+import 'package:rainbow_new/screens/Profile/profile_api/profile_model.dart' as model;
+
 import '../../../../../../utils/color_res.dart';
 
 class HobbiesArea extends StatelessWidget {
@@ -15,7 +16,8 @@ class HobbiesArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProfileData? data = controller.profileModel.data;
+    model.Data? data = controller.profileController.viewProfile.data;
+
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30),
       child: Column(

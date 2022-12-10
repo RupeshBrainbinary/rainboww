@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
-import 'package:rainbow_new/model/profile_model.dart';
+
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/widgets/hobbies_area.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/widgets/social_icons.dart';
+import 'package:rainbow_new/screens/Profile/profile_api/profile_model.dart' as model;
 import 'package:rainbow_new/screens/Profile/profile_controller.dart';
 import 'package:rainbow_new/screens/Profile/widget/about_me.dart';
 import 'package:rainbow_new/screens/Profile/widget/connect_block.dart';
@@ -20,6 +21,8 @@ import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/strings.dart';
 import 'package:readmore/readmore.dart';
+
+import 'profile_api/profile_model.dart';
 
 class ProfileScreen extends StatelessWidget {
   final int i;
@@ -35,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
         body: Obx(() {
 
-          ProfileData data = connectionsProfileController.profileModel.data ?? ProfileData();
+          model.Data? data = connectionsProfileController.profileController.viewProfile.data;
 
           return (controller.screen.isFalse)
               ? Stack(
@@ -136,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
                     end: Alignment.bottomCenter,
                   ),
                 ),
-                child: data.id == null
+                child: data!.id == null
                     ? const SizedBox()
                     : data.isBlock == "block"
                     ? Container(

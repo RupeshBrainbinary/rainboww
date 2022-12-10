@@ -355,7 +355,7 @@ class SearchController extends GetxController {
     connectionsProfileController.callApi(userId);
     loader.value = true;
 
-    connectionsProfileController.profileModel =
+    connectionsProfileController.profileController.viewProfile =
         (await OtherProfileApi.getOtherUerData(userId.toString()))!;
     loader.value = false;
     Get.to(() => ConnectionsProfileScreen(show2: true,))?.then((value) {

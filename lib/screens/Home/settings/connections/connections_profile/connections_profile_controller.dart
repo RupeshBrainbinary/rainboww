@@ -11,13 +11,14 @@ import 'package:rainbow_new/model/unblock_model.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/api/OtherProfileApi.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_screen.dart';
 import 'package:rainbow_new/screens/Profile/acceptFriendRequest_api/accaept_fried_request_api.dart';
+import 'package:rainbow_new/screens/Profile/profile_api/profile_model.dart';
 import 'package:rainbow_new/screens/Profile/profile_controller.dart';
 import 'package:rainbow_new/screens/Profile/sendFriendRequest_api/send_friend_request_api.dart';
 import 'package:rainbow_new/screens/Profile/unFriendRequest_api/unfriend_request_api.dart';
 import 'package:rainbow_new/screens/Profile/widget/block_unblock%20_Api/block_api.dart';
 import 'package:rainbow_new/screens/Profile/widget/block_unblock%20_Api/unblock_api.dart';
+import 'package:rainbow_new/screens/Profile/widget/profile_appbar.dart';
 
-ProfileController profileController = Get.put(ProfileController());
 
 class ConnectionsProfileController extends GetxController {
 /*
@@ -25,7 +26,7 @@ class ConnectionsProfileController extends GetxController {
     await callApi(userId);
   }
 */
-  ProfileModel profileModel = ProfileModel();
+  // ProfileModel profileModel = ProfileModel();
   BlockModel blockModel = BlockModel();
   UnblockModel unblockModel = UnblockModel();
   SendFriendRequest sendFriendRequest = SendFriendRequest();
@@ -34,6 +35,8 @@ class ConnectionsProfileController extends GetxController {
   // HomeController homeController = Get.put(HomeController());
   CancelFriendRequestModel cancelFriendRequestModel =
       CancelFriendRequestModel();
+  ProfileController profileController = Get.put(ProfileController());
+
   UnFriendModel unFriendModel = UnFriendModel();
 
   @override
@@ -61,8 +64,9 @@ class ConnectionsProfileController extends GetxController {
       }
       profileModel = ProfileModel();
     });*/
-    profileModel = await OtherProfileApi.getOtherUerData(userId.toString())
-        .then((value) => profileModel = value!);
+    profileController.viewProfile = await OtherProfileApi.getOtherUerData(userId.toString());
+    /*profileModel = await OtherProfileApi.getOtherUerData(userId.toString())
+        .then((value) => profileModel = value!);*/
     profileController.loader.value = false;
   }
 
@@ -148,13 +152,12 @@ class ConnectionsProfileController extends GetxController {
   }
 
   void onTapGetBack() {
-    profileModel = ProfileModel();
-
+    profileController.viewProfile= ViewProfile();
     Get.back();
   }
 
   void onTapGetBack2(context) {
-    profileModel = ProfileModel();
+    profileController.viewProfile = ViewProfile();
     Navigator.of(context).pop();
   }
 }
