@@ -76,7 +76,7 @@ class ChatScreen extends StatelessWidget {
                                 ),
                                 child: Image.asset(
                                   AssetRes.backIcon,
-                                  height: 15,
+                                  height: 16,
                                   width: 35,
                                 ),
                               ),

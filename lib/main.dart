@@ -24,7 +24,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  if (Platform.isAndroid) {
+  await Firebase.initializeApp();
+/*  if (Platform.isAndroid) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
         apiKey: 'AIzaSyAHDoEBaS6zAHsNvEIvUnQI42mP6_rF10s',
@@ -39,7 +40,7 @@ Future<void> main() async {
     );
   } else if (Platform.isIOS) {
     await Firebase.initializeApp();
-  }
+  }*/
   NotificationService.init();
   await FirebaseMessaging.instance.getToken().then((value) {
     if (kDebugMode) {

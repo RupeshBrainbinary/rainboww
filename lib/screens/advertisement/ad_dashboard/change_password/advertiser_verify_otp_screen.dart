@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rainbow_new/screens/advertisement/ad_dashboard/change_password/advertiser_verify_controller.dart';
 import 'package:rainbow_new/service/pref_services.dart';
+import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
 
 import '../../../../common/Widget/loaders.dart';
@@ -51,6 +52,7 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Center(
@@ -68,18 +70,15 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
                               SizedBox(
                                 height: Get.height * 0.03,
                               ),
-                              /*    GestureDetector(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Icon(
-                                      Icons.arrow_back_ios_outlined,
-                                      size: 16.72,
-                                    ),
-                                  ),
-                                ),*/
+                              GestureDetector(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child:  Padding(
+                                  padding: EdgeInsets.only(left: 10,top: 10),
+                                  child: Image.asset(AssetRes.backIcon,height: 16,width: 35,),
+                                ),
+                              ),
                               SizedBox(
                                 height: Get.height * 0.09,
                               ),

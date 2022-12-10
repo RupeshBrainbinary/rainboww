@@ -47,7 +47,6 @@ class LoginApi {
               jsonDecode(response.body)["data"]["referrall_code"]);
           await PrefService.setValue(
               PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
-          // await PrefService.setValue(PrefKeys.isLogin, false);
 
           await PrefService.setValue(PrefKeys.registerToken,
               jsonDecode(response.body)["token"].toString());
@@ -125,8 +124,12 @@ class LoginApi {
           //Get.offAll(() => const Dashboard());
 
           if (jsonDecode(response.body)["data"]["role"] == "end_user") {
+            await PrefService.setValue(PrefKeys.isLogin, true);
+
             return loginModelFromJson(response.body);
           } else {
+            await PrefService.setValue(PrefKeys.isLogin, true);
+
             await PrefService.setValue(PrefKeys.advertiserProfileImage,
                 jsonDecode(response.body)["data"]["profile_image"]);
             return advertisersLoginModelFromJson(response.body);
