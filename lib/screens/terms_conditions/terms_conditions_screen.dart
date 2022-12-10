@@ -4,6 +4,7 @@ import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/dashboard/dash_board.dart';
 import 'package:rainbow_new/service/pref_services.dart';
+import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
 import 'package:rainbow_new/utils/strings.dart';
@@ -39,12 +40,9 @@ class TermsConditionsScreen extends StatelessWidget {
                           onTap: () {
                             Get.back();
                           },
-                          child: const Padding(
+                          child:  Padding(
                             padding: EdgeInsets.only(left: 15),
-                            child: Icon(
-                              Icons.arrow_back_ios_outlined,
-                              size: 16.72,
-                            ),
+                            child: Image.asset(AssetRes.backIcon,height: 16,width: 35,),
                           ),
                         ),
                   SizedBox(

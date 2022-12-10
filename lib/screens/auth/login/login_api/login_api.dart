@@ -47,7 +47,7 @@ class LoginApi {
               jsonDecode(response.body)["data"]["referrall_code"]);
           await PrefService.setValue(
               PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
-          await PrefService.setValue(PrefKeys.isLogin, true);
+          // await PrefService.setValue(PrefKeys.isLogin, false);
 
           await PrefService.setValue(PrefKeys.registerToken,
               jsonDecode(response.body)["token"].toString());

@@ -40,12 +40,9 @@ class ScanYourFaceScreen extends StatelessWidget {
                           SizedBox(height: Get.height * 0.03),
                           GestureDetector(
                             onTap: Get.back,
-                            child: const Padding(
+                            child:  Padding(
                               padding: EdgeInsets.only(left: 15),
-                              child: Icon(
-                                Icons.arrow_back_ios_outlined,
-                                size: 16.72,
-                              ),
+                              child: Image.asset(AssetRes.backIcon,height: 16,width: 35,),
                             ),
                           ),
                           SizedBox(height: Get.height * 0.03),
