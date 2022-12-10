@@ -40,6 +40,8 @@ class PhoneNumberApi {
           Get.to(() => const VerifyPhoneScreen());
           flutterToast(jsonDecode(response.body)["message"]);
         }
+        VerifyPhoneController controller = Get.put(VerifyPhoneController());
+        controller.startTimer();
         return phoneNumberFromJson(response.body);
       }
 
