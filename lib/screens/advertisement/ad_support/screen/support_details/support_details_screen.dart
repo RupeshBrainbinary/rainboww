@@ -90,7 +90,7 @@ class SupportDetailsScreen extends StatelessWidget {
                               body(com.toString()),
 
                               const SizedBox(
-                                height: 15,
+                                height: 3,
                               ),
 
                               Align(
@@ -134,7 +134,7 @@ class SupportDetailsScreen extends StatelessWidget {
                               //pic Image
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 60, top: 30),
+                                    const EdgeInsets.only(left: 60, top: 13),
                                 child: GetBuilder<AdSupportController>(
                                     id: "img",
                                     builder: (controller) {
@@ -766,12 +766,10 @@ class SupportDetailsScreen extends StatelessWidget {
                                     }),
                               ),
                               SizedBox(
-                                height: Get.height * 0.05,
+                                height: Get.height * 0.02,
                               ),
                               SubmitButton(
                                 onTap: () {
-
-
                                   controller.onTapSendMessage(
                                       id.toString(), context);
 
@@ -794,16 +792,13 @@ class SupportDetailsScreen extends StatelessWidget {
                   ),
                 );
               }),
-          controller.loader.value
-              ? const FullScreenLoader()
-              : const SizedBox(),
+          controller.loader.value ? const FullScreenLoader() : const SizedBox(),
         ],
       );
     }));
   }
 
   Widget body(String comp) {
-
     return GetBuilder<AdSupportController>(
         id: "Support",
         builder: (controller) {
@@ -896,9 +891,14 @@ class SupportDetailsScreen extends StatelessWidget {
                       height: Get.height * 0.0233,
                     ),
                     ReadMoreText(
-                        (controller.viewSupportTicketModel.data![index].description
-                            .toString() == 'null')? "" : controller.viewSupportTicketModel.data![index].description
-                            .toString(),
+                      (controller.viewSupportTicketModel.data![index]
+                                  .description
+                                  .toString() ==
+                              'null')
+                          ? ""
+                          : controller
+                              .viewSupportTicketModel.data![index].description
+                              .toString(),
                       trimLines: 3,
                       style: gilroyMediumTextStyle(fontSize: 14),
                       trimMode: TrimMode.Line,
@@ -1114,7 +1114,7 @@ class SupportDetailsScreen extends StatelessWidget {
                               ),
 
                     SizedBox(
-                      height: Get.height * 0.05,
+                      height: Get.height * 0.02,
                     ),
                   ],
                 ),
