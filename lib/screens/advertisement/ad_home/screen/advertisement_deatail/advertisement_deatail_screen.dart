@@ -9,7 +9,6 @@ import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/strings.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../create_advertisement/create_advertisement_controller.dart';
 
 class AdvertisementDeatailScreen extends StatelessWidget {
@@ -110,7 +109,7 @@ class AdvertisementDeatailScreen extends StatelessWidget {
               ),
               const Spacer(),
               SizedBox(
-                width: Get.width * 0.496,
+                width: Get.width * 0.6,
                 height: 25,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -120,7 +119,8 @@ class AdvertisementDeatailScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child:  createAdvertisementController.tags[index]== " "?const SizedBox():Container(
                       height: 25,
-                      width: 80,
+                      // width: 80,
+                      padding: EdgeInsets.symmetric(horizontal: 10),
                       decoration: const BoxDecoration(
                         color: ColorRes.colorECEFF0,
                         borderRadius: BorderRadius.all(
@@ -129,7 +129,7 @@ class AdvertisementDeatailScreen extends StatelessWidget {
                       ),
                       child: Center(
                         child: Container(
-                          width: 75,
+                          // width: 75,
                           alignment: Alignment.center,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,

@@ -294,40 +294,55 @@ int? totalAmountApi;
 
   var now = DateTime.now();
 
-  void showDatePicker(ctx) {
-    // showCupertinoModalPopup is a built-in function of the cupertino library
-    showCupertinoModalPopup(
-      context: ctx,
-      builder: (_) => Container(
-        height: 500,
-        color: Colors.white,
-        child: Column(
-          children: [
-            Container(
-              height: 400,
-              color: Colors.white,
-              child: CupertinoDatePicker(
-                backgroundColor: Colors.white,
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: DateTime(2001),
-                maximumDate: DateTime.now(),
-                maximumYear: DateTime.now().year,
-                onDateTimeChanged: (val) {
-                  var formattedDate = "${val.month}-${val.day}-${val.year}";
-                  dateController.text = formattedDate;
-                  update(["advertiser"]);
-                },
-              ),
-            ),
-            // Close the modal
-            CupertinoButton(
-              child: const Text('OK'),
-              onPressed: () => Navigator.of(ctx).pop(),
-            )
-          ],
-        ),
-      ),
-    );
+  // void showDatePicker(ctx) {
+  //   // showCupertinoModalPopup is a built-in function of the cupertino library
+  //   showCupertinoModalPopup(
+  //     context: ctx,
+  //     builder: (_) => Container(
+  //       height: 500,
+  //       color: Colors.white,
+  //       child: Column(
+  //         children: [
+  //           Container(
+  //             height: 400,
+  //             color: Colors.white,
+  //             child: CupertinoDatePicker(
+  //               backgroundColor: Colors.black,
+  //               mode: CupertinoDatePickerMode.date,
+  //               initialDateTime: DateTime(2001),
+  //               maximumDate: DateTime.now(),
+  //               maximumYear: DateTime.now().year,
+  //               onDateTimeChanged: (val) {
+  //                 var formattedDate = "${val.month}-${val.day}-${val.year}";
+  //                 dateController.text = formattedDate;
+  //                 update(["advertiser"]);
+  //               },
+  //             ),
+  //           ),
+  //           // Close the modal
+  //           CupertinoButton(
+  //             child: const Text('OK'),
+  //             onPressed: () => Navigator.of(ctx).pop(),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+  void date(ctx) async {
+    DateTime? pickedDate = await showDatePicker(
+        context: ctx,
+        initialDate: DateTime(2001),
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2100));
+    if (pickedDate != null) {
+      print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      print(
+          formattedDate); //formatted date output using intl package =>  2021-03-16
+      dateController.text = formattedDate;
+      update();
+    } else {}
   }
 
   List<UserData> tagUserList = [];

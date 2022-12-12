@@ -22,64 +22,70 @@ class CreateAdvertisementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<CreateAdvertisementController>(
-        id: "advertiser",
-        builder: (controller) {
-          return Container(
-            width: Get.width,
-            height: Get.height,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  ColorRes.color_50369C,
-                  ColorRes.color_50369C,
-                  ColorRes.colorD18EEE,
-                  ColorRes.colorD18EEE,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: GetBuilder<CreateAdvertisementController>(
+          id: "advertiser",
+          builder: (controller) {
+            return Container(
+              width: Get.width,
+              height: Get.height,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    ColorRes.color_50369C,
+                    ColorRes.color_50369C,
+                    ColorRes.colorD18EEE,
+                    ColorRes.colorD18EEE,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
-            ),
-            child: Obx(() {
-              return Stack(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: Get.height * 0.035,
-                      ),
-                      appBar(),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              body(context),
-                              SizedBox(height: Get.height * 0.03),
-                              SubmitButton(
-                                onTap: () {
-                                  advertisementController.createAdvertisement();
-                                },
-                                child: Text(
-                                  "Create Advertisement",
-                                  style: gilroyBoldTextStyle(
-                                      color: Colors.black, fontSize: 16),
+              child: Obx(() {
+                return Stack(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.035,
+                        ),
+                        appBar(),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                body(context),
+                                SizedBox(height: Get.height * 0.03),
+                                SubmitButton(
+                                  onTap: () {
+                                    advertisementController
+                                        .createAdvertisement();
+                                  },
+                                  child: Text(
+                                    "Create Advertisement",
+                                    style: gilroyBoldTextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: Get.height * 0.05),
-                            ],
+                                SizedBox(height: Get.height * 0.05),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  controller.loader.isTrue
-                      ? const FullScreenLoader()
-                      : const SizedBox()
-                ],
-              );
-            }),
-          );
-        },
+                      ],
+                    ),
+                    controller.loader.isTrue
+                        ? const FullScreenLoader()
+                        : const SizedBox()
+                  ],
+                );
+              }),
+            );
+          },
+        ),
       ),
     );
   }
@@ -134,7 +140,6 @@ class CreateAdvertisementScreen extends StatelessWidget {
   }
 
   Widget body(context) {
-
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.0853),
       child: SingleChildScrollView(
@@ -713,7 +718,6 @@ class CreateAdvertisementScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: Get.height * 0.0197),
-
             GetBuilder<CreateAdvertisementController>(
                 id: "drop",
                 builder: (controller) {
@@ -779,32 +783,34 @@ class CreateAdvertisementScreen extends StatelessWidget {
                               children: (controller
                                       .countryController.text.isEmpty)
                                   ? listNationalities.data!.map((e) {
-                                      return (listNationalities.data == null)?
-                                      const SizedBox():
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, top: 7, bottom: 7),
-                                        child: InkWell(
-                                          onTap: () {
-                                            controller.countryController.text = e.name!;
-                                            controller.countryBox = false;
-                                            controller.update(["drop"]);
-                                          },
-                                          child: SizedBox(
-                                            height: 25,
-                                            width: Get.width,
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                e.name ?? "",
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16),
+                                      return (listNationalities.data == null)
+                                          ? const SizedBox()
+                                          : Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 20, top: 7, bottom: 7),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  controller.countryController
+                                                      .text = e.name!;
+                                                  controller.countryBox = false;
+                                                  controller.update(["drop"]);
+                                                },
+                                                child: SizedBox(
+                                                  height: 25,
+                                                  width: Get.width,
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                      e.name ?? "",
+                                                      style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                      );
+                                            );
                                     }).toList()
                                   : controller.filterList.map((e) {
                                       return Padding(
@@ -974,8 +980,8 @@ class CreateAdvertisementScreen extends StatelessWidget {
               builder: (controller) {
                 return InkWell(
                   onTap: () {
-                    controller.showDatePicker(context);
                     FocusScope.of(context).unfocus();
+                    controller.date(context);
                   },
                   child: AppTextFiled(
                     controller: advertisementController.dateController,

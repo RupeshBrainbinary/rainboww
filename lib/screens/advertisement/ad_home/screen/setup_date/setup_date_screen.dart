@@ -2,12 +2,16 @@
 
 import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/money_input_formatter.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/buttons.dart';
+import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/model/view_cardM_model.dart';
 import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
 import 'package:rainbow_new/screens/Profile/widget/profile_appbar.dart';
+import 'package:rainbow_new/screens/advertisement/ad_dashboard/ad_dashboard.dart';
+import 'package:rainbow_new/screens/advertisement/ad_dashboard/advertisement_controlle.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/create_advertisement/create_advertisement_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/payment_failed.dart/payment_failed_screen.dart';
@@ -33,7 +37,7 @@ class SetupDateScreen extends StatelessWidget {
         child: Container(
           width: Get.width,
           height: Get.height,
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 ColorRes.color_50369C,
@@ -186,14 +190,14 @@ class SetupDateScreen extends StatelessWidget {
                       rangeEndDecoration: BoxDecoration(
                         color: ColorRes.color_50369C,
                         shape: BoxShape.circle,
-                        border: Border.all(
-                            color: ColorRes.colorFCE307, width: 1.5),
+                        border:
+                            Border.all(color: ColorRes.colorFCE307, width: 1.5),
                       ),
                       rangeStartDecoration: BoxDecoration(
                         color: ColorRes.color_50369C,
                         shape: BoxShape.circle,
-                        border: Border.all(
-                            color: ColorRes.colorFCE307, width: 1.5),
+                        border:
+                            Border.all(color: ColorRes.colorFCE307, width: 1.5),
                       ),
                       withinRangeTextStyle: gilroyMediumTextStyle(
                           fontSize: 11.43, color: ColorRes.color_27354C),
@@ -270,7 +274,17 @@ class SetupDateScreen extends StatelessWidget {
                         child: GetBuilder<CreateAdvertisementController>(
                             id: 'selectC',
                             builder: (controller) {
-                              return (controller.totalAmount == 0)? Text("£10",style: gilroySemiBoldTextStyle(fontSize: 24),):Text("£${controller.totalAmount??"10"}",style:  gilroySemiBoldTextStyle(fontSize: 24),)/*TextField(
+                              return (controller.totalAmount == 0)
+                                      ? Text(
+                                          "£10",
+                                          style: gilroySemiBoldTextStyle(
+                                              fontSize: 24),
+                                        )
+                                      : Text(
+                                          "£${controller.totalAmount ?? "10"}",
+                                          style: gilroySemiBoldTextStyle(
+                                              fontSize: 24),
+                                        ) /*TextField(
                                 enabled: false,
                                 inputFormatters: [
                                   MoneyInputFormatter(
@@ -288,7 +302,8 @@ class SetupDateScreen extends StatelessWidget {
                                   hintStyle:
                                       gilroySemiBoldTextStyle(fontSize: 24),
                                 ),
-                              )*/;
+                              )*/
+                                  ;
                             }),
                       ),
                     ),
@@ -303,7 +318,7 @@ class SetupDateScreen extends StatelessWidget {
                               "Amount",
                               style: gilroyMediumTextStyle(fontSize: 18),
                             ),
-                         /*   const Spacer(),
+                            /*   const Spacer(),
                              GetBuilder<SetupDateController>(
                               id: 'selectC',
                               builder: (controller) => Column(
@@ -485,6 +500,8 @@ class ShowBottomNext extends StatelessWidget {
         Get.put(CreateAdvertisementController());
     AdHomeController adHomeController = Get.find<AdHomeController>();
     PaymentController paymentController = Get.put(PaymentController());
+    AdvertisementController advertisementController =
+        Get.put(AdvertisementController());
     return Obx(
       () => Stack(
         children: [
@@ -515,7 +532,7 @@ class ShowBottomNext extends StatelessWidget {
                       ),
                       Container(
                         width: Get.width * 0.8293,
-                        decoration:  BoxDecoration(
+                        decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
                               ColorRes.color_50369C,
@@ -548,18 +565,24 @@ class ShowBottomNext extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  GetBuilder<CreateAdvertisementController>(id:"select",
+                                  GetBuilder<CreateAdvertisementController>(
+                                    id: "select",
                                     builder: (controller) {
-                                      return  (controller.totalAmount == null || controller.totalAmount == 0)
-                                          ?Text(
-                                        "£10",
-                                        style: poppinsSemiBold(fontSize: 64),
-                                      ):Text(
-                                        "£${controller.totalAmount}",
-                                        style: poppinsSemiBold(fontSize: 64),
-                                      );
+                                      return (controller.totalAmount == null ||
+                                              controller.totalAmount == 0)
+                                          ? Text(
+                                              "£10",
+                                              style:
+                                                  poppinsSemiBold(fontSize: 64),
+                                            )
+                                          : Text(
+                                              "£${controller.totalAmount}",
+                                              style:
+                                                  poppinsSemiBold(fontSize: 64),
+                                            );
                                     },
-                                  ),/*Padding(padding: EdgeInsets.only(top: 6),
+                                  ),
+                                  /*Padding(padding: EdgeInsets.only(top: 6),
                                     child: Text(
                                       "00USD",
                                       style: poppinsSemiBold(fontSize: 12 ),
@@ -594,13 +617,15 @@ class ShowBottomNext extends StatelessWidget {
                                 height: Get.height * 0.007389,
                               ),
                               Text(
-                                adHomeController.viewAdvertiserModel.data?.fullName ?? "",
+                                adHomeController
+                                        .viewAdvertiserModel.data?.fullName ??
+                                    "",
                                 style: poppinsMediumBold(fontSize: 14),
                               ),
                               SizedBox(
                                 height: Get.height * 0.0209,
                               ),
-                             /* Text(
+                              /* Text(
                                 "Transaction Number",
                                 style: poppinsRegularBold(fontSize: 12),
                               ),
@@ -638,11 +663,56 @@ class ShowBottomNext extends StatelessWidget {
                       ),
                       SubmitButton(
                         onTap: () async {
+                          await paymentController.listCardApi(showToast: false);
 
-                          await createAdvertisementController.uploadImageApi();
+                          paymentController.listCardModel.data?.length == null
+                              ? showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      backgroundColor: Colors.white,
+                                      title: Text(
+                                        "Are you sure you want exit app",
+                                        style: gilroyBoldTextStyle(
+                                            fontSize: 20, color: Colors.black),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text(
+                                            "No",
+                                            style: gilroyBoldTextStyle(
+                                                fontSize: 18,
+                                                color: Colors.black),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text(
+                                            "Yes",
+                                            style: gilroyBoldTextStyle(
+                                                fontSize: 18,
+                                                color: Colors.black),
+                                          ),
+                                          onPressed: () {
+                                            // SystemNavigator.pop();
+
+                                            advertisementController
+                                                .onBottomBarChange(1);
+                                            advertisementController
+                                                .update(['bottom_bar']);
+                                            Get.offAll(
+                                                () => AdvertisementDashBord());
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  })
+                              : await createAdvertisementController
+                                  .uploadImageApi();
 
                           // createAdvertisementController.loader.value = false;
-
                           //Get.to(() => PaymentSuccessfulScreen());
                           /* setupDateController.boostAdvertisementApi();*/
                         },

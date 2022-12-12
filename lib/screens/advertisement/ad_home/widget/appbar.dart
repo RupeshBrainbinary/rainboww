@@ -23,8 +23,9 @@ Widget appbar({context}) {
   return GetBuilder<AdHomeController>(
       id: "update",
       builder: (controller) {
-        return SizedBox(
+        return Container(
           width: Get.width,
+          color: ColorRes.color_50369C,
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10),
@@ -173,13 +174,7 @@ Widget appbar({context}) {
                           Get.put(PaymentController());
 
 
-                          await paymentController.listCardApi(showToast: false);
-
-
-
-                          paymentController.listCardModel.data?.length == null
-                              ? controller.onTap()
-                              : Get.to(() => CreateAdvertisementScreen());
+                         Get.to(() => CreateAdvertisementScreen());
                           controller.update(["update"]);
                         },
                         child: Container(

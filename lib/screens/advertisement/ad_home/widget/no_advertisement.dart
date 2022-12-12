@@ -83,11 +83,7 @@ Widget noAdvertisement() {
                           PaymentController paymentController =
                               Get.put(PaymentController());
 
-                          await paymentController.listCardApi(showToast: false);
-
-                          paymentController.listCardModel.data?.length == null
-                              ? controller.onTap()
-                              : Get.to(() => CreateAdvertisementScreen());
+                     Get.to(() => CreateAdvertisementScreen());
                           controller.update(["more"]);
                         },
                         text: Strings.createAdvertisement,
