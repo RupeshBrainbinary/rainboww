@@ -100,9 +100,11 @@ class AdHomeController extends GetxController {
   @override
   void onInit() async {
     await init();
+   
     update(["more"]);
     update(["dashBoard"]);
     update(["update"]);
+    update(["list"]);
     update();
     super.onInit();
   }
@@ -130,6 +132,7 @@ class AdHomeController extends GetxController {
     scrollController.addListener(pagination);
     await viewAdvertiserData();
     update(["more"]);
+    update(["list"]);
 
     notificationsController.getNotifications;
 
@@ -256,7 +259,7 @@ class AdHomeController extends GetxController {
       loader.value = true;
       viewAdvertiserModel = await ViewAdvertiserApi.viewAdvertiserData();
       loader.value = false;
-
+      update(['list']);
       update(['cancel']);
       update(["dashBoard"]);
     } catch (e) {

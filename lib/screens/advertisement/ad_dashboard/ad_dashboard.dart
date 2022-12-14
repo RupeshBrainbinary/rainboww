@@ -23,12 +23,24 @@ import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/strings.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class AdvertisementDashBord extends StatelessWidget {
+class AdvertisementDashBord extends StatefulWidget {
   AdvertisementDashBord({Key? key}) : super(key: key);
 
+  @override
+  State<AdvertisementDashBord> createState() => _AdvertisementDashBordState();
+}
+
+class _AdvertisementDashBordState extends State<AdvertisementDashBord> {
   final AdvertisementController advertisementController =
       Get.put(AdvertisementController());
+  GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
   final AdHomeController adHomeController = Get.put(AdHomeController());
+  @override
+  void initState() {
+    super.initState();
+adHomeController. refreshCode();
+    drawerKey = GlobalKey<ScaffoldState>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +90,7 @@ class AdvertisementDashBord extends StatelessWidget {
               return false;
             },
             child: Scaffold(
-              key: advertisementController.key,
+              key: drawerKey,
               drawer: GetBuilder<AdvertisementController>(
                   id: "settings",
                   builder: (controller) {
@@ -211,8 +223,7 @@ class AdvertisementDashBord extends StatelessWidget {
                                           children: [
                                             GestureDetector(
                                               onTap: () {
-                                                advertisementController
-                                                    .key!.currentState!
+                                                drawerKey.currentState!
                                                     .closeDrawer();
                                               },
                                               child: Padding(
@@ -447,7 +458,9 @@ class AdvertisementDashBord extends StatelessWidget {
                   id: 'bottom_bar',
                   builder: (controller) {
                     if (controller.currentTab == 0) {
-                      return const AdHomeScreen();
+                      return AdHomeScreen(
+                        drawerKey: drawerKey,
+                      );
                     } else if (controller.currentTab == 1) {
                       return PaymentScreen(
                         showBackArrow: false,
@@ -458,7 +471,9 @@ class AdvertisementDashBord extends StatelessWidget {
                     } else if (controller.currentTab == 3) {
                       return AdSupportScreen();
                     } else {
-                      return const AdHomeScreen();
+                      return AdHomeScreen(
+                        drawerKey: drawerKey,
+                      );
                     }
                   },
                 ),

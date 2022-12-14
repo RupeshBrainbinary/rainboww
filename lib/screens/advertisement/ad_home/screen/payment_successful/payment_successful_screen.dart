@@ -14,12 +14,22 @@ import 'package:rainbow_new/utils/strings.dart';
 import '../../../../../utils/color_res.dart';
 import '../../../ad_dashboard/ad_dashboard.dart';
 
-class PaymentSuccessfulScreen extends StatelessWidget {
+class PaymentSuccessfulScreen extends StatefulWidget {
   PaymentSuccessfulScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PaymentSuccessfulScreen> createState() =>
+      _PaymentSuccessfulScreenState();
+}
+
+class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
   final AdHomeController adHomeController = Get.put(AdHomeController());
+
   PaymentController paymentController = Get.put(PaymentController());
+
   CreateAdvertisementController createAdvertisementController =
       Get.put(CreateAdvertisementController());
+
   RenewAdSetupDateController renewAdSetupDateController =
       Get.put(RenewAdSetupDateController());
 
@@ -27,13 +37,13 @@ class PaymentSuccessfulScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        AdvertisementController advertisementController =
-            Get.put(AdvertisementController());
-        advertisementController.init();
-        advertisementController.onBottomBarChange(0);
-        advertisementController.update(['bottom_bar']);
-        adHomeController.init();
-        Get.to(() => AdvertisementDashBord());
+        setState(() {
+          Get.offAll(() => AdvertisementDashBord());
+          AdvertisementController advertisementController =
+              Get.put(AdvertisementController());
+          advertisementController.onBottomBarChange(0);
+          advertisementController.update(['bottom_bar']);
+        });
 
         return true;
       },
@@ -68,14 +78,15 @@ class PaymentSuccessfulScreen extends StatelessWidget {
                         onPressed: () {
                           AdHomeController adHomeController = Get.find();
                           adHomeController.update(["more"]);
-                          Get.deleteAll();
+                          // Get.deleteAll();
                           AdvertisementController advertisementController =
                               Get.put(AdvertisementController());
                           advertisementController.init();
                           advertisementController.onBottomBarChange(0);
                           advertisementController.update(['bottom_bar']);
                           adHomeController.init();
-                          Get.to(() => AdvertisementDashBord());
+                          Get.offAll(() => AdvertisementDashBord());
+                          Get.reload();
                         },
                         icon: const Icon(Icons.arrow_back_ios),
                       ),
@@ -193,14 +204,14 @@ class PaymentSuccessfulScreen extends StatelessWidget {
                     onTap: () {
                       AdHomeController adHomeController = Get.find();
                       adHomeController.update(["more"]);
-                      Get.deleteAll();
+                      // Get.deleteAll();
                       AdvertisementController advertisementController =
                           Get.put(AdvertisementController());
                       advertisementController.init();
                       advertisementController.onBottomBarChange(0);
                       advertisementController.update(['bottom_bar']);
                       adHomeController.init();
-                      Get.to(() => AdvertisementDashBord());
+                      Get.offAll(() => AdvertisementDashBord());
                     },
                     text: Strings.backToHome,
                   ),

@@ -80,8 +80,8 @@ class AddCartController extends GetxController {
 
       print("payment");
 
-      Future.delayed(const Duration(seconds: 1), () {
-        addCartDetails(context);
+      Future.delayed(const Duration(seconds: 1), () async {
+        await addCartDetails(context);
 
         /*  Get.find<PaymentController>().viewCardModel;
         update(["abc"]);*/
@@ -153,7 +153,7 @@ class AddCartController extends GetxController {
 
   AddCardModel addCardModel = AddCardModel();
 
-  void addCartDetails(context) {
+  Future<void> addCartDetails(context) async {
     final PaymentController controller = Get.find();
     try {
       loader.value = true;
@@ -163,9 +163,9 @@ class AddCartController extends GetxController {
       String str2 = expiryYearController.text;
       first = str.split('/').first;
       second = str2.split('/').last;
-      AddCartApi.addCartDetailsApi(
+      AddCardModel addCardModel = await AddCartApi.addCartDetailsApi(
         context,
-        cardNumber: cardNumber,
+        cardNumber: cardNmberController.text.toString().replaceAll(" ", ""),
         exMonth: first,
         cardHolder: nameOnCardController.text,
         cvv: cvvController.text,
@@ -175,8 +175,8 @@ class AddCartController extends GetxController {
         city: cityController.text,
         postalCode: postalCodeController.text,
         country: countryController.text,
-      ).then((value) async {
-    
+      );
+      if (addCardModel.status ?? false) {
         final PaymentController controller = Get.find();
         await controller.listCardApi(showToast: false);
         await controller.transactionApi();
@@ -186,20 +186,20 @@ class AddCartController extends GetxController {
             ? homeController.viewProfile.data!.userType = "free"
             : homeController.viewProfile.data!.userType = "premium";
 
-        if (isRunPayment && value.status == true) {
+        if (isRunPayment) {
           print("object");
           print("payment");
           controller.loader.value = true;
           CreateAdvertisementController createAdvertisementController =
               Get.put(CreateAdvertisementController());
           print(createAdvertisementController.titleController.text);
-           createAdvertisementController.uploadImageApi();
+          createAdvertisementController.uploadImageApi();
           isRunPayment = false;
           controller.loader.value = false;
         }
         controller.loader.value = false;
         loader.value = false;
-      });
+      }
     } catch (e) {
       loader.value = false;
       controller.loader.value = false;

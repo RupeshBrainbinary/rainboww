@@ -15,7 +15,7 @@ import 'package:rainbow_new/utils/strings.dart';
 
 import '../screen/create_advertisement/create_advertisement_controller.dart';
 
-Widget appbar({context}) {
+Widget appbar({context,key}) {
   AdvertisementController advertisementController =
       Get.put(AdvertisementController());
   CreateAdvertisementController advertisementControllers =
@@ -36,7 +36,7 @@ Widget appbar({context}) {
               children: [
                 InkWell(
                   onTap: () {
-                    advertisementController.key!.currentState?.openDrawer();
+                   key.currentState?.openDrawer();
                     controller.update(["update"]);
                   },
                   child: Padding(

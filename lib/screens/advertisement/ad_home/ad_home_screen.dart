@@ -11,7 +11,8 @@ import 'package:rainbow_new/utils/color_res.dart';
 import '../../dashboard/dashboard_controller.dart';
 
 class AdHomeScreen extends StatefulWidget {
-  const AdHomeScreen({Key? key}) : super(key: key);
+  const AdHomeScreen({Key? key, this.drawerKey}) : super(key: key);
+  final Key? drawerKey;
 
   @override
   State<AdHomeScreen> createState() => _AdHomeScreenState();
@@ -26,18 +27,15 @@ class _AdHomeScreenState extends State<AdHomeScreen> {
       Get.put(UpdateAdvertiseController());
 
   myInit() async {
-
     /*adHomeController.page = 1;
     adHomeController.myAdList = [];
     await adHomeController.myAdvertiserListData();*/
 
     await adHomeController.viewAdvertiserData();
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     myInit();
 
     //adHomeController.init();
@@ -64,7 +62,7 @@ class _AdHomeScreenState extends State<AdHomeScreen> {
               children: [
                 Column(
                   children: [
-                    appbar(context: context),
+                    appbar(context: context, key: widget.drawerKey),
                     GetBuilder<AdHomeController>(
                         id: 'list',
                         builder: (controller) {
