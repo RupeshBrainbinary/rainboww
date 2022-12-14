@@ -76,17 +76,24 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                       alignment: Alignment.topLeft,
                       child: IconButton(
                         onPressed: () {
-                          AdHomeController adHomeController = Get.find();
-                          adHomeController.update(["more"]);
-                          // Get.deleteAll();
-                          AdvertisementController advertisementController =
-                              Get.put(AdvertisementController());
-                          advertisementController.init();
-                          advertisementController.onBottomBarChange(0);
-                          advertisementController.update(['bottom_bar']);
-                          adHomeController.init();
-                          Get.offAll(() => AdvertisementDashBord());
-                          Get.reload();
+                          // AdHomeController adHomeController = Get.find();
+                          // adHomeController.update(["more"]);
+                          // // Get.deleteAll();
+                          // AdvertisementController advertisementController =
+                          //     Get.put(AdvertisementController());
+                          // advertisementController.init();
+                          // advertisementController.onBottomBarChange(0);
+                          // advertisementController.update(['bottom_bar']);
+                          // adHomeController.init();
+                          // Get.offAll(() => AdvertisementDashBord());
+                          // Get.reload();
+                          setState(() {
+                            Get.offAll(() => AdvertisementDashBord());
+                            AdvertisementController advertisementController =
+                                Get.put(AdvertisementController());
+                            advertisementController.onBottomBarChange(0);
+                            advertisementController.update(['bottom_bar']);
+                          });
                         },
                         icon: const Icon(Icons.arrow_back_ios),
                       ),
@@ -202,16 +209,13 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                   SizedBox(height: Get.height * 0.0714),
                   SubmitButton(
                     onTap: () {
-                      AdHomeController adHomeController = Get.find();
-                      adHomeController.update(["more"]);
-                      // Get.deleteAll();
-                      AdvertisementController advertisementController =
-                          Get.put(AdvertisementController());
-                      advertisementController.init();
-                      advertisementController.onBottomBarChange(0);
-                      advertisementController.update(['bottom_bar']);
-                      adHomeController.init();
-                      Get.offAll(() => AdvertisementDashBord());
+                      setState(() {
+                        Get.offAll(() => AdvertisementDashBord());
+                        AdvertisementController advertisementController =
+                            Get.put(AdvertisementController());
+                        advertisementController.onBottomBarChange(0);
+                        advertisementController.update(['bottom_bar']);
+                      });
                     },
                     text: Strings.backToHome,
                   ),
