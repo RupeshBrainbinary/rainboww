@@ -1,34 +1,29 @@
 // ignore_for_file: avoid_print, sort_child_properties_last
 
-import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_multi_formatter/formatters/money_input_formatter.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:rainbow_new/common/Widget/buttons.dart';
-import 'package:rainbow_new/common/popup.dart';
-import 'package:rainbow_new/model/view_cardM_model.dart';
+import 'package:rainbow_new/common/Widget/loaders.dart';
+import 'package:rainbow_new/common/Widget/text_styles.dart';
+import 'package:rainbow_new/screens/Home/settings/payment/add_cart/add_cart_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
-import 'package:rainbow_new/screens/Profile/widget/profile_appbar.dart';
 import 'package:rainbow_new/screens/advertisement/ad_dashboard/ad_dashboard.dart';
 import 'package:rainbow_new/screens/advertisement/ad_dashboard/advertisement_controlle.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/create_advertisement/create_advertisement_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/payment_failed.dart/payment_failed_screen.dart';
-import 'package:rainbow_new/screens/advertisement/ad_home/screen/payment_successful/payment_successful_screen.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/setup_date/setup_date_controller.dart';
+import 'package:rainbow_new/utils/asset_res.dart';
+import 'package:rainbow_new/utils/color_res.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-import '../../../../../common/Widget/loaders.dart';
-import '../../../../../common/Widget/text_styles.dart';
-import '../../../../../utils/asset_res.dart';
-import '../../../../../utils/color_res.dart';
 
 class SetupDateScreen extends StatelessWidget {
   SetupDateScreen({Key? key}) : super(key: key);
   final CreateAdvertisementController createAdvertisementController =
       Get.put(CreateAdvertisementController());
-  SetupDateController setupDateController = Get.put(SetupDateController());
+  final SetupDateController setupDateController =
+      Get.put(SetupDateController());
 
   @override
   Widget build(BuildContext context) {
@@ -149,6 +144,7 @@ class SetupDateScreen extends StatelessWidget {
                   builder: (controller) => TableCalendar(
                     calendarBuilders: const CalendarBuilders(),
                     shouldFillViewport: true,
+                    availableGestures: AvailableGestures.all,
                     firstDay: DateTime.now(),
                     lastDay: DateTime(2050),
                     onFormatChanged: (CalendarFormat ca) {
@@ -170,7 +166,6 @@ class SetupDateScreen extends StatelessWidget {
                         fontSize: 11.43,
                         color: ColorRes.color_27354C.withOpacity(0.4),
                       ),
-
                       defaultTextStyle: gilroyMediumTextStyle(
                           fontSize: 11.43, color: ColorRes.color_27354C),
                       rangeEndTextStyle:
@@ -245,6 +240,14 @@ class SetupDateScreen extends StatelessWidget {
                     ),
                     calendarFormat: CalendarFormat.month,
                     startingDayOfWeek: StartingDayOfWeek.monday,
+                    onDaySelected: (selectedDay, focusedDay) {
+                      print(selectedDay);
+                      print(focusedDay);
+                    },
+                    onHeaderTapped: (focusedDay) {
+                      print(
+                          "<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>$focusedDay");
+                    },
                   ),
                 ),
               ),
@@ -506,8 +509,9 @@ class ShowBottomNext extends StatelessWidget {
       () => Stack(
         children: [
           DraggableScrollableSheet(
+            expand: false,
             initialChildSize: 0.99,
-            minChildSize: 0.95,
+            minChildSize: 0.84,
             maxChildSize: 0.99,
             builder: (context, scrollController) => GestureDetector(
               behavior: HitTestBehavior.opaque,
@@ -515,11 +519,24 @@ class ShowBottomNext extends StatelessWidget {
                 controller: scrollController,
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: Get.height * 0.1169,
+                      // top: Get.height * 0.1169,
                       left: Get.width * 0.0853,
                       right: Get.width * 0.0853),
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Container(
+                        height: 5,
+                        width: Get.width * 0.36,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2.5),
+                            color: ColorRes.black.withOpacity(0.2)),
+                      ),
+                      SizedBox(
+                        height: Get.height * 0.1009,
+                      ),
                       Text(
                         "Confirm Advertisement Details And Pay",
                         style: gilroySemiBoldTextStyle(
@@ -663,8 +680,9 @@ class ShowBottomNext extends StatelessWidget {
                       ),
                       SubmitButton(
                         onTap: () async {
+                          createAdvertisementController.loader.value = true;
                           await paymentController.listCardApi(showToast: false);
-
+                          createAdvertisementController.loader.value = false;
                           paymentController.listCardModel.data?.length == null
                               ? showDialog(
                                   context: context,
@@ -672,7 +690,7 @@ class ShowBottomNext extends StatelessWidget {
                                     return AlertDialog(
                                       backgroundColor: Colors.white,
                                       title: Text(
-                                        "Are you sure you want exit app",
+                                        "Would you like to add card for your transaction?",
                                         style: gilroyBoldTextStyle(
                                             fontSize: 20, color: Colors.black),
                                       ),
@@ -696,14 +714,44 @@ class ShowBottomNext extends StatelessWidget {
                                                 color: Colors.black),
                                           ),
                                           onPressed: () {
+                                            // // AdHomeController adHomeController =
+                                            // //     Get.find();
+                                            // // adHomeController.update(["more"]);
+                                            // // Get.deleteAll();
+                                            // // Get.to(
+                                            // //     () => AdvertisementDashBord());
+                                            // // AdvertisementController
+                                            // //     advertisementController =
+                                            // //     Get.put(
+                                            // //         AdvertisementController());
+                                            // // advertisementController
+                                            // //     .onBottomBarChange(1);
+                                            // // advertisementController
+                                            // //     .update(['bottom_bar']);
+                                            // .
                                             // SystemNavigator.pop();
-
+                                            // key =
+                                            //     GlobalKey(debugLabel: "dash");
+                                            Get.back();
+                                            Get.back();
+                                            Get.back();
+                                            Get.back();
+                                            Get.back();
+                                            AddCartController
+                                                addCartController =
+                                                Get.put(AddCartController());
+                                            addCartController.isRunPayment =
+                                                true;
+                                            // ispayment = true;
                                             advertisementController
                                                 .onBottomBarChange(1);
                                             advertisementController
                                                 .update(['bottom_bar']);
-                                            Get.offAll(
-                                                () => AdvertisementDashBord());
+                                            // Get.to(
+                                            //     () => AdvertisementDashBord());
+
+                                            // Get.offAll(
+                                            //     () => AdvertisementDashBord());
                                           },
                                         )
                                       ],

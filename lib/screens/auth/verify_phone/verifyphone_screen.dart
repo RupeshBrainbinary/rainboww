@@ -232,8 +232,15 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                               ),
                                             ),
                                           )
-                                        : SizedBox(
-                                            height: 19,
+                                        : Center(
+                                            child: Text(
+                                              Strings.resendOtp,
+                                              style: gilroyBoldTextStyle(
+                                                fontSize: 16,
+                                                color: ColorRes.white
+                                                    .withOpacity(0.2),
+                                              ),
+                                            ),
                                           );
                                   },
                                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:rainbow_new/common/Widget/text_styles.dart';
+
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_dashboard/advertisement_controlle.dart';
@@ -28,14 +29,14 @@ Widget appbar({context}) {
           color: ColorRes.color_50369C,
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10),
+                const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-                children :[
+              children: [
                 InkWell(
                   onTap: () {
-                    advertisementController.key.currentState?.openDrawer();
+                    advertisementController.key!.currentState?.openDrawer();
                     controller.update(["update"]);
                   },
                   child: Padding(
@@ -144,53 +145,61 @@ Widget appbar({context}) {
                 const Spacer(),
                 GetBuilder<AdHomeController>(
                     id: "network",
-                    builder: (controller){
+                    builder: (controller) {
                       controller.checkUserConnection();
-                      return  InkWell(
+                      return InkWell(
                         onTap: controller.activeConnection == false
-                            ? (){
-                          errorToast("No internet connection");
-                        }
-                            :() async {
-                          advertisementControllers.tagsController.clear();
-                          advertisementControllers.titleController.clear();
-                          advertisementControllers.countryController.clear();
-                          advertisementControllers.streetController.clear();
-                          advertisementControllers.cityController.clear();
-                          advertisementControllers.provinceController.clear();
-                          advertisementControllers.postalCodeController.clear();
-                          advertisementControllers.dateController.clear();
-                          advertisementControllers.descriptoionController.clear();
-                          advertisementControllers.urlLinkController.clear();
-                          advertisementControllers.callToActionController.clear();
-                          advertisementControllers.callToAction = null;
-                          advertisementControllers.address =
-                              Strings.useCurrentLocation;
-                          advertisementControllers.countryController.clear();
-                          advertisementControllers.selectedCity = null;
-                          advertisementControllers.imagePath = [];
+                            ? () {
+                                errorToast("No internet connection");
+                              }
+                            : () async {
+                                advertisementControllers.tagsController.clear();
+                                advertisementControllers.titleController
+                                    .clear();
+                                advertisementControllers.countryController
+                                    .clear();
+                                advertisementControllers.streetController
+                                    .clear();
+                                advertisementControllers.cityController.clear();
+                                advertisementControllers.provinceController
+                                    .clear();
+                                advertisementControllers.postalCodeController
+                                    .clear();
+                                advertisementControllers.dateController.clear();
+                                advertisementControllers.descriptoionController
+                                    .clear();
+                                advertisementControllers.urlLinkController
+                                    .clear();
+                                advertisementControllers.callToActionController
+                                    .clear();
+                                advertisementControllers.callToAction = null;
+                                advertisementControllers.address =
+                                    Strings.useCurrentLocation;
+                                advertisementControllers.countryController
+                                    .clear();
+                                advertisementControllers.selectedCity = null;
+                                advertisementControllers.imagePath = [];
 
-                          PaymentController paymentController =
-                          Get.put(PaymentController());
+                                PaymentController paymentController =
+                                    Get.put(PaymentController());
 
-
-                         Get.to(() => CreateAdvertisementScreen());
-                          controller.update(["update"]);
-                        },
+                                Get.to(() => CreateAdvertisementScreen());
+                                controller.update(["update"]);
+                              },
                         child: Container(
                           height: 34,
                           width: 34,
-                          margin: const EdgeInsets.only(bottom: 12),
+                          margin: const EdgeInsets.only(bottom: 8),
                           decoration: const BoxDecoration(
                             color: ColorRes.color_9297FF,
                             shape: BoxShape.circle,
                           ),
-                          child:
-                          const Icon(Icons.add, size: 15, color: ColorRes.white),
+                          child: const Icon(Icons.add,
+                              size: 15, color: ColorRes.white),
                         ),
                       );
                     }),
-               /*Padding(
+                /*Padding(
                  padding: EdgeInsets.only(top: 50),
                  child:  GetBuilder<AdHomeController>(
                      id: "network",

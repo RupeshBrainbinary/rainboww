@@ -13,6 +13,8 @@ import 'package:rainbow_new/utils/end_points.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
 
 class AddCartApi {
+
+  /// Card Number Is Correct Or Not
   static Future addCartDetailsApi(
     context, {
     String? cardNumber,

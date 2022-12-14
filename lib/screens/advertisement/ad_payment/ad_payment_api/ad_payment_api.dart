@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:http/http.dart' as http;
 import 'package:rainbow_new/common/popup.dart';
 
@@ -30,16 +29,13 @@ class ListCartApi {
       if (response != null && response.statusCode == 200) {
         bool? status = jsonDecode(response.body)["status"];
         if (status == false) {
-
           //errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-
           //showToast ? flutterToast(jsonDecode(response.body)["message"]) : SizedBox();
         }
         return listCardModelFromJson(response.body);
       }
     } catch (e) {
-      
       return [];
     }
   }
@@ -61,16 +57,11 @@ class ListCartApi {
       if (response != null && response.statusCode == 200) {
         bool? status = jsonDecode(response.body)["status"];
         if (status == false) {
-
-
           //errorToast(jsonDecode(response.body)["message"]);
-        } else if (status == true) {
-
-        }
+        } else if (status == true) {}
         return viewCardModelFromJson(response.body);
       }
     } catch (e) {
-
       return null;
     }
   }
@@ -94,17 +85,13 @@ class ListCartApi {
       if (response != null && response.statusCode == 200) {
         bool? status = jsonDecode(response.body)["status"];
         if (status == false) {
-
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-
-
           flutterToast(jsonDecode(response.body)["message"]);
         }
         return removeCardModelFromJson(response.body);
       }
     } catch (e) {
-
       return [];
     }
   }
@@ -121,18 +108,14 @@ class ListCartApi {
       if (response != null && response.statusCode == 200) {
         bool? status = jsonDecode(response.body)["status"];
         if (status == false) {
-
           // errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-
-
           //flutterToast(jsonDecode(response.body)["message"]);
 
         }
         return transactionModelFromJson(response.body);
       }
     } catch (e) {
-
       return [];
     }
   }
@@ -156,17 +139,13 @@ class ListCartApi {
       if (response != null && response.statusCode == 200) {
         bool? status = jsonDecode(response.body)["status"];
         if (status == false) {
-
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-
-
           flutterToast(jsonDecode(response.body)["message"]);
         }
         return defaultCradModelFromJson(response.body);
       }
     } catch (e) {
-
       return [];
     }
   }

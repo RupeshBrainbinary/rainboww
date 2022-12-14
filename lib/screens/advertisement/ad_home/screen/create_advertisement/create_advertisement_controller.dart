@@ -27,7 +27,6 @@ import 'package:rainbow_new/utils/color_res.dart';
 import '../../../../../common/popup.dart';
 import '../../../../../utils/strings.dart';
 
-
 class CreateAdvertisementController extends GetxController {
   List tags = [];
   String? callToAction;
@@ -59,8 +58,8 @@ class CreateAdvertisementController extends GetxController {
   String currency = "£";
   List<String> currencyList = ["\$", "₹"];
   String select = 'canada';
-int? totalAmount;
-int? totalAmountApi;
+  int? totalAmount;
+  int? totalAmountApi;
   int pageIndex = 0;
 
   RxBool loader = false.obs;
@@ -193,7 +192,7 @@ int? totalAmountApi;
         uploadImage = await UploadImageApi.postRegister(e.path);
         imgIdList.add(uploadImage.data!.id!);
       }
-      addAdvertisement(imgIdList);
+       addAdvertisement(imgIdList);
       loader.value = true;
     } catch (e) {
       debugPrint(e.toString());
@@ -370,7 +369,7 @@ int? totalAmountApi;
 
   AdvertisersCreateModel advertisersCreateModel = AdvertisersCreateModel();
 
- void addAdvertisement(List imageId) async {
+  addAdvertisement(List imageId) async {
     DateTime now = DateTime.now();
     loader.value = true;
     advertisersCreateModel = await AddAdvertisement.addAdvertisementApi(
@@ -394,17 +393,20 @@ int? totalAmountApi;
               .add_yMd()
               .format(DateTime(now.year, now.month, now.day, 24, 00, 00))
           : DateFormat().add_yMd().format(endTime!),
-      amount: (totalAmountApi == null || totalAmountApi == 0)?1000:totalAmountApi,
-    )/*.then((value) {
+      amount: (totalAmountApi == null || totalAmountApi == 0)
+          ? 1000
+          : totalAmountApi,
+    ) /*.then((value) {
       loader.value = true;
       adHomeController.myAdvertiserListData();
       loader.value = false;
       return advertisersCreateModel;
-    })*/;
-    totalAmount=0;
-    totalAmountApi=0;
+    })*/
+        ;
+    totalAmount = 0;
+    totalAmountApi = 0;
     print(totalAmountApi);
-   await adHomeController.myAdvertiserListData();
+    await adHomeController.myAdvertiserListData();
     //adHomeController.myAdvertiserListDataWithOutPagination();
     update(['more', 'list']);
 
@@ -414,6 +416,8 @@ int? totalAmountApi;
 
   rangSelect(start, end, range) {
     startTime = start;
+    update(['range']);
+    update(['selectC']);
     endTime = end;
     Duration diff = end.difference(start);
     print(diff.inDays);
@@ -474,9 +478,8 @@ int? totalAmountApi;
 /*      print(DateFormat().add_yMd().format(startTime));*/
 /*    await  createAdvertisementController.uploadImageApi();*/
 
-
       Get.bottomSheet(
-        enableDrag: false,
+        enableDrag: true,
         BottomSheet(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -487,12 +490,16 @@ int? totalAmountApi;
           backgroundColor: ColorRes.white,
           onClosing: () {},
           constraints: BoxConstraints(
-            maxHeight: Get.height - (Get.height * 0.2),
+            maxHeight: Get.height - 40,
           ),
 
           // enableDrag: true,
           builder: (_) => ShowBottomNext(
-            amount: (totalAmount.toString() == "" || totalAmount == null || totalAmount == 0)?"10":totalAmount.toString(),
+            amount: (totalAmount.toString() == "" ||
+                    totalAmount == null ||
+                    totalAmount == 0)
+                ? "10"
+                : totalAmount.toString(),
           ),
         ),
         isScrollControlled: true,

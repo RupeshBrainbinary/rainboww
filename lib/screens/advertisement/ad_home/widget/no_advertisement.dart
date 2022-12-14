@@ -21,7 +21,7 @@ Widget noAdvertisement() {
     builder: (controller) {
       return Expanded(
         child: Container(
-          margin: const EdgeInsets.only(top: 20),
+          // margin: const EdgeInsets.only(top: 20),
           width: Get.width,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -32,6 +32,7 @@ Widget noAdvertisement() {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
+            // color: ColorRes.color_50369C,
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -57,35 +58,41 @@ Widget noAdvertisement() {
                     builder: (controller) {
                       controller.checkUserConnection();
                       return SubmitButton(
-                        onTap:   controller.activeConnection == false
-                            ? (){
-                          errorToast("No internet connection");
-                        }
-                            :() async {
-                          advertisementControllers.tagsController.clear();
-                          advertisementControllers.titleController.clear();
-                          advertisementControllers.countryController.clear();
-                          advertisementControllers.streetController.clear();
-                          advertisementControllers.cityController.clear();
-                          advertisementControllers.provinceController.clear();
-                          advertisementControllers.postalCodeController.clear();
-                          advertisementControllers.dateController.clear();
-                          advertisementControllers.descriptoionController
-                              .clear();
-                          advertisementControllers.urlLinkController.clear();
-                          advertisementControllers.callToActionController
-                              .clear();
-                          advertisementControllers.address =
-                              Strings.useCurrentLocation;
-                          advertisementControllers.callToAction = null;
-                          advertisementControllers.imagePath = [];
+                        onTap: controller.activeConnection == false
+                            ? () {
+                                errorToast("No internet connection");
+                              }
+                            : () async {
+                                advertisementControllers.tagsController.clear();
+                                advertisementControllers.titleController
+                                    .clear();
+                                advertisementControllers.countryController
+                                    .clear();
+                                advertisementControllers.streetController
+                                    .clear();
+                                advertisementControllers.cityController.clear();
+                                advertisementControllers.provinceController
+                                    .clear();
+                                advertisementControllers.postalCodeController
+                                    .clear();
+                                advertisementControllers.dateController.clear();
+                                advertisementControllers.descriptoionController
+                                    .clear();
+                                advertisementControllers.urlLinkController
+                                    .clear();
+                                advertisementControllers.callToActionController
+                                    .clear();
+                                advertisementControllers.address =
+                                    Strings.useCurrentLocation;
+                                advertisementControllers.callToAction = null;
+                                advertisementControllers.imagePath = [];
 
-                          PaymentController paymentController =
-                              Get.put(PaymentController());
+                                PaymentController paymentController =
+                                    Get.put(PaymentController());
 
-                     Get.to(() => CreateAdvertisementScreen());
-                          controller.update(["more"]);
-                        },
+                                Get.to(() => CreateAdvertisementScreen());
+                                controller.update(["more"]);
+                              },
                         text: Strings.createAdvertisement,
                       );
                     }),

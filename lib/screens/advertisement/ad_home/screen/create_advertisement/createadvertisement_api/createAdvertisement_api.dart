@@ -80,7 +80,6 @@ class AddAdvertisement {
         errorToast("Please enter valid country name");
       }*/
     } catch (e) {
-
       return [];
     }
   }

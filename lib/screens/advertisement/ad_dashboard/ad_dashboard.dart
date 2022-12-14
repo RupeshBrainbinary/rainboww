@@ -21,7 +21,6 @@ import 'package:rainbow_new/screens/advertisement/ad_support/ad_support_screen.d
 import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/strings.dart';
-
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class AdvertisementDashBord extends StatelessWidget {
@@ -213,7 +212,7 @@ class AdvertisementDashBord extends StatelessWidget {
                                             GestureDetector(
                                               onTap: () {
                                                 advertisementController
-                                                    .key.currentState!
+                                                    .key!.currentState!
                                                     .closeDrawer();
                                               },
                                               child: Padding(

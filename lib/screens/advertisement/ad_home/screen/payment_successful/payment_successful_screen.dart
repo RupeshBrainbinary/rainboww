@@ -1,10 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:rainbow_new/common/Widget/buttons.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
+import 'package:rainbow_new/screens/advertisement/ad_dashboard/advertisement_controlle.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/create_advertisement/create_advertisement_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/renewAdSetupDate/renewSetup_controller.dart';
@@ -18,14 +18,23 @@ class PaymentSuccessfulScreen extends StatelessWidget {
   PaymentSuccessfulScreen({Key? key}) : super(key: key);
   final AdHomeController adHomeController = Get.put(AdHomeController());
   PaymentController paymentController = Get.put(PaymentController());
-  CreateAdvertisementController createAdvertisementController = Get.put(CreateAdvertisementController());
-  RenewAdSetupDateController renewAdSetupDateController = Get.put(RenewAdSetupDateController());
+  CreateAdvertisementController createAdvertisementController =
+      Get.put(CreateAdvertisementController());
+  RenewAdSetupDateController renewAdSetupDateController =
+      Get.put(RenewAdSetupDateController());
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
+        AdvertisementController advertisementController =
+            Get.put(AdvertisementController());
+        advertisementController.init();
+        advertisementController.onBottomBarChange(0);
+        advertisementController.update(['bottom_bar']);
+        adHomeController.init();
         Get.to(() => AdvertisementDashBord());
+
         return true;
       },
       child: Scaffold(
@@ -49,21 +58,32 @@ class PaymentSuccessfulScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
+
+                  /// Back Button
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
                         onPressed: () {
-                          Get.to(AdvertisementDashBord());
+                          AdHomeController adHomeController = Get.find();
+                          adHomeController.update(["more"]);
+                          Get.deleteAll();
+                          AdvertisementController advertisementController =
+                              Get.put(AdvertisementController());
+                          advertisementController.init();
+                          advertisementController.onBottomBarChange(0);
+                          advertisementController.update(['bottom_bar']);
+                          adHomeController.init();
+                          Get.to(() => AdvertisementDashBord());
                         },
                         icon: const Icon(Icons.arrow_back_ios),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: Get.height * 0.135024,
-                  ),
+                      // height: Get.height * 0.135024,
+                      ),
                   Text(
                     Strings.paymentSuccessful,
                     style: gilroySemiBoldTextStyle(fontSize: 24),
@@ -117,7 +137,9 @@ class PaymentSuccessfulScreen extends StatelessWidget {
                                 height: Get.height * 0.007389,
                               ),
                               Text(
-                                adHomeController.viewAdvertiserModel.data?.fullName ?? "",
+                                adHomeController
+                                        .viewAdvertiserModel.data?.fullName ??
+                                    "",
                                 style: poppinsMediumBold(fontSize: 14),
                               ),
                               SizedBox(
@@ -131,7 +153,11 @@ class PaymentSuccessfulScreen extends StatelessWidget {
                                 height: Get.height * 0.007389,
                               ),
                               Text(
-                                createAdvertisementController.advertisersCreateModel.data?.transactionId ?? "",
+                                createAdvertisementController
+                                        .advertisersCreateModel
+                                        .data
+                                        ?.transactionId ??
+                                    "",
                                 //paymentController.viewCardModel?.data?.tokenId ?? "",
 
                                 style: poppinsMediumBold(fontSize: 14),
@@ -168,6 +194,12 @@ class PaymentSuccessfulScreen extends StatelessWidget {
                       AdHomeController adHomeController = Get.find();
                       adHomeController.update(["more"]);
                       Get.deleteAll();
+                      AdvertisementController advertisementController =
+                          Get.put(AdvertisementController());
+                      advertisementController.init();
+                      advertisementController.onBottomBarChange(0);
+                      advertisementController.update(['bottom_bar']);
+                      adHomeController.init();
                       Get.to(() => AdvertisementDashBord());
                     },
                     text: Strings.backToHome,

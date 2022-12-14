@@ -19,23 +19,27 @@ import 'package:rainbow_new/utils/pref_keys.dart';
 class AdvertisementController extends GetxController {
   int currentTab = 0;
   final AdHomeController homeController = Get.put(AdHomeController());
-
+  GlobalKey<ScaffoldState>? key ;
   final AdPaymenetController adPaymenetController =
       Get.put(AdPaymenetController());
   final AdNotificationsController notificationsController =
       Get.put(AdNotificationsController());
   final AdSupportController supportController = Get.put(AdSupportController());
 
-  final GlobalKey<ScaffoldState> key = GlobalKey();
-
   RxBool loader = false.obs;
   bool? isSwitched = true;
 
   @override
   void onInit() {
+    init();
     countryName();
     countryNationalites();
+  
     super.onInit();
+  }
+
+  void init(){
+    key = GlobalKey<ScaffoldState>();
   }
 
   Future<void> countryName() async {
@@ -74,8 +78,6 @@ class AdvertisementController extends GetxController {
       debugPrint(e.toString());
     }
   }*/
-
-
 
   void onBottomBarChange(int index) {
     currentTab = index;
@@ -123,12 +125,11 @@ class AdvertisementController extends GetxController {
 
       loader.value = false;
     } catch (e) {
-
       loader.value = false;
     }
   }
 
-  onTapNetwork(){
+  onTapNetwork() {
     errorToast("No internet connection");
   }
 }

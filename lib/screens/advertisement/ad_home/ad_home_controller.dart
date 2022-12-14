@@ -60,7 +60,7 @@ class AdHomeController extends GetxController {
     "Breast Milk Donor",
   ];
 
-  List<MyAdvertiserData>  myAdList = [];
+  List<MyAdvertiserData> myAdList = [];
 
   ScrollController scrollController = ScrollController();
   int page = 1;
@@ -86,14 +86,11 @@ class AdHomeController extends GetxController {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-
         activeConnection = true;
         T = "Turn off the data and repress again";
         update(["network"]);
-
       }
     } on SocketException catch (_) {
-
       activeConnection = false;
       T = "Turn On the data and repress again";
       update(["network"]);
@@ -102,8 +99,8 @@ class AdHomeController extends GetxController {
 
   @override
   void onInit() async {
-   await  init();
-   update(["more"]);
+    await init();
+    update(["more"]);
     update(["dashBoard"]);
     update(["update"]);
     update();
@@ -170,11 +167,11 @@ class AdHomeController extends GetxController {
     Get.offAll(() => AuthDashboard());
   }
 
-
   Future<void> myAdvertiserListData() async {
     try {
       loader.value = true;
-      myAdvertiserModel = await MyAdvertiserApi.myAdvertiserDataList(page, limit);
+      myAdvertiserModel =
+          await MyAdvertiserApi.myAdvertiserDataList(page, limit);
       page++;
       print(page);
       myAdList.addAll(myAdvertiserModel.data!);
@@ -190,6 +187,7 @@ class AdHomeController extends GetxController {
     moreOption = List.filled(myAdList.length, false);
     update(['more']);
   }
+
   PaymentAdvertiseModel paymentAdvertiseModel = PaymentAdvertiseModel();
 
   Future<void> onMenuId(int? id) async {
@@ -200,7 +198,6 @@ class AdHomeController extends GetxController {
   Future<void> myAdvertiserListDataWithOutPagination({int? pageLength}) async {
     try {
       loader.value = true;
-
 
       myAdvertiserModel = await MyAdvertiserApi.myAdvertiserDataList(
           1, pageLength ?? myAdList.length);
@@ -216,9 +213,6 @@ class AdHomeController extends GetxController {
     }
   }
 
-
-
-
   Future<void> deleteAdvertiser(id, context) async {
     try {
       loader.value = true;
@@ -228,7 +222,6 @@ class AdHomeController extends GetxController {
       update(['delete']);
     } catch (e) {
       loader.value = false;
-
     }
   }
 
@@ -241,8 +234,6 @@ class AdHomeController extends GetxController {
       update(['cancel']);
     } catch (e) {
       loader.value = false;
-
-
     }
   }
 
@@ -255,7 +246,6 @@ class AdHomeController extends GetxController {
       update(['followUp']);
     } catch (e) {
       loader.value = false;
-
     }
   }
 
@@ -271,8 +261,6 @@ class AdHomeController extends GetxController {
       update(["dashBoard"]);
     } catch (e) {
       loader.value = false;
-
-
     }
   }
 
@@ -281,8 +269,7 @@ class AdHomeController extends GetxController {
     update(['more']);
   }
 
-  onTapNetwork(){
+  onTapNetwork() {
     errorToast("No internet connection");
   }
-
 }

@@ -77,7 +77,6 @@ class DoctorRegisterScreen extends StatelessWidget {
                               // ),
                               //       ),
                               //     ),
-
                               // !controller.countryCityDropdown
                               //     ? const SizedBox()
                               //     : Positioned(

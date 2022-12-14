@@ -66,6 +66,8 @@ class AdInformationAPI {
            AccountInformationController accountInformationController = Get.put(AccountInformationController());
 
           Get.offAll( AdvertisementDashBord());
+
+          
           accountInformationController.img = false;
         }
 

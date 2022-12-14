@@ -52,7 +52,6 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Center(
@@ -74,9 +73,13 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
                                 onTap: () {
                                   Get.back();
                                 },
-                                child:  Padding(
-                                  padding: EdgeInsets.only(left: 10,top: 10),
-                                  child: Image.asset(AssetRes.backIcon,height: 16,width: 35,),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10, top: 10),
+                                  child: Image.asset(
+                                    AssetRes.backIcon,
+                                    height: 16,
+                                    width: 35,
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -213,8 +216,15 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
                                           ),
                                         ),
                                       )
-                                    : SizedBox(
-                                        height: 20,
+                                    : Center(
+                                        child: Text(
+                                          Strings.resendOtp,
+                                          style: gilroyBoldTextStyle(
+                                            fontSize: 16,
+                                            color:
+                                                ColorRes.white.withOpacity(0.2),
+                                          ),
+                                        ),
                                       ),
                               ),
                               SizedBox(

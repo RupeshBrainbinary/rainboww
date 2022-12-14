@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import 'package:rainbow_new/common/helper.dart';
+import 'package:rainbow_new/model/ad_add_cart_model.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/payment/add_cart/addCart_api/add_cart_api.dart';
 import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
+import 'package:rainbow_new/screens/advertisement/ad_home/screen/create_advertisement/create_advertisement_controller.dart';
+import 'package:rainbow_new/screens/advertisement/ad_home/screen/payment_successful/payment_successful_screen.dart';
 
 import '../../../../../common/popup.dart';
 import '../../../../../utils/strings.dart';
@@ -23,6 +26,7 @@ class AddCartController extends GetxController {
   String? selectCountry;
   String? myId;
   String? cardNumber;
+  bool isRunPayment = false;
   RxBool loader = false.obs;
 
   bool countryBox = false;
@@ -73,6 +77,9 @@ class AddCartController extends GetxController {
 
     if (validation()) {
       loader.value = true;
+
+      print("payment");
+
       Future.delayed(const Duration(seconds: 1), () {
         addCartDetails(context);
 
@@ -144,7 +151,10 @@ class AddCartController extends GetxController {
     update(['addCard']);
   }
 
+  AddCardModel addCardModel = AddCardModel();
+
   void addCartDetails(context) {
+    final PaymentController controller = Get.find();
     try {
       loader.value = true;
       String str = expiryYearController.text;
@@ -166,19 +176,33 @@ class AddCartController extends GetxController {
         postalCode: postalCodeController.text,
         country: countryController.text,
       ).then((value) async {
+    
         final PaymentController controller = Get.find();
         await controller.listCardApi(showToast: false);
         await controller.transactionApi();
-
+        controller.loader.value = true;
         final HomeController homeController = Get.find();
         controller.listCardModel.data?.length == null
             ? homeController.viewProfile.data!.userType = "free"
             : homeController.viewProfile.data!.userType = "premium";
 
+        if (isRunPayment && value.status == true) {
+          print("object");
+          print("payment");
+          controller.loader.value = true;
+          CreateAdvertisementController createAdvertisementController =
+              Get.put(CreateAdvertisementController());
+          print(createAdvertisementController.titleController.text);
+           createAdvertisementController.uploadImageApi();
+          isRunPayment = false;
+          controller.loader.value = false;
+        }
+        controller.loader.value = false;
         loader.value = false;
       });
     } catch (e) {
       loader.value = false;
+      controller.loader.value = false;
       errorToast("No internet connection");
       debugPrint(e.toString());
     }

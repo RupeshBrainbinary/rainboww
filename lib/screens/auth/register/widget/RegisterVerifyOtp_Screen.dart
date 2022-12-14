@@ -215,7 +215,16 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                                               ),
                                             ),
                                           )
-                                        : const SizedBox();
+                                        : Center(
+                                            child: Text(
+                                              Strings.resendOtp,
+                                              style: gilroyBoldTextStyle(
+                                                fontSize: 16,
+                                                color: ColorRes.white
+                                                    .withOpacity(0.2),
+                                              ),
+                                            ),
+                                          );
                                   },
                                 ),
                                 SizedBox(
