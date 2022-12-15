@@ -38,7 +38,7 @@ class _AdvertisementDashBordState extends State<AdvertisementDashBord> {
   @override
   void initState() {
     super.initState();
-adHomeController. refreshCode();
+// adHomeController. refreshCode();
     drawerKey = GlobalKey<ScaffoldState>();
   }
 

@@ -64,7 +64,7 @@ class AdHomeController extends GetxController {
 
   ScrollController scrollController = ScrollController();
   int page = 1;
-  int limit = 10;
+  int limit = 15;
 
   void pagination() async {
     if (scrollController.position.pixels ==
@@ -100,7 +100,7 @@ class AdHomeController extends GetxController {
   @override
   void onInit() async {
     await init();
-   
+
     update(["more"]);
     update(["dashBoard"]);
     update(["update"]);
@@ -134,7 +134,7 @@ class AdHomeController extends GetxController {
     update(["more"]);
     update(["list"]);
 
-    notificationsController.getNotifications;
+    notificationsController.getNotifications();
 
     await greeting();
   }
@@ -173,6 +173,7 @@ class AdHomeController extends GetxController {
   Future<void> myAdvertiserListData() async {
     try {
       loader.value = true;
+
       myAdvertiserModel =
           await MyAdvertiserApi.myAdvertiserDataList(page, limit);
       page++;

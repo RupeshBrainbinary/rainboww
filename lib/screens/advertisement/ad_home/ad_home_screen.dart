@@ -26,17 +26,26 @@ class _AdHomeScreenState extends State<AdHomeScreen> {
   UpdateAdvertiseController updateAdvertiseController =
       Get.put(UpdateAdvertiseController());
 
-  myInit() async {
-    /*adHomeController.page = 1;
-    adHomeController.myAdList = [];
-    await adHomeController.myAdvertiserListData();*/
+  // myInit() async {
+  //   /*adHomeController.page = 1;
+  //   adHomeController.myAdList = [];
+  //   await adHomeController.myAdvertiserListData();*/
 
-    await adHomeController.viewAdvertiserData();
+  //   await adHomeController.viewAdvertiserData();
+  // }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // adHomeController.myAdList.clear();
+    // adHomeController.init();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    myInit();
+    // myInit();
 
     //adHomeController.init();
     //adHomeController.myAdvertiserListData();

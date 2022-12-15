@@ -492,6 +492,7 @@ class SetupDateScreen extends StatelessWidget {
   }
 }
 
+/// BottomSheet ---> Pay
 class ShowBottomNext extends StatelessWidget {
   String? amount;
 
@@ -525,7 +526,7 @@ class ShowBottomNext extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 8,
+                        height: Get.height * 0.00985,
                       ),
                       Container(
                         height: 5,
@@ -544,9 +545,7 @@ class ShowBottomNext extends StatelessWidget {
                           color: ColorRes.black,
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.03078,
-                      ),
+                      SizedBox(height: Get.height * 0.0307),
                       Container(
                         width: Get.width * 0.8293,
                         decoration: BoxDecoration(
@@ -564,85 +563,96 @@ class ShowBottomNext extends StatelessWidget {
                             Radius.circular(8),
                           ),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.0666),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: Get.height * 0.0320,
-                              ),
-                              Text(
-                                "You have to pay",
-                                style: gilroySemiBoldTextStyle(fontSize: 12),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.0666),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  GetBuilder<CreateAdvertisementController>(
-                                    id: "select",
-                                    builder: (controller) {
-                                      return (controller.totalAmount == null ||
-                                              controller.totalAmount == 0)
-                                          ? Text(
-                                              "£10",
-                                              style:
-                                                  poppinsSemiBold(fontSize: 64),
-                                            )
-                                          : Text(
-                                              "£${controller.totalAmount}",
-                                              style:
-                                                  poppinsSemiBold(fontSize: 64),
-                                            );
-                                    },
+                                  SizedBox(
+                                    height: Get.height * 0.0320,
                                   ),
-                                  /*Padding(padding: EdgeInsets.only(top: 6),
+                                  Text(
+                                    "You have to pay",
+                                    style:
+                                        gilroySemiBoldTextStyle(fontSize: 12),
+                                  ),
+                                  SizedBox(height: Get.height * 0.0320),
+                                  Row(
+                                    children: [
+                                      GetBuilder<CreateAdvertisementController>(
+                                        id: "select",
+                                        builder: (controller) {
+                                          return (controller.totalAmount ==
+                                                      null ||
+                                                  controller.totalAmount == 0)
+                                              ? Text(
+                                                  "£10",
+                                                  style: poppinsSemiBold(
+                                                      fontSize: 64),
+                                                )
+                                              : Text(
+                                                  "£${controller.totalAmount}",
+                                                  style: poppinsSemiBold(
+                                                      fontSize: 64),
+                                                );
+                                        },
+                                      ),
+                                      /*Padding(padding: EdgeInsets.only(top: 6),
                                     child: Text(
                                       "00USD",
                                       style: poppinsSemiBold(fontSize: 12 ),
                                     ),
                                   ),*/
+                                    ],
+                                  ),
+                                  // RichText(
+                                  //   text: TextSpan(children: [
+                                  //     TextSpan(
+                                  //       text: amount,
+                                  //       style: poppinsSemiBold(fontSize: 64),
+                                  //     ),
+                                  //     TextSpan(
+                                  //       text: setupDateController.amountController.text,
+                                  //       style: poppinsSemiBold(fontSize: 24),
+                                  //     )
+                                  //   ]),
+                                  // ),
                                 ],
                               ),
-                              // RichText(
-                              //   text: TextSpan(children: [
-                              //     TextSpan(
-                              //       text: amount,
-                              //       style: poppinsSemiBold(fontSize: 64),
-                              //     ),
-                              //     TextSpan(
-                              //       text: setupDateController.amountController.text,
-                              //       style: poppinsSemiBold(fontSize: 24),
-                              //     )
-                              //   ]),
-                              // ),
-
-                              Divider(
-                                color: ColorRes.black.withOpacity(0.5),
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.036,
-                              ),
-                              Text(
-                                "Payer’s Name",
-                                style: poppinsRegularBold(fontSize: 12),
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.007389,
-                              ),
-                              Text(
-                                adHomeController
-                                        .viewAdvertiserModel.data?.fullName ??
-                                    "",
-                                style: poppinsMediumBold(fontSize: 14),
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.0209,
-                              ),
-                              /* Text(
+                            ),
+                            Divider(
+                              color: ColorRes.black.withOpacity(0.5),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.0666),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: Get.height * 0.036,
+                                  ),
+                                  Text(
+                                    "Payer’s Name",
+                                    style: poppinsRegularBold(fontSize: 12),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.007389,
+                                  ),
+                                  Text(
+                                    adHomeController.viewAdvertiserModel.data
+                                            ?.fullName ??
+                                        "",
+                                    style: poppinsMediumBold(fontSize: 14),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.0209,
+                                  ),
+                                  /* Text(
                                 "Transaction Number",
                                 style: poppinsRegularBold(fontSize: 12),
                               ),
@@ -657,26 +667,28 @@ class ShowBottomNext extends StatelessWidget {
                               SizedBox(
                                 height: Get.height * 0.0209,
                               ),*/
-                              Text(
-                                "Service",
-                                style: poppinsRegularBold(fontSize: 12),
+                                  Text(
+                                    "Service",
+                                    style: poppinsRegularBold(fontSize: 12),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.007389,
+                                  ),
+                                  Text(
+                                    "Post Ads",
+                                    style: poppinsMediumBold(fontSize: 14),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.0480,
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: Get.height * 0.007389,
-                              ),
-                              Text(
-                                "Post Ads",
-                                style: poppinsMediumBold(fontSize: 14),
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.0209,
-                              ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ),
                       SizedBox(
-                        height: Get.height * 0.0665,
+                        height: Get.height * 0.066,
                       ),
                       SubmitButton(
                         onTap: () async {

@@ -37,12 +37,16 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        setState(() {
+        setState(() async {
           Get.offAll(() => AdvertisementDashBord());
           AdvertisementController advertisementController =
               Get.put(AdvertisementController());
           advertisementController.onBottomBarChange(0);
           advertisementController.update(['bottom_bar']);
+          final AdHomeController adHomeController = Get.put(AdHomeController());
+          await adHomeController.refreshCode();
+          adHomeController.update(['more']);
+          adHomeController.update(['list']);
         });
 
         return true;
@@ -87,12 +91,17 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                           // adHomeController.init();
                           // Get.offAll(() => AdvertisementDashBord());
                           // Get.reload();
-                          setState(() {
+                          setState(() async {
                             Get.offAll(() => AdvertisementDashBord());
                             AdvertisementController advertisementController =
                                 Get.put(AdvertisementController());
                             advertisementController.onBottomBarChange(0);
                             advertisementController.update(['bottom_bar']);
+                            final AdHomeController adHomeController =
+                                Get.put(AdHomeController());
+                            await adHomeController.refreshCode();
+                            adHomeController.update(['more']);
+                            adHomeController.update(['list']);
                           });
                         },
                         icon: const Icon(Icons.arrow_back_ios),
@@ -208,13 +217,18 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                   ),
                   SizedBox(height: Get.height * 0.0714),
                   SubmitButton(
-                    onTap: () {
-                      setState(() {
+                    onTap: () async {
+                      setState(() async {
                         Get.offAll(() => AdvertisementDashBord());
                         AdvertisementController advertisementController =
                             Get.put(AdvertisementController());
                         advertisementController.onBottomBarChange(0);
                         advertisementController.update(['bottom_bar']);
+                        final AdHomeController adHomeController =
+                            Get.put(AdHomeController());
+                        await adHomeController.refreshCode();
+                        adHomeController.update(['more']);
+                        adHomeController.update(['list']);
                       });
                     },
                     text: Strings.backToHome,

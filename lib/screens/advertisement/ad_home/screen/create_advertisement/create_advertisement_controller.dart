@@ -118,6 +118,8 @@ class CreateAdvertisementController extends GetxController {
   }
 
   tagsListSet() {
+    tags.clear();
+
     if (!tagsController.text.toString().contains(",")) {
       tags.add(tagsController.text.toString());
     } else {
@@ -492,7 +494,7 @@ class CreateAdvertisementController extends GetxController {
           backgroundColor: ColorRes.white,
           onClosing: () {},
           constraints: BoxConstraints(
-            maxHeight: Get.height - 40,
+            maxHeight: Get.height - (Get.height * 0.0480),
           ),
 
           // enableDrag: true,
