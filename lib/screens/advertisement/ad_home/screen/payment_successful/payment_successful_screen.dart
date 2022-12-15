@@ -37,17 +37,18 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        setState(() async {
-          Get.offAll(() => AdvertisementDashBord());
-          AdvertisementController advertisementController =
-              Get.put(AdvertisementController());
-          advertisementController.onBottomBarChange(0);
-          advertisementController.update(['bottom_bar']);
-          final AdHomeController adHomeController = Get.put(AdHomeController());
-          await adHomeController.refreshCode();
-          adHomeController.update(['more']);
-          adHomeController.update(['list']);
-        });
+        // setState(() async {
+        AdvertisementController advertisementController =
+            Get.put(AdvertisementController());
+        advertisementController.onBottomBarChange(0);
+        Get.offAll(() => AdvertisementDashBord());
+
+        // advertisementController.update(['bottom_bar']);
+        // final AdHomeController adHomeController = Get.put(AdHomeController());
+        // await adHomeController.refreshCode();
+        // adHomeController.update(['more']);
+        // adHomeController.update(['list']);
+        // });
 
         return true;
       },
@@ -80,29 +81,34 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                       alignment: Alignment.topLeft,
                       child: IconButton(
                         onPressed: () {
-                          // AdHomeController adHomeController = Get.find();
-                          // adHomeController.update(["more"]);
-                          // // Get.deleteAll();
-                          // AdvertisementController advertisementController =
-                          //     Get.put(AdvertisementController());
-                          // advertisementController.init();
-                          // advertisementController.onBottomBarChange(0);
-                          // advertisementController.update(['bottom_bar']);
-                          // adHomeController.init();
-                          // Get.offAll(() => AdvertisementDashBord());
-                          // Get.reload();
-                          setState(() async {
-                            Get.offAll(() => AdvertisementDashBord());
-                            AdvertisementController advertisementController =
-                                Get.put(AdvertisementController());
-                            advertisementController.onBottomBarChange(0);
-                            advertisementController.update(['bottom_bar']);
-                            final AdHomeController adHomeController =
-                                Get.put(AdHomeController());
-                            await adHomeController.refreshCode();
-                            adHomeController.update(['more']);
-                            adHomeController.update(['list']);
-                          });
+                          AdvertisementController advertisementController =
+                              Get.put(AdvertisementController());
+                          advertisementController.onBottomBarChange(0);
+                          Get.offAll(() => AdvertisementDashBord());
+                          // // AdHomeController adHomeController = Get.find();
+                          // // adHomeController.update(["more"]);
+                          // // // Get.deleteAll();
+                          // // AdvertisementController advertisementController =
+                          // //     Get.put(AdvertisementController());
+                          // // advertisementController.init();
+                          // // advertisementController.onBottomBarChange(0);
+                          // // advertisementController.update(['bottom_bar']);
+                          // // adHomeController.init();
+                          // // Get.offAll(() => AdvertisementDashBord());
+                          // // Get.reload();
+                          // .
+                          // setState(() async {
+                          //   Get.offAll(() => AdvertisementDashBord());
+                          //   AdvertisementController advertisementController =
+                          //       Get.put(AdvertisementController());
+                          //   advertisementController.onBottomBarChange(0);
+                          //   advertisementController.update(['bottom_bar']);
+                          //   final AdHomeController adHomeController =
+                          //       Get.put(AdHomeController());
+                          //   await adHomeController.refreshCode();
+                          //   adHomeController.update(['more']);
+                          //   adHomeController.update(['list']);
+                          // });
                         },
                         icon: const Icon(Icons.arrow_back_ios),
                       ),
@@ -218,18 +224,22 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                   SizedBox(height: Get.height * 0.0714),
                   SubmitButton(
                     onTap: () async {
-                      setState(() async {
-                        Get.offAll(() => AdvertisementDashBord());
-                        AdvertisementController advertisementController =
-                            Get.put(AdvertisementController());
-                        advertisementController.onBottomBarChange(0);
-                        advertisementController.update(['bottom_bar']);
-                        final AdHomeController adHomeController =
-                            Get.put(AdHomeController());
-                        await adHomeController.refreshCode();
-                        adHomeController.update(['more']);
-                        adHomeController.update(['list']);
-                      });
+                      AdvertisementController advertisementController =
+                          Get.put(AdvertisementController());
+                      advertisementController.onBottomBarChange(0);
+                      Get.offAll(() => AdvertisementDashBord());
+                      // setState(() async {
+                      //   Get.offAll(() => AdvertisementDashBord());
+                      //   AdvertisementController advertisementController =
+                      //       Get.put(AdvertisementController());
+                      //   advertisementController.onBottomBarChange(0);
+                      //   advertisementController.update(['bottom_bar']);
+                      //   final AdHomeController adHomeController =
+                      //       Get.put(AdHomeController());
+                      //   await adHomeController.refreshCode();
+                      //   adHomeController.update(['more']);
+                      //   adHomeController.update(['list']);
+                      // });
                     },
                     text: Strings.backToHome,
                   ),
