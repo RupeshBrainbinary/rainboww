@@ -151,16 +151,6 @@ class _AdvertisementDashBordState extends State<AdvertisementDashBord> {
                                                         width:
                                                             Get.width * 0.1730,
                                                       )),
-                                        /*       Container(
-                        height: Get.width * 0.1730,
-                        width: Get.width * 0.1730,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage(AssetRes.account),
-                          ),
-                        ),
-                      ),*/
                                         SizedBox(
                                           width: Get.width * 0.0255,
                                         ),
@@ -406,7 +396,7 @@ class _AdvertisementDashBordState extends State<AdvertisementDashBord> {
                                       right: Get.width * 0.0498),
                                   child: SubmitButton(
                                     onTap: () =>
-                                        logoutPopupAdvertise(context: context),
+                                        logoutPopupAdvertise(context: context,key :drawerKey),
                                     child: Row(
                                       children: [
                                         const Spacer(),

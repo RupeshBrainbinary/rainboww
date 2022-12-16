@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
+import 'package:rainbow_new/screens/Home/settings/logOut_Api/log_out_api.dart';
 
 import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/settings_controller.dart';
 import 'package:rainbow_new/screens/account_Information/account_information_controller.dart';
+import 'package:rainbow_new/screens/advertisement/ad_dashboard/ad_dashboard.dart';
+import 'package:rainbow_new/screens/advertisement/ad_dashboard/advertisement_controlle.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
+import 'package:rainbow_new/screens/advertisement/ad_home/widget/advertisement_list.dart';
 
 import 'package:rainbow_new/screens/auth/auth_dashboard/auth_dashboard.dart';
 import 'package:rainbow_new/service/pref_services.dart';
@@ -65,8 +69,8 @@ logoutPopup({required BuildContext context}) {
 
                     controller.loader.value = true;
 
-                  PaymentController paymentController = Get.put(PaymentController());
-
+                    PaymentController paymentController =
+                        Get.put(PaymentController());
                     paymentController.listCardModel.data = [];
                     paymentController.transactionModel.data = [];
 
@@ -84,7 +88,8 @@ logoutPopup({required BuildContext context}) {
       });
 }
 
-logoutPopupAdvertise({required BuildContext context}) {
+logoutPopupAdvertise(
+    {required BuildContext context, required GlobalKey<ScaffoldState> key}) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -121,19 +126,31 @@ logoutPopupAdvertise({required BuildContext context}) {
 
                 //Get.offNamed("/AuthDashboard");
                 //Get.offNamedUntil("/AuthDashboard");
-                Get.deleteAll();
+                // Get.deleteAll();
+                Get.back();
+                key.currentState!.closeDrawer();
+                AdvertisementController advertisementController =
+                    Get.put(AdvertisementController());
+                AdHomeController adHomeController = Get.put(AdHomeController());
+                adHomeController.loader.value = true;
+                advertisementController.update(['settings']);
+                await LogOutApi.postRegister();
+                adHomeController.loader.value = false;
 
-                Get.offAll(() => AuthDashboard());
+                advertisementController.update(['settings']);
+                // Get.offAll(() => AuthDashboard());
 
                 //Get.reset();
                 PrefService.setValue(PrefKeys.userId, "");
                 PrefService.setValue(PrefKeys.accessToken, "");
                 PrefService.setValue(PrefKeys.skipBoardingScreen, true);
                 //AdHomeController adHomeController = AdHomeController();
-               // adHomeController.myAdvertiserModel.data = null;
-                PaymentController paymentController = Get.find();
+                // adHomeController.myAdvertiserModel.data = null;
+                PaymentController paymentController =
+                    Get.put(PaymentController());
                 //adHomeController.viewAdvertiserModel.data!.profileImage = '';
-                AccountInformationController accountController = AccountInformationController();
+                AccountInformationController accountController =
+                    AccountInformationController();
                 accountController.imagePath = null;
                 //accountController.update(["Getpic"]);
                 paymentController.listCardModel.data = [];

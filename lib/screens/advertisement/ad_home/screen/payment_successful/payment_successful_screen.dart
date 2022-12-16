@@ -92,6 +92,10 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                           // //     Get.put(AdvertisementController());
                           // // advertisementController.init();
                           // // advertisementController.onBottomBarChange(0);
+                   
+                   
+                   
+                   
                           // // advertisementController.update(['bottom_bar']);
                           // // adHomeController.init();
                           // // Get.offAll(() => AdvertisementDashBord());
