@@ -166,33 +166,31 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
           return Obx(() {
             return Stack(
               children: [
-                SafeArea(
-                  child: Container(
-                    height: Get.height,
-                    width: Get.width,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          ColorRes.color_50369C,
-                          ColorRes.colorD18EEE,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: Stack(
-                      children: [
-                        appBar(title: "Find ${widget.title}"),
-                        //const SizedBox(height: 60),
-                        /*    searchUser(),*/
-                        homeController.controller.viewProfile.data!.latitude
-                                .toString()
-                                .isEmpty
-                            ? const SizedBox()
-                            : userProfile(),
-                        listOfUser(controller),
+                Container(
+                  height: Get.height,
+                  width: Get.width,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        ColorRes.color_50369C,
+                        ColorRes.colorD18EEE,
                       ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
+                  ),
+                  child: Stack(
+                    children: [
+                      appBar(title: "Find ${widget.title}"),
+                      //const SizedBox(height: 60),
+                      /*    searchUser(),*/
+                      homeController.controller.viewProfile.data!.latitude
+                              .toString()
+                              .isEmpty
+                          ? const SizedBox()
+                          : userProfile(),
+                      listOfUser(controller),
+                    ],
                   ),
                 ),
                 controller.loader.value == true
@@ -212,7 +210,7 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
       width: Get.width,
       child: Column(
         children: [
-          const SizedBox(height: 20 //Get.height * 0.03,
+          const SizedBox(height: 40 //Get.height * 0.03,
               ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

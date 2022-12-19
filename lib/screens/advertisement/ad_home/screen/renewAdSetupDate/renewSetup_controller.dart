@@ -130,7 +130,7 @@ class RenewAdSetupDateController extends GetxController {
         backgroundColor: ColorRes.white,
         onClosing: () {},
         constraints: BoxConstraints(
-          maxHeight: Get.height - (Get.height * 0.2),
+          maxHeight: Get.height - (Get.height * 0.1),
         ),
 
         // enableDrag: true,

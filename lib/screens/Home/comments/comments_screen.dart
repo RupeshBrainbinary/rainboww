@@ -132,24 +132,21 @@ class CommentScreen extends StatelessWidget {
                       left: 19, right: 19, top: 12, bottom: Get.height * 0.1),
                   itemBuilder: (context, index) {
                     return userComment(
-                        image: controller
-                            .postCommentListModel.data![index].postCommentItem
+                        image: postCommentListModel.data![index].postCommentItem
                             .toString(),
-                        description: controller
-                            .postCommentListModel.data![index].description
+                        description: postCommentListModel.data![index].description
                             .toString(),
-                        fullName: controller.postCommentListModel.data![index]
+                        fullName: postCommentListModel.data![index]
                             .postCommentUser!.fullName
                             .toString(),
-                        profileImage: controller.postCommentListModel.data![index]
+                        profileImage: postCommentListModel.data![index]
                             .postCommentUser!.profileImage
                             .toString(),
-                        reply: controller
-                            .postCommentListModel.data![index].postCommentReply,
-                        commentId: controller.postCommentListModel.data![index].id
+                        reply:postCommentListModel.data![index].postCommentReply,
+                        commentId:postCommentListModel.data![index].id
                             .toString(),
                         date:
-                            controller.postCommentListModel.data![index].createdAt);
+                            postCommentListModel.data![index].createdAt);
                   },
                   separatorBuilder: (context, index) {
                     return Divider(
@@ -157,12 +154,12 @@ class CommentScreen extends StatelessWidget {
                       height: 22,
                     );
                   },
-                  itemCount: controller.postCommentListModel.data == null
+                  itemCount: postCommentListModel.data == null
                       ? 0
-                      : controller.postCommentListModel.data!.length,
+                      : postCommentListModel.data!.length,
                 ),
                 controller.refreshLoader.isFalse && controller.commloader.isTrue
-                    ? const FullScreenLoaderWhiteBack()
+                    ? Center(child: const CircularProgressIndicator(color: Colors.grey,))
                     : const SizedBox()
               ],
             ),

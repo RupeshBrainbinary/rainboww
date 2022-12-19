@@ -15,6 +15,7 @@ import 'package:rainbow_new/model/post_comment_model.dart';
 import 'package:rainbow_new/screens/Home/comments/comments_screen.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/Home/myPost_Api/my_post_api.dart';
+PostCommentListModel postCommentListModel = PostCommentListModel();
 
 class CommentsController extends GetxController {
   RxBool loader = false.obs;
@@ -102,7 +103,6 @@ class CommentsController extends GetxController {
     }
   }
 
-  PostCommentListModel postCommentListModel = PostCommentListModel();
 
 
 
