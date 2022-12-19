@@ -59,9 +59,15 @@ class MessageScreen extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                DashboardController dashboardController =
+                                if(backArrow==true){
+                                  Navigator.pop(context);
+                                }else
+                                  {
+                                    DashboardController dashboardController =
                                     Get.find();
-                                dashboardController.onBottomBarChange(0);
+                                    dashboardController.onBottomBarChange(0);
+                                  }
+
                               },
                               child: Padding(
                                 padding: EdgeInsets.only(
