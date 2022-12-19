@@ -157,12 +157,12 @@ class PrivacyScreen extends StatelessWidget {
                 child: Image.asset(
                   AssetRes.backIcon,
                   height: 16,
-                  width: 16,
+                  width: 35,
                   color: Colors.white,
                 ),
               ),
               SizedBox(
-                width: Get.width * 0.34,
+                width: Get.width * 0.30,
               ),
               GestureDetector(
                   onTap: () {

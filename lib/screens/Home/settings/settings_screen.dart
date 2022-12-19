@@ -37,42 +37,40 @@ class SettingsScreen extends StatelessWidget {
         id: "settings",
         builder: (controller) {
           return Obx(() {
-            return SafeArea(
-              child: Container(
-                width: Get.width,
-                padding: const EdgeInsets.only(bottom: 5),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      ColorRes.color_50369C,
-                      ColorRes.colorD18EEE,
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    Column(
-                      children: [
-                        appBar(context),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                profile(),
-                                settingsProperties(context: context),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    controller.loader.isTrue
-                        ? const FullScreenLoader()
-                        : const SizedBox()
+            return Container(
+              width: Get.width,
+              padding: const EdgeInsets.only(bottom: 5),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    ColorRes.color_50369C,
+                    ColorRes.colorD18EEE,
                   ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
+              ),
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      appBar(context),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              profile(),
+                              settingsProperties(context: context),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  controller.loader.isTrue
+                      ? const FullScreenLoader()
+                      : const SizedBox()
+                ],
               ),
             );
           });
@@ -88,7 +86,7 @@ class SettingsScreen extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: Get.height * 0.03,
+            height: 40,
           ),
           Stack(
             children: [

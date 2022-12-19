@@ -232,7 +232,7 @@ class ChatScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            padding: const EdgeInsets.only(top: 30),
+                            padding: const EdgeInsets.only(top: 30,bottom: 13),
                             scrollController: controller.listScrollController,
                             isLive: true,
                             reverse: true,

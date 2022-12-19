@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class SmartLoader extends StatelessWidget {
@@ -39,6 +40,11 @@ class FullScreenLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Color(0xff50369C), //or set color with: Color(0xFF0000FF)
+      ),
+    );
     return Container(
       color: Colors.black54,
       height: Get.height,
@@ -67,6 +73,11 @@ class FullScreenLoaderWhiteBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Color(0xff50369C), //or set color with: Color(0xFF0000FF)
+      ),
+    );
     return Container(
       color: Colors.white,
       height: Get.height,

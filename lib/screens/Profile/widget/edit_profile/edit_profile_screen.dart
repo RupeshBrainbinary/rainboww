@@ -39,36 +39,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Scaffold(body: Obx(() {
         return Stack(
           children: [
-            SafeArea(
-              child: GetBuilder<EditProfileController>(
-                id: 'Edit_profile',
-                builder: (controller) {
-                  return Container(
-                    width: Get.width,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          ColorRes.color_50369C,
-                          ColorRes.colorD18EEE,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
+            GetBuilder<EditProfileController>(
+              id: 'Edit_profile',
+              builder: (controller) {
+                return Container(
+                  width: Get.width,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        ColorRes.color_50369C,
+                        ColorRes.colorD18EEE,
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          editProfilePicture(context),
-                          editProfileTextField()
-                        ],
-                      ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15,top: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        editProfilePicture(context),
+                        editProfileTextField()
+                      ],
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
             controller.loader.isTrue
                 ? const FullScreenLoader()

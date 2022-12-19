@@ -50,8 +50,7 @@ Future<void> main() async {
   await PrefService.init();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: ColorRes.color_4F359B
-          .withOpacity(0.3), //or set color with: Color(0xFF0000FF)
+      statusBarColor: Color(0xff50369C), //or set color with: Color(0xFF0000FF)
     ),
   );
 

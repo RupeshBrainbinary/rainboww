@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
               (controller.loader.isTrue)
                   ? Container(
                 width: Get.width,
-                padding: const EdgeInsets.only(top: 25),
+                padding: const EdgeInsets.only(top: 35),
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -64,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                 builder: (controller) {
                   return Container(
                     width: Get.width,
-                    padding: const EdgeInsets.only(top: 25),
+                    padding: const EdgeInsets.only(top: 35),
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -78,9 +78,6 @@ class ProfileScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: Get.height * 0.035,
-                        ),
                         Expanded(
                           flex: 1,
                           child: profileAppbar(Strings.profile, true, false, context, i,

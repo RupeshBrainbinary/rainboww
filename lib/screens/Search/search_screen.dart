@@ -17,95 +17,97 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(
-      id: "Search",
-      builder: (controller) {
-        return GestureDetector(
-          onTap: controller.onScreenTap,
-          child: Obx(() {
-            return Stack(
-              children: [
-                SizedBox(
-                  height: Get.height,
-                  width: Get.width,
-                  child: Column(
-                    children: [
-                      Container(
-                        color: ColorRes.white,
-                        child: Column(
-                          children: [
-                            appBar(context: context),
-                            textField(context: context),
-                            const SizedBox(height: 15),
-                          ],
+    return SafeArea(
+      child: GetBuilder<SearchController>(
+        id: "Search",
+        builder: (controller) {
+          return GestureDetector(
+            onTap: controller.onScreenTap,
+            child: Obx(() {
+              return Stack(
+                children: [
+                  SizedBox(
+                    height: Get.height,
+                    width: Get.width,
+                    child: Column(
+                      children: [
+                        Container(
+                          color: ColorRes.white,
+                          child: Column(
+                            children: [
+                              appBar(context: context),
+                              textField(context: context),
+                              const SizedBox(height: 15),
+                            ],
+                          ),
                         ),
-                      ),
-                      profile(),
-                    ],
+                        profile(),
+                      ],
+                    ),
                   ),
-                ),
-                GetBuilder<SearchController>(
-                  id: "Search",
-                  builder: (controller) {
-                    return controller.advance == true
-                        ? Positioned(
-                            top: Get.height * 0.105,
-                            left: Get.width * 0.58,
-                            child: Container(
-                              height: 200,
-                              width: 142,
-                              padding: EdgeInsets.zero,
-                              color: ColorRes.color_4F359B,
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      controller.onTapAdvanceSearchMenu(index);
-                                    },
-                                    child: Container(
-                                      width: 142,
-                                      height: 37,
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          controller.advanceSearch[index]
-                                              .toString(),
-                                          style: gilroyBoldTextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12),
+                  GetBuilder<SearchController>(
+                    id: "Search",
+                    builder: (controller) {
+                      return controller.advance == true
+                          ? Positioned(
+                              top: Get.height * 0.105,
+                              left: Get.width * 0.58,
+                              child: Container(
+                                height: 200,
+                                width: 142,
+                                padding: EdgeInsets.zero,
+                                color: ColorRes.color_4F359B,
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        controller.onTapAdvanceSearchMenu(index);
+                                      },
+                                      child: Container(
+                                        width: 142,
+                                        height: 37,
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            controller.advanceSearch[index]
+                                                .toString(),
+                                            style: gilroyBoldTextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const Divider(
-                                    thickness: 1,
-                                    color: ColorRes.white,
-                                    height: 2,
-                                  );
-                                },
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: controller.advanceSearch.length,
-                                padding: const EdgeInsets.only(top: 0),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return const Divider(
+                                      thickness: 1,
+                                      color: ColorRes.white,
+                                      height: 2,
+                                    );
+                                  },
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: controller.advanceSearch.length,
+                                  padding: const EdgeInsets.only(top: 0),
+                                ),
                               ),
-                            ),
-                          )
-                        : const SizedBox();
-                  },
-                ),
-                controller.loader.isTrue
-                    ? const FullScreenLoader()
-                    : const SizedBox()
-              ],
-            );
-          }),
-        );
-      },
+                            )
+                          : const SizedBox();
+                    },
+                  ),
+                  controller.loader.isTrue
+                      ? const FullScreenLoader()
+                      : const SizedBox()
+                ],
+              );
+            }),
+          );
+        },
+      ),
     );
   }
 
