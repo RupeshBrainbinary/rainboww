@@ -66,7 +66,6 @@ class AddAdvertisement {
         bool? status = jsonDecode(response.body)["status"];
         if (status == true) {
           final PaymentController controller = Get.find();
-          AdHomeController adHomeController = Get.put(AdHomeController());
           await controller.transactionApi();
           //adHomeController.myAdvertiserListData();
 

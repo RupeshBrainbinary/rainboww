@@ -34,7 +34,7 @@ class _AdvertisementDashBordState extends State<AdvertisementDashBord> {
   final AdvertisementController advertisementController =
       Get.put(AdvertisementController());
   GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
-  final AdHomeController adHomeController = Get.put(AdHomeController());
+   AdHomeController adHomeController = Get.put(AdHomeController());
   @override
   void initState() {
     super.initState();

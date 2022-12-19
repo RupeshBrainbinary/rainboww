@@ -29,34 +29,33 @@ class RenewSetupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: Get.width,
-          height: Get.height,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorRes.color_50369C,
-                ColorRes.color_50369C,
-                ColorRes.colorD18EEE,
-                ColorRes.colorD18EEE,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Column(
-            children: [
-              appBar(),
-              // top(),
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: bottom(context, idAdvertiser),
-                ),
-              ),
+      body: Container(
+        width: Get.width,
+        height: Get.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              ColorRes.color_50369C,
+              ColorRes.color_50369C,
+              ColorRes.colorD18EEE,
+              ColorRes.colorD18EEE,
             ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 40,),
+            appBar(),
+            // top(),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: bottom(context, idAdvertiser),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -67,9 +66,6 @@ class RenewSetupScreen extends StatelessWidget {
       width: Get.width,
       child: Column(
         children: [
-          SizedBox(
-            height: Get.height * 0.03,
-          ),
           Row(
             children: [
               SizedBox(

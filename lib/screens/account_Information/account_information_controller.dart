@@ -451,7 +451,6 @@ class AccountInformationController extends GetxController {
         loader.value = false;
       },
     );
-
     loader.value = false;
     await adHomeController.viewAdvertiserData();
     adHomeController.update(["dashBoard"]);

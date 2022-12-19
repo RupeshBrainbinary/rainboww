@@ -148,6 +148,7 @@ logoutPopupAdvertise(
                 // adHomeController.myAdvertiserModel.data = null;
                 PaymentController paymentController =
                     Get.put(PaymentController());
+                Get.deleteAll();
                 //adHomeController.viewAdvertiserModel.data!.profileImage = '';
                 AccountInformationController accountController =
                     AccountInformationController();

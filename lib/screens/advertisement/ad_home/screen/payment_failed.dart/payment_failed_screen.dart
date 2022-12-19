@@ -44,12 +44,10 @@ class PaymentFailedScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 15),
                   child: Align(
                     alignment: Alignment.topLeft,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.to(AdvertisementDashBord());
-                      },
-                      icon: const Icon(Icons.arrow_back_ios),
-                    ),
+                    child: GestureDetector(onTap: () {
+                      Get.to(AdvertisementDashBord());
+                    },
+                        child: Image.asset(AssetRes.backIcon,height: 16,width: 30,))
                   ),
                 ),
                 SizedBox(

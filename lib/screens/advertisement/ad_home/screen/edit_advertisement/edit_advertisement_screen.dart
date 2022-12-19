@@ -20,31 +20,30 @@ class EditAdvertisementscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: Get.width,
-          decoration:  const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorRes.color_50369C,
-                ColorRes.color_50369C,
-                ColorRes.colorD18EEE,
-                ColorRes.colorD18EEE,
-                ColorRes.color_50369C,
-                ColorRes.colorD18EEE,
+      body: Container(
+        width: Get.width,
+        decoration:  const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              ColorRes.color_50369C,
+              ColorRes.color_50369C,
+              ColorRes.colorD18EEE,
+              ColorRes.colorD18EEE,
+              ColorRes.color_50369C,
+              ColorRes.colorD18EEE,
 
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                appBar(),
-                body(),
-              ],
-            ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 40,),
+              appBar(),
+              body(),
+            ],
           ),
         ),
       ),
@@ -56,9 +55,7 @@ class EditAdvertisementscreen extends StatelessWidget {
       width: Get.width,
       child: Column(
         children: [
-          SizedBox(
-            height: Get.height * 0.03,
-          ),
+
           Row(
             children: [
               SizedBox(
@@ -71,12 +68,12 @@ class EditAdvertisementscreen extends StatelessWidget {
                 child: Image.asset(
                   AssetRes.backIcon,
                   height: 16,
-                  width: 35,
+                  width: 40,
                   color: Colors.white,
                 ),
               ),
               SizedBox(
-                width: Get.width * 0.2,
+                width: Get.width * 0.19,
               ),
               GestureDetector(
                 onTap: () {

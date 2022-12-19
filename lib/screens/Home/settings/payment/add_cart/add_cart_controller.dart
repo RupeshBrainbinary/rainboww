@@ -154,7 +154,8 @@ class AddCartController extends GetxController {
   AddCardModel addCardModel = AddCardModel();
 
   Future<void> addCartDetails(context) async {
-    final PaymentController controller = Get.find();
+     PaymentController controller = Get.find();
+     HomeController homeController = Get.find();
     try {
       loader.value = true;
       String str = expiryYearController.text;
@@ -176,27 +177,26 @@ class AddCartController extends GetxController {
         postalCode: postalCodeController.text,
         country: countryController.text,
       );
+      if (isRunPayment) {
+        loader.value = true;
+        CreateAdvertisementController createAdvertisementController =
+        Get.put(CreateAdvertisementController());
+
+        createAdvertisementController.addAdvertisement(createAdvertisementController.imgIdList);
+        isRunPayment = false;
+
+      }
       if (addCardModel.status ?? false) {
         final PaymentController controller = Get.find();
         await controller.listCardApi(showToast: false);
         await controller.transactionApi();
         controller.loader.value = true;
-        final HomeController homeController = Get.find();
+
         controller.listCardModel.data?.length == null
             ? homeController.viewProfile.data!.userType = "free"
             : homeController.viewProfile.data!.userType = "premium";
 
-        if (isRunPayment) {
-          print("object");
-          print("payment");
-          controller.loader.value = true;
-          CreateAdvertisementController createAdvertisementController =
-              Get.put(CreateAdvertisementController());
-          print(createAdvertisementController.titleController.text);
-          createAdvertisementController.uploadImageApi();
-          isRunPayment = false;
-          controller.loader.value = false;
-        }
+
         controller.loader.value = false;
         loader.value = false;
       }

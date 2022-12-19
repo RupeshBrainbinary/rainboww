@@ -79,43 +79,13 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                     padding: const EdgeInsets.only(left: 15),
                     child: Align(
                       alignment: Alignment.topLeft,
-                      child: IconButton(
-                        onPressed: () {
-                          AdvertisementController advertisementController =
-                              Get.put(AdvertisementController());
-                          advertisementController.onBottomBarChange(0);
-                          Get.offAll(() => AdvertisementDashBord());
-                          // // AdHomeController adHomeController = Get.find();
-                          // // adHomeController.update(["more"]);
-                          // // // Get.deleteAll();
-                          // // AdvertisementController advertisementController =
-                          // //     Get.put(AdvertisementController());
-                          // // advertisementController.init();
-                          // // advertisementController.onBottomBarChange(0);
-                   
-                   
-                   
-                   
-                          // // advertisementController.update(['bottom_bar']);
-                          // // adHomeController.init();
-                          // // Get.offAll(() => AdvertisementDashBord());
-                          // // Get.reload();
-                          // .
-                          // setState(() async {
-                          //   Get.offAll(() => AdvertisementDashBord());
-                          //   AdvertisementController advertisementController =
-                          //       Get.put(AdvertisementController());
-                          //   advertisementController.onBottomBarChange(0);
-                          //   advertisementController.update(['bottom_bar']);
-                          //   final AdHomeController adHomeController =
-                          //       Get.put(AdHomeController());
-                          //   await adHomeController.refreshCode();
-                          //   adHomeController.update(['more']);
-                          //   adHomeController.update(['list']);
-                          // });
-                        },
-                        icon: const Icon(Icons.arrow_back_ios),
-                      ),
+                      child:GestureDetector(onTap: () {
+                        AdvertisementController advertisementController =
+                        Get.put(AdvertisementController());
+                        advertisementController.onBottomBarChange(0);
+                        Get.offAll(() => AdvertisementDashBord());
+                      },
+                          child: Image.asset(AssetRes.backIcon,height: 16,width: 35,)),
                     ),
                   ),
                   SizedBox(
@@ -228,10 +198,15 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                   SizedBox(height: Get.height * 0.0714),
                   SubmitButton(
                     onTap: () async {
+                      adHomeController.page = 1;
+                      adHomeController.myAdList = [];
+                      adHomeController.update();
                       AdvertisementController advertisementController =
                           Get.put(AdvertisementController());
                       advertisementController.onBottomBarChange(0);
                       Get.offAll(() => AdvertisementDashBord());
+
+
                       // setState(() async {
                       //   Get.offAll(() => AdvertisementDashBord());
                       //   AdvertisementController advertisementController =
