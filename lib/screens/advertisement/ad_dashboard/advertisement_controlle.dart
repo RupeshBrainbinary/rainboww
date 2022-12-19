@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 
 import 'package:rainbow_new/common/helper.dart';
 import 'package:rainbow_new/common/popup.dart';
+import 'package:rainbow_new/model/notification_model.dart';
+import 'package:rainbow_new/model/notification_on_off_model.dart';
+import 'package:rainbow_new/model/notofication_data_model.dart';
 import 'package:rainbow_new/screens/Home/settings/notificationOnOff_api/notification_on_off_api.dart';
 import 'package:rainbow_new/screens/account_Information/account_Information_screen.dart';
 import 'package:rainbow_new/screens/account_Information/account_information_controller.dart';
@@ -39,6 +42,7 @@ class AdvertisementController extends GetxController {
   }
 
   void init(){
+    notificationGetData();
     key = GlobalKey<ScaffoldState>();
   }
 
@@ -110,12 +114,13 @@ class AdvertisementController extends GetxController {
 
     update(["settings"]);
   }
-
+  NotificationOnOffModel notificationOnOffModel = NotificationOnOffModel();
   Future<void> notificationOnOffApi() async {
     try {
       loader.value = true;
       if (isSwitched == false) {
         PrefService.setValue(PrefKeys.notification, false);
+
         await NotificationOnOffApi.notificationOff();
       } else {
         PrefService.setValue(PrefKeys.notification, true);
@@ -128,7 +133,20 @@ class AdvertisementController extends GetxController {
       loader.value = false;
     }
   }
+  NotificationDataModel notificationModel = NotificationDataModel();
+  Future<void> notificationGetData() async {
+    try {
+      loader.value = true;
+      notificationModel = await NotificationOnOffApi.notificationGetData();
+      isSwitched = notificationModel.data == false ? false : true;
+      update(["switch"]);
 
+      loader.value = false;
+    } catch (e) {
+
+      loader.value = false;
+    }
+  }
   onTapNetwork() {
     errorToast("No internet connection");
   }

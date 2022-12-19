@@ -35,18 +35,38 @@ class RenewAdSetupDateController extends GetxController {
   TextEditingController amountController =
       TextEditingController(text: "\$3000.00");
 
-  rangSelect(start, end, range) {
+/*  rangSelect(start, end, range) {
     startTime = start;
-    endTime = end;
-    Duration diff = end.difference(start);
-    print(diff.inDays);
-    totalAmount = diff.inDays.toInt() * 10 + 10;
-    totalAmountApi = diff.inDays.toInt() * 1000 + 1000;
-    print(totalAmountApi);
-    print(totalAmount);
+    if(end!=null){
+      endTime = end;
+      Duration diff = end.difference(start);
+      print(diff.inDays);
+      totalAmount = diff.inDays.toInt() * 10 + 10;
+      totalAmount = diff.inDays.toInt() * 10 + 10;
+      totalAmountApi = diff.inDays.toInt() * 1000 + 1000;
+      print(totalAmountApi);
+      print(totalAmount);
+    }
     update(['selectC']);
     update(['range']);
+  }*/
+  rangSelect(start, end, range) {
+    startTime = start;
+    update(['range']);
+    update(['selectC']);
+    if (end != null) {
+      endTime = end;
+      Duration diff = end.difference(start);
+      print(diff.inDays);
+      totalAmount = diff.inDays.toInt() * 10 + 10;
+      totalAmountApi = diff.inDays.toInt() * 1000 + 1000;
+      print(totalAmountApi);
+      print(totalAmount);
+      update(['range']);
+      update(['selectC']);
+    }
   }
+
 
   PaymentAdvertiseModel paymentAdvertiseModel = PaymentAdvertiseModel();
   RenewAdModel renewAdModel = RenewAdModel();

@@ -33,12 +33,12 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //controller.viewCardApi();
 
-    return Scaffold(
-      body: Obx(() {
-        return Stack(
-          children: [
-            SafeArea(
-              child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Obx(() {
+          return Stack(
+            children: [
+              Container(
                 width: Get.width,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -475,20 +475,20 @@ class PaymentScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            controller.loader.value == true
-                ? Container(
-                    height: Get.height,
-                    width: Get.width,
-                    color: Colors.black.withOpacity(0.4),
-                  )
-                : const SizedBox(),
-            controller.loader.value == true
-                ? const FullScreenLoader()
-                : const SizedBox(),
-          ],
-        );
-      }),
+              controller.loader.value == true
+                  ? Container(
+                      height: Get.height,
+                      width: Get.width,
+                      color: Colors.black.withOpacity(0.4),
+                    )
+                  : const SizedBox(),
+              controller.loader.value == true
+                  ? const FullScreenLoader()
+                  : const SizedBox(),
+            ],
+          );
+        }),
+      ),
     );
   }
 }

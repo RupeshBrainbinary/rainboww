@@ -1,6 +1,7 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:charts_flutter/flutter.dart' as chart;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
@@ -76,6 +77,9 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     init();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Color(0xff50369C)
+    ));
     return Scaffold(
       body: Obx(
         () {
@@ -84,31 +88,29 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
               GetBuilder<AdHomeController>(
                 id: "add",
                 builder: (controller) {
-                  return SafeArea(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        width: Get.width,
-                        height: 790,
-                        decoration:  BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              ColorRes.color_50369C,
-                              ColorRes.color_50369C.withOpacity(0.98),
-                              ColorRes.colorD18EEE,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            top(i, context, id),
-                            Expanded(
-                                child: SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(),
-                                    child: bottom(context, i))),
+                  return SingleChildScrollView(
+                    child: Container(
+                      width: Get.width,
+                      height: 790,
+                      decoration:  BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            ColorRes.color_50369C,
+                            ColorRes.color_50369C.withOpacity(0.98),
+                            ColorRes.colorD18EEE,
                           ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
+                      ),
+                      child: Column(
+                        children: [
+                          top(i, context, id),
+                          Expanded(
+                              child: SingleChildScrollView(
+                                  physics: const BouncingScrollPhysics(),
+                                  child: bottom(context, i))),
+                        ],
                       ),
                     ),
                   );

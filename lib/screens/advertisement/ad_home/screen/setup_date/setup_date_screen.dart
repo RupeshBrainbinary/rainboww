@@ -770,7 +770,7 @@ class ShowBottomNext extends StatelessWidget {
                                     );
                                   })
                               : await createAdvertisementController
-                                  .uploadImageApi();
+                                  .onTapApiCalling();
 
                           // createAdvertisementController.loader.value = false;
                           //Get.to(() => PaymentSuccessfulScreen());

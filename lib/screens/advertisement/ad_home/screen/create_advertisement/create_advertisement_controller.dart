@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -15,8 +14,6 @@ import 'package:rainbow_new/common/uploadimage_api/uploadimage_model.dart';
 import 'package:rainbow_new/helper.dart';
 import 'package:rainbow_new/model/create_advertiser_model.dart';
 import 'package:rainbow_new/model/list_user_tag_model.dart';
-import 'package:rainbow_new/model/my_advertiser_model.dart';
-
 import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/advertisement_deatail/advertisement_deatail_screen.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/screen/create_advertisement/createadvertisement_api/createAdvertisement_api.dart';
@@ -184,6 +181,11 @@ class CreateAdvertisementController extends GetxController {
 
   UploadImage uploadImage = UploadImage();
 
+  Future<void> onTapApiCalling() async {
+    await uploadImageApi();
+    await addAdvertisement(imgIdList);
+  }
+
   Future<void> uploadImageApi() async {
     loader.value = true;
     try {
@@ -194,7 +196,7 @@ class CreateAdvertisementController extends GetxController {
         uploadImage = await UploadImageApi.postRegister(e.path);
         imgIdList.add(uploadImage.data!.id!);
       }
-      addAdvertisement(imgIdList);
+
       loader.value = true;
     } catch (e) {
       debugPrint(e.toString());

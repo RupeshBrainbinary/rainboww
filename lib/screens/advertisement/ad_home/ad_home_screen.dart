@@ -36,7 +36,6 @@ class _AdHomeScreenState extends State<AdHomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // adHomeController.myAdList.clear();
     // adHomeController.init();
@@ -50,9 +49,9 @@ class _AdHomeScreenState extends State<AdHomeScreen> {
     //adHomeController.init();
     //adHomeController.myAdvertiserListData();
 
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
           width: Get.width,
           //height: Get.height - 80,
           //padding: const EdgeInsets.only(left: 30,right: 30,top: 40),
