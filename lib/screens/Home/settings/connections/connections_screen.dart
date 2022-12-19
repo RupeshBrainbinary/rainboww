@@ -120,7 +120,7 @@ class ConnectionsScreen extends StatelessWidget {
           controller.requestUsers.isEmpty
               ? Center(
                   child: Text(
-                    "No FriendRequest",
+                    "No Friend Request",
                     style: gilroyMediumTextStyle(fontSize: 18),
                   ),
                 )

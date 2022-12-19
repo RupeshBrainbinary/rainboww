@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/loaders.dart';
 import 'package:rainbow_new/common/Widget/text_styles.dart';
+import 'package:rainbow_new/model/post_comment_list_model.dart';
 import 'package:rainbow_new/screens/Home/comments/comments_controller.dart';
 import 'package:rainbow_new/screens/Home/comments/widget/user_comment.dart';
 import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/strings.dart';
-
+PostCommentListModel postCommentListModelMirror = PostCommentListModel();
 class CommentScreen extends StatelessWidget {
   final String? idPost;
   final String? profileImage;
@@ -60,13 +61,14 @@ class CommentScreen extends StatelessWidget {
               return Obx(() {
                 return Stack(
                   children: [
-                    (controller.loader.value == true)
-                        ? Container(
-                            height: Get.height,
-                            width: Get.width,
-                            color: ColorRes.white,
-                          )
-                        : commentList(context),
+                    // (controller.loader.value == true)
+                    //     ? Container(
+                    //         // height: Get.height,
+                    //         // width: Get.width,
+                    //         // color: ColorRes.white,
+                    //       )
+                    //     :
+                    commentList(context),
                     controller.refreshLoader.isFalse && controller.loader.isTrue
                         ? const FullScreenLoaderWhiteBack()
                         : const SizedBox()
@@ -84,42 +86,85 @@ class CommentScreen extends StatelessWidget {
         Expanded(
           child: RefreshIndicator(
             onRefresh: () => controller.onRefreshCode(idPost.toString()),
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics(),
-              ),
-              padding: EdgeInsets.only(
-                  left: 19, right: 19, top: 12, bottom: Get.height * 0.1),
-              itemBuilder: (context, index) {
-                return userComment(
-                    image: controller
-                        .postCommentListModel.data![index].postCommentItem
-                        .toString(),
-                    description: controller
-                        .postCommentListModel.data![index].description
-                        .toString(),
-                    fullName: controller.postCommentListModel.data![index]
-                        .postCommentUser!.fullName
-                        .toString(),
-                    profileImage: controller.postCommentListModel.data![index]
-                        .postCommentUser!.profileImage
-                        .toString(),
-                    reply: controller
-                        .postCommentListModel.data![index].postCommentReply,
-                    commentId: controller.postCommentListModel.data![index].id
-                        .toString(),
-                    date:
-                        controller.postCommentListModel.data![index].createdAt);
-              },
-              separatorBuilder: (context, index) {
-                return Divider(
-                  color: ColorRes.black.withOpacity(0.6),
-                  height: 22,
-                );
-              },
-              itemCount: controller.postCommentListModel.data == null
-                  ? 0
-                  : controller.postCommentListModel.data!.length,
+            child: Stack(
+              children: [
+                controller.commloader.isTrue?
+                ListView.separated(
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  padding: EdgeInsets.only(
+                      left: 19, right: 19, top: 12, bottom: Get.height * 0.1),
+                  itemBuilder: (context, index) {
+                    return userComment(
+                        image:postCommentListModelMirror.data![index].postCommentItem
+                            .toString(),
+                        description:postCommentListModelMirror.data![index].description
+                            .toString(),
+                        fullName: postCommentListModelMirror.data![index]
+                            .postCommentUser!.fullName
+                            .toString(),
+                        profileImage: postCommentListModelMirror.data![index]
+                            .postCommentUser!.profileImage
+                            .toString(),
+                        reply:postCommentListModelMirror.data![index].postCommentReply,
+                        commentId: postCommentListModelMirror.data![index].id
+                            .toString(),
+                        date:
+                        postCommentListModelMirror.data![index].createdAt);
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      color: ColorRes.black.withOpacity(0.6),
+                      height: 22,
+                    );
+                  },
+                  itemCount: postCommentListModelMirror.data == null
+                      ? 0
+                      : postCommentListModelMirror.data!.length,
+                )
+                    :
+                ListView.separated(
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  padding: EdgeInsets.only(
+                      left: 19, right: 19, top: 12, bottom: Get.height * 0.1),
+                  itemBuilder: (context, index) {
+                    return userComment(
+                        image: controller
+                            .postCommentListModel.data![index].postCommentItem
+                            .toString(),
+                        description: controller
+                            .postCommentListModel.data![index].description
+                            .toString(),
+                        fullName: controller.postCommentListModel.data![index]
+                            .postCommentUser!.fullName
+                            .toString(),
+                        profileImage: controller.postCommentListModel.data![index]
+                            .postCommentUser!.profileImage
+                            .toString(),
+                        reply: controller
+                            .postCommentListModel.data![index].postCommentReply,
+                        commentId: controller.postCommentListModel.data![index].id
+                            .toString(),
+                        date:
+                            controller.postCommentListModel.data![index].createdAt);
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      color: ColorRes.black.withOpacity(0.6),
+                      height: 22,
+                    );
+                  },
+                  itemCount: controller.postCommentListModel.data == null
+                      ? 0
+                      : controller.postCommentListModel.data!.length,
+                ),
+                controller.refreshLoader.isFalse && controller.commloader.isTrue
+                    ? const FullScreenLoaderWhiteBack()
+                    : const SizedBox()
+              ],
             ),
           ),
         ),

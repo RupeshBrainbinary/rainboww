@@ -1458,7 +1458,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .friendPostListData[
                                                                   index]
                                                               .id
-                                                              .toString());
+                                                              .toString(),rout: "FullRefresh");
                                                   Get.to(() => CommentScreen(
                                                             idPost: controller
                                                                 .friendPostListData[

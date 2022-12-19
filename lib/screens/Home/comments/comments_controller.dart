@@ -12,11 +12,13 @@ import 'package:rainbow_new/common/uploadimage_api/uploadimage_model.dart';
 import 'package:rainbow_new/model/list_user_tag_model.dart';
 import 'package:rainbow_new/model/post_comment_list_model.dart';
 import 'package:rainbow_new/model/post_comment_model.dart';
+import 'package:rainbow_new/screens/Home/comments/comments_screen.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/Home/myPost_Api/my_post_api.dart';
 
 class CommentsController extends GetxController {
   RxBool loader = false.obs;
+  RxBool commloader = false.obs;
   TextEditingController msgController = TextEditingController();
   PostCommentModel postCommentModel = PostCommentModel();
   List<UserData> tagUserList = [];
@@ -102,17 +104,43 @@ class CommentsController extends GetxController {
 
   PostCommentListModel postCommentListModel = PostCommentListModel();
 
-  Future<void> commentPostListData({String? idPost}) async {
+
+
+  Future<void> commentPostListData({String? idPost,String? rout}) async {
     try {
-      loader.value = true;
+      if(rout== "FullRefresh"){
+
+        loader.value = true;
+      }
+      if(rout== "NFullRefresh"){
+
+        commloader.value = true;
+      }
+
       postCommentListModel = await MyPostApi.commentPostListApi(idPost!);
+
       if (kDebugMode) {
         print(postCommentListModel);
       }
       update(['home']);
-      loader.value = false;
+      if(rout== "FullRefresh"){
+
+        loader.value = false;
+      }
+      if(rout== "NFullRefresh"){
+
+        commloader.value = false;
+      }
+      postCommentListModelMirror = postCommentListModel;
     } catch (e) {
-      loader.value = false;
+      if(rout== "FullRefresh"){
+
+        loader.value = false;
+      }
+      if(rout== "NFullRefresh"){
+
+        commloader.value = false;
+      }
       debugPrint(e.toString());
     }
   }
@@ -126,14 +154,14 @@ class CommentsController extends GetxController {
   }
 
   Future<void> uploadImageApi() async {
-    loader.value = true;
+    commloader.value = true;
     try {
       await UploadImageApi.postRegister(imageForCamera!.path.toString()).then(
         (value) => uploadImage = value!,
       );
-      loader.value = false;
+      commloader.value = false;
     } catch (e) {
-      loader.value = false;
+      commloader.value = false;
       debugPrint(e.toString());
     }
   }
@@ -163,7 +191,7 @@ class CommentsController extends GetxController {
 
   Future<void> commentPostData(BuildContext context, String idPost) async {
     try {
-      loader.value = true;
+      commloader.value = true;
       List<Map<String, dynamic>> list = tagUserList
           .map<Map<String, dynamic>>((e) => {
                 "id_user": e.id.toString(),
@@ -195,16 +223,16 @@ class CommentsController extends GetxController {
       uploadImage.data = null;
       imageForCamera = null;
 
-      await commentPostListData(idPost: idPost);
+      await commentPostListData(idPost: idPost,rout: "NFullRefresh");
       await homeController.friendPostDataWithOutPagination();
 
       homeController.update(["home"]);
       update(['commentPost']);
 
-      loader.value = false;
+      commloader.value = false;
     } catch (e) {
       debugPrint(e.toString());
-      loader.value = false;
+      commloader.value = false;
     }
   }
 
