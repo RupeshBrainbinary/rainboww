@@ -277,15 +277,21 @@ class SubscriptionScreen extends StatelessWidget {
               SizedBox(
                 width: Get.width * 0.05,
               ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Get.back();
                 },
-                child: Image.asset(
-                  AssetRes.backIcon,
-                  height: 16,
-                  width: 16,
-                  color: Colors.white,
+                child: Container(
+                  height: 22,
+                  width: 22,
+
+                  padding : EdgeInsets.all(3),
+                  child: Image.asset(
+                    AssetRes.backIcon,
+
+
+                    color: Colors.white,
+                  ),
                 ),
               ),
               SizedBox(

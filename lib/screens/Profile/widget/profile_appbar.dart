@@ -64,8 +64,8 @@ Widget profileAppbar(
               },
               child: Container(
                 padding: const EdgeInsets.all(7),
-                height: 30,
-                width: 30,
+                height: 40,
+                width: 40,
                 child: Image.asset(
                   AssetRes.backIcon,
                   height: 15,

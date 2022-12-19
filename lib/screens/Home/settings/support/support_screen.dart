@@ -29,6 +29,7 @@ class SupportScreen extends StatelessWidget {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
+
                   ColorRes.color_50369C,
                   ColorRes.color_50369C,
                   ColorRes.colorD18EEE,
@@ -97,21 +98,20 @@ class SupportScreen extends StatelessWidget {
               SizedBox(
                 width: Get.width * 0.05,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: Get.width * 0.05),
-                child: GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: SizedBox(
-                    height: 15,
-                    width: 9,
-                    child: Image.asset(
-                      AssetRes.backIcon,
-                      height: 16,
-                      width: 35,
-                      color: Colors.white,
-                    ),
+              InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  height: 22,
+                  width: 22,
+
+                  padding : EdgeInsets.all(3),
+                  child: Image.asset(
+                    AssetRes.backIcon,
+
+
+                    color: Colors.white,
                   ),
                 ),
               ),

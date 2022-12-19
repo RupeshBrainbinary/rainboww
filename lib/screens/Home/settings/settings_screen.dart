@@ -90,21 +90,25 @@ class SettingsScreen extends StatelessWidget {
           ),
           Stack(
             children: [
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: Get.width * 0.05),
                   child: Container(
-                    height: 15,
+                    height: 25,
                     width: 35,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                      image: AssetImage(
-                        AssetRes.backIcon,
-                      ),
-                    )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Image.asset(AssetRes.backIcon),
+                    ),
+                    // decoration: const BoxDecoration(
+                    //     image: DecorationImage(
+                    //   image: AssetImage(
+                    //     AssetRes.backIcon,
+                    //   ),
+                    // )),
                   ),
                 ),
               ),
