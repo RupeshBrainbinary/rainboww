@@ -64,7 +64,7 @@ class SplashScreen extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(
                               left: 15, top: Get.height * 0.1, right: 15),
-                          child: InkWell(
+                          child: GestureDetector(
                             onTap: controller.onSkipTap,
                             child: Text(
                               "Skip",

@@ -193,12 +193,12 @@ class AccountInformationController extends GetxController {
       }
     }*/
     for (int i = 0; i < listCountryModel.data!.length; i++) {
-      if (listCountryModel.data![i].name == countryController.text) {
+      if (listCountryModel.data![i].name == countryController.text.trim()) {
         idCountry = listCountryModel.data![i].id.toString();
       }
     }
     for (int i = 0; i < listCountryModel.data!.length; i++) {
-      if (listCountryModel.data![i].name == companyCountryController.text) {
+      if (listCountryModel.data![i].name == companyCountryController.text.trim()) {
         idCompanyCountry = listCountryModel.data![i].id.toString();
       }
     }

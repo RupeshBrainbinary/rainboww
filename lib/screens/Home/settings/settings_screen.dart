@@ -243,7 +243,7 @@ class SettingsScreen extends StatelessWidget {
 
             homeController.viewProfile.data?.userType == "free"
                 ? premiumPopUpBox(context: context)
-                : Get.off(() => MessageScreen(
+                : Get.to(() => MessageScreen(
                       backArrow: true,
                     ));
           },
