@@ -143,6 +143,7 @@ class ViewStoryController extends GetxController {
       filterList = [];
       update(['createStory']);
     }
+    update(['createStory']);
   }
 
   void onTagTap(UserData userData) {
