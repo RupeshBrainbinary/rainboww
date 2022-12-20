@@ -110,12 +110,12 @@ class CreateAdvertisementScreen extends StatelessWidget {
                 child: Image.asset(
                   AssetRes.backIcon,
                   height: 16,
-                  width: 16,
+                  width: 35,
                   color: Colors.white,
                 ),
               ),
               SizedBox(
-                width: Get.width * 0.22,
+                width: Get.width * 0.19,
               ),
               GestureDetector(
                 onTap: () {

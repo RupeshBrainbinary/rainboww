@@ -226,7 +226,7 @@ class _AdvanceSearchScreenState extends State<AdvanceSearchScreen> {
                   child: Image.asset(
                     AssetRes.backIcon,
                     height: 16,
-                    width: 16,
+                    width: 35,
                     color: Colors.white,
                   ),
                 ),

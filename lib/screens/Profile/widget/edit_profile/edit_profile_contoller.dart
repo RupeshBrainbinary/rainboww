@@ -83,6 +83,7 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> init() async {
+    getCountryNation();
     await determinePosition();
     position = await getCurrentPosition();
     setInitData();

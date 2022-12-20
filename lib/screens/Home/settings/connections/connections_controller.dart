@@ -76,7 +76,7 @@ class ConnectionsController extends GetxController {
   }
 
   Future<void> callRequestApi() async {
-    loader.value = true;
+   /* loader.value = true;*/
     RequestUserModel? model = await ConnectionApi.getRequestList();
     if (model != null) {
       requestUsers = model.data ?? [];

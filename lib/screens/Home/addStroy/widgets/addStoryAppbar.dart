@@ -21,12 +21,12 @@ Widget addStoryAppBar(AddStoryController controller) {
           child: Image.asset(
             AssetRes.backIcon,
             height: 16,
-            width: 16,
+            width: 35,
             color: Colors.black,
           ),
         ),
         SizedBox(
-          width: Get.width * 0.3,
+          width: Get.width * 0.28,
         ),
         Text(
           Strings.addToStory,
