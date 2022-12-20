@@ -381,25 +381,32 @@ class HomeController extends GetxController {
   }
 
   Future<void> init() async {
-    /*   changeLoader(true);*/
-    await checkUserConnection();
-    await viewProfileApi();
-    await friendPostData();
-    await onStory();
-    await advertisementListUser();
     PaymentController paymentController = Get.put(PaymentController());
+
+    await friendPostData();
+    await friendPostDataWithOutPagination();
+    await onStory();
+    /*   changeLoader(true);*/
+    checkUserConnection();
+    // without loder
+    await viewProfileApi();
+    // with loder
+
+    // without loder
+    await advertisementListUser();
     paymentController.transactionApi();
     await paymentController.listCardApi(showToast: false);
     paymentController.listCardModel.data?.length == null
         ? viewProfile.data!.userType = "free"
         : viewProfile.data!.userType = "premium";
-    await getCurrentLocation();
+     getCurrentLocation();
     await controller.viewProfileDetails();
 
     countryName();
     countryNationalites();
+    // without loder
     await getNotifications();
-    await friendPostDataWithOutPagination();
+
     await connectionsController.callRequestApi();
     /*  changeLoader(false);*/
   }
@@ -426,11 +433,11 @@ class HomeController extends GetxController {
   }
 
   Future<void> getNotifications() async {
-    loader.value = true;
+ /*   loader.value = true;*/
     notificationModel = await NotificationApi.getNotificationList();
 
     update(['notification_badge']);
-    loader.value = false;
+   /* loader.value = false;*/
   }
 
   Future<void> onRefresh() async {
@@ -529,12 +536,12 @@ class HomeController extends GetxController {
 
   Future<void> viewProfileApi() async {
     try {
-      loader.value = true;
+     /* loader.value = true;*/
       viewProfile = await ViewProfileApi.postRegister();
       controller.update(["settings"]);
-      loader.value = false;
+      /*loader.value = false;*/
     } catch (e) {
-      loader.value = false;
+     /* loader.value = false;*/
     }
   }
 
@@ -543,13 +550,13 @@ class HomeController extends GetxController {
 
   Future<void> advertisementListUser() async {
     try {
-      loader.value = true;
+  /*    loader.value = true;*/
       advertisementListUserModel =
           await AdvertiseListUser.advertiseListUserApi();
       update(["settings"]);
-      loader.value = false;
+    /*  loader.value = false;*/
     } catch (e) {
-      loader.value = false;
+      /*loader.value = false;*/
     }
   }
 }
