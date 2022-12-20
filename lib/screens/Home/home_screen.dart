@@ -51,241 +51,250 @@ class _HomeScreenState extends State<HomeScreen> {
     controller.advertisementListUser();
 
     return Obx(() {
-      return Stack(
-        children: [
-          GetBuilder<HomeController>(
-            id: "home",
-            builder: (controller) {
-              return Scaffold(
-                backgroundColor: Colors.white,
-                appBar: AppBar(
+      return SafeArea(
+        child: Stack(
+          children: [
+            GetBuilder<HomeController>(
+              id: "home",
+              builder: (controller) {
+                return Scaffold(
                   backgroundColor: Colors.white,
-                  elevation: 0,
-                  actions: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width * 0.02,
-                          ),
-                          const Image(
-                            image: AssetImage(AssetRes.locate),
-                            height: 19.25,
-                            width: 19.25,
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.02,
-                          ),
-                          controller.addCity == null
-                              ? const SizedBox()
-                              : Text(
-                                  "${controller.addCity ?? ""}, ${controller.addCountry ?? ""}",
-                                  style: gilroyBoldTextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                          const Spacer(),
-                          const SizedBox(width: 10),
-                          GetBuilder<HomeController>(
-                              id: "network",
-                              builder: (homeController) {
-                                homeController.checkUserConnection();
-                                return GestureDetector(
-                                  onTap: homeController.activeConnection ==
-                                          false
-                                      ? () {
-                                          errorToast("No internet connection");
-                                        }
-                                      : () {
-                                          controller.onTapSetting();
-                                        },
-                                  child: const Image(
-                                    image: AssetImage(
-                                      AssetRes.settings,
-                                    ),
-                                    height: 19.35,
-                                    width: 19.35,
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    actions: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.02,
+                            ),
+                            const Image(
+                              image: AssetImage(AssetRes.locate),
+                              height: 19.25,
+                              width: 19.25,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.02,
+                            ),
+                            controller.addCity == null
+                                ? const SizedBox()
+                                : Text(
+                                    "${controller.addCity ?? ""}, ${controller.addCountry ?? ""}",
+                                    style: gilroyBoldTextStyle(
+                                        color: Colors.black, fontSize: 16),
                                   ),
-                                );
-                              }),
-                          SizedBox(
-                            width: Get.width * 0.04,
-                          ),
-                          GetBuilder<HomeController>(
-                              id: "network",
-                              builder: (homeController) {
-                                homeController.checkUserConnection();
-                                return InkWell(
-                                  onTap: homeController.activeConnection ==
-                                          false
-                                      ? () {
-                                          errorToast("No internet connection");
-                                        }
-                                      : () {
-                                          controller.onNotyIconBtnTap(
-                                              context: context);
-                                        },
-                                  child: Stack(
-                                    children: [
-                                      const SizedBox(
-                                        height: 25,
-                                        width: 25,
+                            const Spacer(),
+                            const SizedBox(width: 10),
+                            GetBuilder<HomeController>(
+                                id: "network",
+                                builder: (homeController) {
+                                  homeController.checkUserConnection();
+                                  return GestureDetector(
+                                    onTap:
+                                        homeController.activeConnection == false
+                                            ? () {
+                                                errorToast(
+                                                    "No internet connection");
+                                              }
+                                            : () {
+                                                controller.onTapSetting();
+                                              },
+                                    child: const Image(
+                                      image: AssetImage(
+                                        AssetRes.settings,
                                       ),
-                                      const Positioned(
-                                        bottom: 0,
-                                        left: 0,
-                                        child: SizedBox(
-                                          height: 20,
-                                          width: 20,
-                                          child: Image(
-                                            image: AssetImage(AssetRes.notify),
+                                      height: 19.35,
+                                      width: 19.35,
+                                    ),
+                                  );
+                                }),
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            GetBuilder<HomeController>(
+                                id: "network",
+                                builder: (homeController) {
+                                  homeController.checkUserConnection();
+                                  return InkWell(
+                                    onTap:
+                                        homeController.activeConnection == false
+                                            ? () {
+                                                errorToast(
+                                                    "No internet connection");
+                                              }
+                                            : () {
+                                                controller.onNotyIconBtnTap(
+                                                    context: context);
+                                              },
+                                    child: Stack(
+                                      children: [
+                                        const SizedBox(
+                                          height: 25,
+                                          width: 25,
+                                        ),
+                                        const Positioned(
+                                          bottom: 0,
+                                          left: 0,
+                                          child: SizedBox(
                                             height: 20,
                                             width: 20,
+                                            child: Image(
+                                              image:
+                                                  AssetImage(AssetRes.notify),
+                                              height: 20,
+                                              width: 20,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Positioned(
-                                        top: 0,
-                                        right: 0,
-                                        child: GetBuilder<HomeController>(
-                                          id: 'notification_badge',
-                                          builder: (controller) {
-                                            return homeController
-                                                            .notificationModel ==
-                                                        null ||
-                                                    homeController
-                                                            .notificationModel
-                                                            ?.pendingCount
-                                                            .toString() ==
-                                                        'null' ||
-                                                    homeController
+                                        Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: GetBuilder<HomeController>(
+                                            id: 'notification_badge',
+                                            builder: (controller) {
+                                              return homeController
+                                                              .notificationModel ==
+                                                          null ||
+                                                      homeController
+                                                              .notificationModel
+                                                              ?.pendingCount
+                                                              .toString() ==
+                                                          'null' ||
+                                                      homeController
+                                                              .notificationModel!
+                                                              .pendingCount
+                                                              .toString() ==
+                                                          "0"
+                                                  ? const SizedBox()
+                                                  : Container(
+                                                      height: 16,
+                                                      width: 16,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color: ColorRes
+                                                                  .colorFF6B97),
+                                                      child: Text(
+                                                        controller
                                                             .notificationModel!
                                                             .pendingCount
-                                                            .toString() ==
-                                                        "0"
-                                                ? const SizedBox()
-                                                : Container(
-                                                    height: 16,
-                                                    width: 16,
-                                                    alignment: Alignment.center,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            color: ColorRes
-                                                                .colorFF6B97),
-                                                    child: Text(
-                                                      controller
-                                                          .notificationModel!
-                                                          .pendingCount
-                                                          .toString(),
-                                                      style: const TextStyle(
-                                                        color: ColorRes.white,
-                                                        fontSize: 8,
-                                                        fontWeight:
-                                                            FontWeight.w800,
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                          color: ColorRes.white,
+                                                          fontSize: 8,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                          },
+                                                    );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }),
-                          SizedBox(
-                            width: Get.width * 0.05,
-                          ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                            SizedBox(
+                              width: Get.width * 0.05,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  body: Container(
+                    height: Get.height,
+                    width: Get.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          ColorRes.color_50369C,
+                          ColorRes.colorD18EEE,
                         ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
-                    )
-                  ],
-                ),
-                body: Container(
-                  height: Get.height,
-                  width: Get.width,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        ColorRes.color_50369C,
-                        ColorRes.colorD18EEE,
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                    ),
+                    child: RefreshIndicator(
+                      onRefresh: () => controller.onRefresh(),
+                      child: latestFeed(),
                     ),
                   ),
-                  child: RefreshIndicator(
-                    onRefresh: () => controller.onRefresh(),
-                    child: latestFeed(),
+                  floatingActionButton: GetBuilder<HomeController>(
+                    id: "home",
+                    builder: (controller) {
+                      return Stack(
+                        children: [
+                          GetBuilder<HomeController>(
+                              id: "network",
+                              builder: (homeController) {
+                                homeController.checkUserConnection();
+                                return FloatingActionButton(
+                                  child: Image.asset(
+                                    AssetRes.add,
+                                    height: 24,
+                                    width: 24,
+                                  ),
+                                  onPressed: homeController.activeConnection ==
+                                          false
+                                      ? () {
+                                          errorToast("No internet connection");
+                                        }
+                                      : () async {
+                                          //premiumPopUpBox(context: context);
+                                          viewStoryController.resetAllData();
+                                          // if user have not subcription show pop up
+                                          controller.viewProfile.data!
+                                                      .userType ==
+                                                  "free"
+                                              ? premiumPopUpBox(
+                                                  context: context)
+                                              : await Get.to(() => StoryScreen(
+                                                        image: controller
+                                                            .controller
+                                                            .viewProfile
+                                                            .data!
+                                                            .profileImage
+                                                            .toString(),
+                                                      ))!
+                                                  .then((value) {
+                                                  if (value == true) {
+                                                    Future.delayed(
+                                                            const Duration(
+                                                                seconds: 1))
+                                                        .then((value) async {
+                                                      await controller
+                                                          .friendPostDataWithOutPagination(
+                                                        pageLength: controller
+                                                                .friendPostListData
+                                                                .length +
+                                                            1,
+                                                      );
+                                                    });
+                                                  }
+                                                });
+                                        },
+                                );
+                              }),
+                          /*  subscribePopUp==true?Positioned(bottom: 0,
+                              child: Image.asset(AssetRes.lockSub,height: 18,width: 18,)):const SizedBox()*/
+                        ],
+                      );
+                    },
                   ),
-                ),
-                floatingActionButton: GetBuilder<HomeController>(
-                  id: "home",
-                  builder: (controller) {
-                    return Stack(
-                      children: [
-                        GetBuilder<HomeController>(
-                            id: "network",
-                            builder: (homeController) {
-                              homeController.checkUserConnection();
-                              return FloatingActionButton(
-                                child: Image.asset(
-                                  AssetRes.add,
-                                  height: 24,
-                                  width: 24,
-                                ),
-                                onPressed: homeController.activeConnection ==
-                                        false
-                                    ? () {
-                                        errorToast("No internet connection");
-                                      }
-                                    : () async {
-                                        //premiumPopUpBox(context: context);
-                                        viewStoryController.resetAllData();
-                                        // if user have not subcription show pop up
-                                        controller.viewProfile.data!.userType ==
-                                                "free"
-                                            ? premiumPopUpBox(context: context)
-                                            : await Get.to(() => StoryScreen(
-                                                      image: controller
-                                                          .controller
-                                                          .viewProfile
-                                                          .data!
-                                                          .profileImage
-                                                          .toString(),
-                                                    ))!
-                                                .then((value) {
-                                                if (value == true) {
-                                                  Future.delayed(const Duration(
-                                                          seconds: 1))
-                                                      .then((value) async {
-                                                    await controller
-                                                        .friendPostDataWithOutPagination(
-                                                      pageLength: controller
-                                                              .friendPostListData
-                                                              .length +
-                                                          1,
-                                                    );
-                                                  });
-                                                }
-                                              });
-                                      },
-                              );
-                            }),
-                        /*  subscribePopUp==true?Positioned(bottom: 0,
-                            child: Image.asset(AssetRes.lockSub,height: 18,width: 18,)):const SizedBox()*/
-                      ],
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-          controller.loader.isTrue
-              ? const FullScreenLoader()
-              : const SizedBox(),
-          //  controller.premiumBox.isTrue ? Center(child: premiumPopUpBox(context: context)):const SizedBox(),
-        ],
+                );
+              },
+            ),
+            controller.loader.isTrue
+                ? const FullScreenLoader()
+                : const SizedBox(),
+            //  controller.premiumBox.isTrue ? Center(child: premiumPopUpBox(context: context)):const SizedBox(),
+          ],
+        ),
       );
     });
   }
@@ -1004,10 +1013,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                connectionsProfileController.callApi(controller
-                                    .friendPostListData[index].postUser!.id
-                                    .toString());
+                              onTap: () async {
+                                homeController.loader.value = true;
+                                await connectionsProfileController.callApi(
+                                    controller
+                                        .friendPostListData[index].postUser!.id
+                                        .toString());
+                                homeController.loader.value = false;
                                 Get.to(() => ConnectionsProfileScreen(
                                       show2: true,
                                     ))?.then((value) {
@@ -1460,7 +1472,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .friendPostListData[
                                                                   index]
                                                               .id
-                                                              .toString(),rout: "FullRefresh");
+                                                              .toString(),
+                                                          rout: "FullRefresh");
                                                   Get.to(() => CommentScreen(
                                                             idPost: controller
                                                                 .friendPostListData[
