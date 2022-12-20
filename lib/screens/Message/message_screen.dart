@@ -429,7 +429,7 @@ class MessageScreen extends StatelessWidget {
                                                                 const EdgeInsets
                                                                         .symmetric(
                                                                     vertical:
-                                                                        2),
+                                                                       7),
                                                             child: Row(
                                                               children: [
                                                                 const SizedBox(
