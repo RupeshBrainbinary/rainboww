@@ -349,7 +349,7 @@ class StoryScreen extends StatelessWidget {
                     } else {
                       return Container(
                         constraints: const BoxConstraints(
-                            maxHeight: 200 - 20 - 50, minHeight: 30),
+                            maxHeight: 200 - 20 - 50, minHeight: 0),
                         // height: 200,
                         width: Get.width,
                         decoration: BoxDecoration(

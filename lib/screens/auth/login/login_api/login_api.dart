@@ -146,8 +146,6 @@ class LoginApi {
         errorToast(jsonDecode(response.body)["message"]);
       }
     } catch (e) {
-
-
       return loginModelFromJson('');
     }
   }
