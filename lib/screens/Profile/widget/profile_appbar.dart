@@ -62,14 +62,9 @@ Widget profileAppbar(
                }
 
               },
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                height: 40,
-                width: 40,
-                child: Image.asset(
-                  AssetRes.backIcon,
-                  height: 15,
-                ),
+              child: Image.asset(
+                AssetRes.backIcon,
+                height: 16,width: 35,
               ),
             ),
             const Spacer(),

@@ -281,7 +281,7 @@ class SubscriptionPaymentScreen extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width:26,
+                width:12,
               ),
               GestureDetector(
                 onTap: () {

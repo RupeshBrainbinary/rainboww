@@ -88,7 +88,7 @@ class TermsConditionsScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: GestureDetector(
                       onTap: () async {
-                        homeController.init();
+                       /* homeController.init();*/
                         await PrefService.setValue(
                             PrefKeys.showTermsCondition, false);
 

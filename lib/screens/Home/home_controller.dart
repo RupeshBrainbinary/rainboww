@@ -383,15 +383,15 @@ class HomeController extends GetxController {
   Future<void> init() async {
     PaymentController paymentController = Get.put(PaymentController());
 
-
+    await friendPostData();
+    await friendPostDataWithOutPagination();
+    await onStory();
     /*   changeLoader(true);*/
     await checkUserConnection();
     // without loder
     await viewProfileApi();
     // with loder
-    await friendPostData();
-    await friendPostDataWithOutPagination();
-    await onStory();
+
     // without loder
     await advertisementListUser();
     paymentController.transactionApi();
@@ -536,12 +536,12 @@ class HomeController extends GetxController {
 
   Future<void> viewProfileApi() async {
     try {
-      loader.value = true;
+      /*loader.value = true;*/
       viewProfile = await ViewProfileApi.postRegister();
       controller.update(["settings"]);
-      loader.value = false;
+     /* loader.value = false;*/
     } catch (e) {
-      loader.value = false;
+      /*loader.value = false;*/
     }
   }
 
@@ -550,13 +550,13 @@ class HomeController extends GetxController {
 
   Future<void> advertisementListUser() async {
     try {
-      loader.value = true;
+      /*loader.value = true;*/
       advertisementListUserModel =
           await AdvertiseListUser.advertiseListUserApi();
       update(["settings"]);
-      loader.value = false;
+     /* loader.value = false;*/
     } catch (e) {
-      loader.value = false;
+   /*   loader.value = false;*/
     }
   }
 }

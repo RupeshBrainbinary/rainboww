@@ -47,8 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
       Get.put(NotificationsController());
 
   @override
-  Widget build(BuildContext context) {
+  @override
+  void initState() {
+    controller.init();
     controller.advertisementListUser();
+    super.initState();
+  }
+  Widget build(BuildContext context) {
+
+
 
     return Obx(() {
       return SafeArea(

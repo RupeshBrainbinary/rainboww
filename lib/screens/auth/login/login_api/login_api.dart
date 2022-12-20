@@ -80,7 +80,7 @@ class LoginApi {
 
               HomeController homeController = Get.put(HomeController());
 
-              homeController.init();
+            /*  homeController.init();*/
 
               flutterToast(jsonDecode(response.body)["message"]);
 
@@ -111,7 +111,7 @@ class LoginApi {
             } else {
               // flutterToast(jsonDecode(response.body)["message"]);
               HomeController homeController = Get.put(HomeController());
-              await homeController.init();
+           /*   await homeController.init();*/
 
               flutterToast(jsonDecode(response.body)["message"]);
 
