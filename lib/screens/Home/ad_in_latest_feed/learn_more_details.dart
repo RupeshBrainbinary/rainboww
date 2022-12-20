@@ -18,28 +18,7 @@ class LearnMoreDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorRes.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: InkWell(
-          onTap: () {
-            Get.back();
-          },
-          child: const Icon(
-            Icons.chevron_left_outlined,
-            color: ColorRes.black,
-            size: 25,
-          ),
-        ),
-        title: Text(
-          "Details",
-          style: beVietnamProBoldTextStyle(
-            color: ColorRes.black,
-            fontSize: 16,
-          ),
-        ),
-      ),
+
       body: Container(
         height: Get.height,
         width: Get.width,
@@ -48,6 +27,7 @@ class LearnMoreDetails extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
+              appBar(context),
               const Divider(
                 thickness: 1,
                 color: Colors.grey,
@@ -259,6 +239,45 @@ class LearnMoreDetails extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+  Widget appBar(BuildContext context) {
+    return Container(
+      width: Get.width,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 40,
+          ),
+          Stack(
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(left: Get.width * 0.05),
+                  child: Container(
+                    height: 25,
+                    width: 35,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Image.asset(AssetRes.backIcon,color: Colors.black,),
+                    ),
+
+                  ),
+                ),
+              ),
+              Center(
+                child: Text(
+                 "Details",
+                  style: gilroyBoldTextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
