@@ -1430,12 +1430,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       controller.share(controller
                                           .friendPostListData[index].id
                                           .toString());
-                                      /*    controller.sharePostData(
+                                          controller.sharePostData(
                                                   controller
                                                       .friendPostViewModel
                                                       .data![index]
                                                       .id
-                                                      .toString());*/
+                                                      .toString());
                                     },
                                     child: const SizedBox(
                                         height: 18,
