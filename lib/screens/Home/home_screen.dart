@@ -54,9 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
   Widget build(BuildContext context) {
-
-
-
     return Obx(() {
       return SafeArea(
         child: Stack(

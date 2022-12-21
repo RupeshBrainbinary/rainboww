@@ -93,8 +93,7 @@ class CommentScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
-                  padding: EdgeInsets.only(
-                      left: 19, right: 19, top: 12, bottom: Get.height * 0.1),
+                  padding: EdgeInsets.zero,
                   itemBuilder: (context, index) {
                     return userComment(
                         image:postCommentListModelMirror.data![index].postCommentItem
@@ -129,7 +128,7 @@ class CommentScreen extends StatelessWidget {
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
                   padding: EdgeInsets.only(
-                      left: 19, right: 19, top: 12, bottom: Get.height * 0.1),
+                      left: 19, right: 19, top: 12,),
                   itemBuilder: (context, index) {
                     return userComment(
                         image: postCommentListModel.data![index].postCommentItem

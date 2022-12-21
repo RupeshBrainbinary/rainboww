@@ -110,7 +110,9 @@ class LoginApi {
                 PrefKeys.loginRole, jsonDecode(response.body)["data"]["role"]);
 
             // flutterToast(jsonDecode(response.body)["message"]);
-
+            if(jsonDecode(response.body)["data"]["mobile_status"]=="active"){
+              await PrefService.setValue(PrefKeys.isLogin, true);
+            }
             if (jsonDecode(response.body)["data"]["mobile_status"] ==
                 "pending") {
               advertiserVerifyController.phoneNumberRegister();

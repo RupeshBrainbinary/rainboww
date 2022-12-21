@@ -103,11 +103,14 @@ Widget userComment(
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          controller.timeAgo(date!),
-                          style: beVietnamProRegularTextStyle(
-                            fontSize: 10,
-                            color: ColorRes.color_959595,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            controller.timeAgo(date!),
+                            style: beVietnamProRegularTextStyle(
+                              fontSize: 10,
+                              color: ColorRes.color_959595,
+                            ),
                           ),
                         ),
                         InkWell(
@@ -189,155 +192,115 @@ Widget userComment(
                 )
               ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
             Align(
               alignment: Alignment.topRight,
               child: SizedBox(
                 width: Get.width * 0.717,
                 child: ListView.builder(
-                  shrinkWrap: true,
+                  shrinkWrap: true,padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: reply!.length,
                   itemBuilder: (context, index) {
                     return reply.isNotEmpty
-                        ? Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Column(
-                              children: [
-                                const Divider(
-                                  thickness: 0.5,
-                                  color: Colors.grey,
+                        ? Column(
+                          children: [
+                        /*    const Divider(
+                              thickness: 0.5,
+                              color: Colors.grey,
+                            ),
+                            const SizedBox(height: 10),*/
+                            Container(
+                              width: Get.width - 110,
+                              decoration: BoxDecoration(
+                                color:
+                                    ColorRes.color_959595.withOpacity(0.1),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15),
                                 ),
-                                const SizedBox(height: 10),
-                                Container(
-                                  width: Get.width - 110,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        ColorRes.color_959595.withOpacity(0.1),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(15),
-                                    ),
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 25,
+                              ),
+                              padding: const EdgeInsets.all(7),
+                              child: Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    reply[index]
+                                        .postCommentUser!
+                                        .fullName
+                                        .toString(),
+                                    style: beVietnamProMediumTextStyle(
+                                        color: ColorRes.black),
                                   ),
-                                  margin: const EdgeInsets.only(
-                                    left: 25,
+                                  /* Text(
+                                controller.timeAgo(reply[index].createdAt!),
+                                style: beVietnamProRegularTextStyle(
+                                  fontSize: 10,
+                                  color: ColorRes.color_959595,
+                                ),
+                              ),*/
+                                  const SizedBox(
+                                    height: 5,
                                   ),
-                                  padding: const EdgeInsets.all(7),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        reply[index]
-                                            .postCommentUser!
-                                            .fullName
-                                            .toString(),
-                                        style: beVietnamProMediumTextStyle(
-                                            color: ColorRes.black),
-                                      ),
-                                      /* Text(
-                                    controller.timeAgo(reply[index].createdAt!),
+                                  Text(
+                                    controller
+                                        .timeAgo(reply[index].createdAt!),
                                     style: beVietnamProRegularTextStyle(
                                       fontSize: 10,
                                       color: ColorRes.color_959595,
                                     ),
-                                  ),*/
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        controller
-                                            .timeAgo(reply[index].createdAt!),
-                                        style: beVietnamProRegularTextStyle(
-                                          fontSize: 10,
-                                          color: ColorRes.color_959595,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 7,
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          text: "",
-                                          style: beVietnamProRegularTextStyle(
-                                            color: ColorRes.themeColor,
-                                            fontSize: 12,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                              text: reply[index]
-                                                  .description
-                                                  .toString(),
-                                              style:
-                                                  beVietnamProRegularTextStyle(
-                                                fontSize: 12,
-                                                color: ColorRes.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      reply[index].postCommentItem.toString() ==
-                                              ""
-                                          ? const SizedBox()
-                                          : CachedNetworkImage(
-                                              imageUrl: reply[index]
-                                                  .postCommentItem
-                                                  .toString(),
-                                              height: 100,
-                                              width: 100,
-                                              fit: BoxFit.cover,
-                                              placeholder: ((context, url) =>
-                                                  Image.asset(AssetRes
-                                                      .placeholderImage)),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(Icons.error),
-                                            ),
-                                      /* reply[index].postCommentItem.toString() == ""
-                                          ? const SizedBox()
-                                          :  image == ""
-                                          ? const SizedBox()
-                                      : FadeInImage(
-                                        height: 100,
-                                        width: 100,
-                                        placeholder: const AssetImage(
-                                            AssetRes.placeholderImage),
-                                        image: NetworkImage(reply[index]
-                                            .postCommentItem
-                                            .toString()),
-                                        fit: BoxFit.cover,
-                                      ),*/
-                                    ],
                                   ),
-                                ),
-                                const SizedBox(height: 10),
-                                /* Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 30),
-                                    child: Text(
-                                      controller
-                                          .timeAgo(reply[index].createdAt!),
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      text: "",
                                       style: beVietnamProRegularTextStyle(
-                                        fontSize: 10,
-                                        color: ColorRes.color_959595,
+                                        color: ColorRes.themeColor,
+                                        fontSize: 12,
                                       ),
+                                      children: [
+                                        TextSpan(
+                                          text: reply[index]
+                                              .description
+                                              .toString(),
+                                          style:
+                                              beVietnamProRegularTextStyle(
+                                            fontSize: 12,
+                                            color: ColorRes.black,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),*/
-                                const SizedBox(height: 10),
-                                /*reply[index].postCommentItem.toString() == ""
-                                    ? const SizedBox()
-                                    : */ /*image == ""
-                                          ? const SizedBox()*/ /*
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: FadeInImage(
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  reply[index].postCommentItem.toString() ==
+                                          ""
+                                      ? const SizedBox()
+                                      : CachedNetworkImage(
+                                          imageUrl: reply[index]
+                                              .postCommentItem
+                                              .toString(),
+                                          height: 100,
+                                          width: 100,
+                                          fit: BoxFit.cover,
+                                          placeholder: ((context, url) =>
+                                              Image.asset(AssetRes
+                                                  .placeholderImage)),
+                                          errorWidget:
+                                              (context, url, error) =>
+                                                  const Icon(Icons.error),
+                                        ),
+                                  /* reply[index].postCommentItem.toString() == ""
+                                      ? const SizedBox()
+                                      :  image == ""
+                                      ? const SizedBox()
+                                  : FadeInImage(
                                     height: 100,
                                     width: 100,
                                     placeholder: const AssetImage(
@@ -346,12 +309,45 @@ Widget userComment(
                                         .postCommentItem
                                         .toString()),
                                     fit: BoxFit.cover,
-                                  ),
-                                ),*/
-                                const SizedBox(height: 20),
-                              ],
+                                  ),*/
+                                ],
+                              ),
                             ),
-                          )
+                            const SizedBox(height: 10),
+                            /* Align(
+                              alignment: Alignment.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 30),
+                                child: Text(
+                                  controller
+                                      .timeAgo(reply[index].createdAt!),
+                                  style: beVietnamProRegularTextStyle(
+                                    fontSize: 10,
+                                    color: ColorRes.color_959595,
+                                  ),
+                                ),
+                              ),
+                            ),*/
+                            /*reply[index].postCommentItem.toString() == ""
+                                ? const SizedBox()
+                                : */ /*image == ""
+                                      ? const SizedBox()*/
+                            /*
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: FadeInImage(
+                                height: 100,
+                                width: 100,
+                                placeholder: const AssetImage(
+                                    AssetRes.placeholderImage),
+                                image: NetworkImage(reply[index]
+                                    .postCommentItem
+                                    .toString()),
+                                fit: BoxFit.cover,
+                              ),
+                            ),*/
+                          ],
+                        )
                         : const SizedBox();
                   },
                 ),

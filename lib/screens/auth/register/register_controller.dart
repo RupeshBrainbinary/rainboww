@@ -397,7 +397,7 @@ class RegisterController extends GetxController {
             await firebaseFirestore
                 .collection("users")
                 .doc(uid)
-                .update({"online": true});
+                .update({"online": true, "UserToken": token.toString()});
             await PrefService.setValue(PrefKeys.uid, uid);
           } else {
             await firebaseFirestore.collection("users").doc(uid).set({

@@ -74,6 +74,7 @@ class MessageController extends GetxController {
   String? token;
 
   Future<void> init() async {
+    msgController.clear();
     token = await NotificationService.getFcmToken();
     print(token);
     loader.value = true;
