@@ -96,12 +96,13 @@ class ListCartApi {
     }
   }
 
-  static Future transactionApi() async {
+  static Future transactionApi(int page) async {
     String accesToken = PrefService.getString(PrefKeys.registerToken);
     try {
       String url = EndPoints.transaction;
-
-      http.Response? response = await HttpService.postApi(url: url, header: {
+      Map<String, dynamic> param = {"page": page, "limit": 10};
+      http.Response? response =
+          await HttpService.postApi(url: url, body: jsonEncode(param), header: {
         "Content-Type": "application/json",
         "x-access-token": accesToken
       });

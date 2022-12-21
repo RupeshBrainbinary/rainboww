@@ -126,7 +126,7 @@ class AdHomeController extends GetxController {
 
   Future<void> init() async {
     await checkUserConnection();
-    paymentController.transactionApi();
+    // paymentController.transactionApi();
     paymentController.listCardModel;
     await myAdvertiserListData();
     scrollController.addListener(pagination);

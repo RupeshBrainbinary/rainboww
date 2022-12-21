@@ -396,7 +396,7 @@ class HomeController extends GetxController {
 
     // without loder
     await advertisementListUser();
-    paymentController.transactionApi();
+    paymentController.transactionApiPagination();
     await paymentController.listCardApi(showToast: false);
     paymentController.listCardModel.data?.length == null
         ? viewProfile.data!.userType = "free"

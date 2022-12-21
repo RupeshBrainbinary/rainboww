@@ -45,7 +45,7 @@ class RenewAdApi {
         bool? status = jsonDecode(response.body)["status"];
         if (status == true) {
           final PaymentController controller = Get.find();
-          await controller.transactionApi();
+          await controller.transactionApiPagination();
 
           //Get.to(() => PaymentSuccessfulScreenR());
 
@@ -57,7 +57,6 @@ class RenewAdApi {
         errorToast("Please enter valid country name");
       }*/
     } catch (e) {
-
       return [];
     }
   }
@@ -68,7 +67,6 @@ AdHomeController controller = Get.put(AdHomeController());
 class AdvPaymentApi {
   static Future advPaymentApi({
     int? idAd,
-
   }) async {
     String accesToken = PrefService.getString(PrefKeys.registerToken);
     // int userId = PrefService.getInt(PrefKeys.userId);
@@ -90,13 +88,12 @@ class AdvPaymentApi {
         bool? status = jsonDecode(response.body)["status"];
         if (status == true) {
           final PaymentController controller = Get.find();
-          await controller.transactionApi();
+          await controller.transactionApiPagination();
 
           controller.loader.value = false;
         }
         return paymentAdvertiseModelFromJson(response.body);
       }
-
     } catch (e) {
       controller.loader.value = false;
       return [];

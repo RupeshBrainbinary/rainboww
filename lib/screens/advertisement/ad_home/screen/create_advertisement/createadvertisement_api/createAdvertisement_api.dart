@@ -66,7 +66,7 @@ class AddAdvertisement {
         bool? status = jsonDecode(response.body)["status"];
         if (status == true) {
           final PaymentController controller = Get.find();
-          await controller.transactionApi();
+          await controller.transactionApiPagination();
           //adHomeController.myAdvertiserListData();
 
           Get.to(() => PaymentSuccessfulScreen());

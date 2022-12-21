@@ -287,7 +287,8 @@ class SetupDateScreen extends StatelessWidget {
                                           "£${controller.totalAmount ?? "10"}",
                                           style: gilroySemiBoldTextStyle(
                                               fontSize: 24),
-                                        ) /*TextField(
+                                        ) 
+                                        /*TextField(
                                 enabled: false,
                                 inputFormatters: [
                                   MoneyInputFormatter(

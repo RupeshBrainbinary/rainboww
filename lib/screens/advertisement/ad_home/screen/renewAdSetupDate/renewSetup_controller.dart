@@ -54,19 +54,17 @@ class RenewAdSetupDateController extends GetxController {
     startTime = start;
     update(['range']);
     update(['selectC']);
+    endTime = end;
     if (end != null) {
-      endTime = end;
       Duration diff = end.difference(start);
       print(diff.inDays);
       totalAmount = diff.inDays.toInt() * 10 + 10;
       totalAmountApi = diff.inDays.toInt() * 1000 + 1000;
-      print(totalAmountApi);
-      print(totalAmount);
-      update(['range']);
-      update(['selectC']);
+    } else {
+      totalAmount = 10;
+      totalAmountApi = 1000;
     }
   }
-
 
   PaymentAdvertiseModel paymentAdvertiseModel = PaymentAdvertiseModel();
   RenewAdModel renewAdModel = RenewAdModel();
@@ -74,7 +72,7 @@ class RenewAdSetupDateController extends GetxController {
   Future<void> renewAdAPI({int? id}) async {
     DateTime now = DateTime.now();
     loader.value = true;
-   await RenewAdApi.renewAdApi(
+    await RenewAdApi.renewAdApi(
       idAd: id,
       startDate: DateFormat().add_yMd().format(startTime!),
       //startTime!.add(Duration(days: 1))!
@@ -83,20 +81,20 @@ class RenewAdSetupDateController extends GetxController {
               .add_yMd()
               .format(DateTime(now.year, now.month, now.day, 24, 00, 00))
           : DateFormat().add_yMd().format(endTime!),
-      amount: (totalAmountApi == null || totalAmountApi == 0)?1000:totalAmountApi,
-    ).then((value) async{
-     loader.value = true;
-     paymentAdvertiseModel = await AdvPaymentApi.advPaymentApi(idAd: id);
-     loader.value = false;
-     Get.to(() => PaymentSuccessfulScreenR());
-   });
-    totalAmount=0;
-    totalAmountApi=0;
+      amount: (totalAmountApi == null || totalAmountApi == 0)
+          ? 1000
+          : totalAmountApi,
+    ).then((value) async {
+      loader.value = true;
+      paymentAdvertiseModel = await AdvPaymentApi.advPaymentApi(idAd: id);
+      loader.value = false;
+      Get.to(() => PaymentSuccessfulScreenR());
+    });
+    totalAmount = 0;
+    totalAmountApi = 0;
     loader.value = false;
     update(["advertiser"]);
   }
-
-
 
 /*  UploadImage uploadImage = UploadImage();
 
@@ -135,7 +133,11 @@ class RenewAdSetupDateController extends GetxController {
 
         // enableDrag: true,
         builder: (_) => ShowBottomNextR(
-          amount:  (totalAmount.toString() == "" || totalAmount == null || totalAmount == 0)?"10":totalAmount.toString(),
+          amount: (totalAmount.toString() == "" ||
+                  totalAmount == null ||
+                  totalAmount == 0)
+              ? "10"
+              : totalAmount.toString(),
           id: id,
         ),
       ),

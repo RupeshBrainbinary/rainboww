@@ -7,6 +7,7 @@ import 'package:rainbow_new/model/notification_model.dart';
 import 'package:rainbow_new/model/notification_on_off_model.dart';
 import 'package:rainbow_new/model/notofication_data_model.dart';
 import 'package:rainbow_new/screens/Home/settings/notificationOnOff_api/notification_on_off_api.dart';
+import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
 import 'package:rainbow_new/screens/account_Information/account_Information_screen.dart';
 import 'package:rainbow_new/screens/account_Information/account_information_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
@@ -23,8 +24,8 @@ class AdvertisementController extends GetxController {
   int currentTab = 0;
   final AdHomeController homeController = Get.put(AdHomeController());
   GlobalKey<ScaffoldState>? key ;
-  final AdPaymenetController adPaymenetController =
-      Get.put(AdPaymenetController());
+  final PaymentController paymentController =
+      Get.put(PaymentController());
   final AdNotificationsController notificationsController =
       Get.put(AdNotificationsController());
   final AdSupportController supportController = Get.put(AdSupportController());
@@ -88,7 +89,7 @@ class AdvertisementController extends GetxController {
     if (index == 0) {
       homeController.init();
     } else if (index == 1) {
-      adPaymenetController.init();
+      paymentController.transactionApiPagination();
     } else if (index == 2) {
       notificationsController.init();
     } else {

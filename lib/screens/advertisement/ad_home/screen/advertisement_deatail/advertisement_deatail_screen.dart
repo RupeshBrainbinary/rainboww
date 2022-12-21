@@ -12,8 +12,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../create_advertisement/create_advertisement_controller.dart';
 
 class AdvertisementDeatailScreen extends StatelessWidget {
-   AdvertisementDeatailScreen({Key? key}) : super(key: key);
-   final CreateAdvertisementController createAdvertisementController =
+  AdvertisementDeatailScreen({Key? key}) : super(key: key);
+  final CreateAdvertisementController createAdvertisementController =
       Get.put(CreateAdvertisementController());
 
   @override
@@ -117,43 +117,46 @@ class AdvertisementDeatailScreen extends StatelessWidget {
                   itemCount: createAdvertisementController.tags.length,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child:  createAdvertisementController.tags[index]== " "?const SizedBox():Container(
-                      height: 25,
-                      // width: 80,
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: const BoxDecoration(
-                        color: ColorRes.colorECEFF0,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                      ),
-                      child: Center(
-                        child: Container(
-                          // width: 75,
-                          alignment: Alignment.center,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Text(
-                                  createAdvertisementController.tags[index],
-                                  maxLines: 1,
-                                  style: gilroyMediumTextStyle(
-                                      fontSize: 12,
-                                      color: ColorRes.color_696D6D),
-                                ),
-                              ],
+                    child: createAdvertisementController.tags[index] == " "
+                        ? const SizedBox()
+                        : Container(
+                            height: 25,
+                            // width: 80,
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            decoration: const BoxDecoration(
+                              color: ColorRes.colorECEFF0,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(4),
+                              ),
                             ),
-                          ),
-                        ),
-                        /* Text(
+                            child: Center(
+                              child: Container(
+                                // width: 75,
+                                alignment: Alignment.center,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        createAdvertisementController
+                                            .tags[index],
+                                        maxLines: 1,
+                                        style: gilroyMediumTextStyle(
+                                            fontSize: 12,
+                                            color: ColorRes.color_696D6D),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              /* Text(
                           createAdvertisementController.tags[index],
                           maxLines: 1,
                           style: gilroyMediumTextStyle(
                               fontSize: 12, color: ColorRes.color_696D6D),
                         ),*/
-                      ),
-                    ),
+                            ),
+                          ),
                   ),
                 ),
               ),
@@ -201,6 +204,7 @@ class AdvertisementDeatailScreen extends StatelessWidget {
             onTap: () {
               createAdvertisementController.startTime = DateTime.now();
               createAdvertisementController.endTime = null;
+              createAdvertisementController.totalAmount = 0;
               Get.to(() => SetupDateScreen());
             },
             child: Text(

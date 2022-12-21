@@ -31,6 +31,7 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // controller.init();
     //controller.viewCardApi();
 
     return Scaffold(
@@ -54,6 +55,7 @@ class PaymentScreen extends StatelessWidget {
                   appBar(showBack: showBackArrow!),
                   Expanded(
                     child: SingleChildScrollView(
+                      controller: controller.scrollController,
                       child: Column(
                         children: [
                           const SizedBox(
@@ -87,9 +89,10 @@ class PaymentScreen extends StatelessWidget {
                           GetBuilder<PaymentController>(
                               id: "more",
                               builder: (controller) {
-                                return (controller.listCardModel.data ==
-                                            null &&
-                                        controller.viewCardModel == null || controller.listCardModel.data?.length == 0)
+                                return (controller.listCardModel.data == null &&
+                                            controller.viewCardModel == null ||
+                                        controller.listCardModel.data?.length ==
+                                            0)
                                     ? const SizedBox()
                                     : Center(
                                         child: Padding(
@@ -105,8 +108,7 @@ class PaymentScreen extends StatelessWidget {
                                                       controller
                                                               .viewCardModel
                                                               ?.data
-                                                              ?.cardAddress?[
-                                                                  0]
+                                                              ?.cardAddress?[0]
                                                               .fullName ??
                                                           "",
                                                       style:
@@ -116,14 +118,15 @@ class PaymentScreen extends StatelessWidget {
                                                     //margin: const EdgeInsets.only(top: 5.5),
                                                     height: 4,
                                                     width: 4,
-                                                    decoration: const BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                        2)),
-                                                        color: ColorRes
-                                                            .colorFFEC5C),
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            2)),
+                                                            color: ColorRes
+                                                                .colorFFEC5C),
                                                   ),
                                                   const SizedBox(width: 15),
                                                   Text(
@@ -135,18 +138,19 @@ class PaymentScreen extends StatelessWidget {
                                                     //margin: const EdgeInsets.only(top: 5.5),
                                                     height: 4,
                                                     width: 4,
-                                                    decoration: const BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                        2)),
-                                                        color: ColorRes
-                                                            .colorFFEC5C),
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            2)),
+                                                            color: ColorRes
+                                                                .colorFFEC5C),
                                                   ),
                                                   const SizedBox(width: 15),
                                                   Text(
-                                                      "${controller.viewCardModel?.data?.expMonth??""}/${controller.viewCardModel?.data?.expYear.toString().substring(2,4).toString()??""}",
+                                                      "${controller.viewCardModel?.data?.expMonth ?? ""}/${controller.viewCardModel?.data?.expYear.toString().substring(2, 4).toString() ?? ""}",
                                                       style:
                                                           textStyleFont14White),
                                                 ],
@@ -165,16 +169,13 @@ class PaymentScreen extends StatelessWidget {
                                                     gilroyMediumTextStyle(
                                                         fontSize: 14,
                                                         color: Colors.white
-                                                            .withOpacity(
-                                                                0.5)),
-                                                trimExpandedText:
-                                                    '...see less',
+                                                            .withOpacity(0.5)),
+                                                trimExpandedText: '...see less',
                                                 moreStyle:
                                                     gilroyMediumTextStyle(
                                                         fontSize: 14,
                                                         color: Colors.white
-                                                            .withOpacity(
-                                                                0.5)),
+                                                            .withOpacity(0.5)),
                                               ),
                                             ],
                                           ),
@@ -189,8 +190,7 @@ class PaymentScreen extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: Get.width * 0.04266),
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 //set As a Default Value
                                 InkWell(
@@ -214,24 +214,29 @@ class PaymentScreen extends StatelessWidget {
                                     child: Center(
                                         child: Text(
                                       Strings.setAsDefaultPayment,
-                                      style: gilroySemiBoldTextStyle(
-                                          fontSize: 12),
+                                      style:
+                                          gilroySemiBoldTextStyle(fontSize: 12),
                                     )),
                                   ),
                                 ),
                                 //Remove
                                 InkWell(
                                   onTap: () {
-                                    if (controller
-                                            .listCardModel.data?.length ==
+                                    if (controller.listCardModel.data?.length ==
                                         null) {
                                       errorToast("Card not available");
                                     } else {
-                                      controller.navigateToRemove(context: context,
-                                       expiryDate:    "${controller.viewCardModel?.data?.expMonth}/${controller.viewCardModel?.data?.expYear.toString().substring(2,4).toString()}",
-                                      expiryYear: controller.viewCardModel?.data?.expYear.toString()??"",
-                                        endingNumber: controller.viewCardModel?.data?.cardNumber ?? ""
-                                      );
+                                      controller.navigateToRemove(
+                                          context: context,
+                                          expiryDate:
+                                              "${controller.viewCardModel?.data?.expMonth}/${controller.viewCardModel?.data?.expYear.toString().substring(2, 4).toString()}",
+                                          expiryYear: controller
+                                                  .viewCardModel?.data?.expYear
+                                                  .toString() ??
+                                              "",
+                                          endingNumber: controller.viewCardModel
+                                                  ?.data?.cardNumber ??
+                                              "");
                                     }
                                   },
                                   child: Container(
@@ -242,10 +247,8 @@ class PaymentScreen extends StatelessWidget {
                                             Radius.circular(50)),
                                         gradient: LinearGradient(
                                           colors: [
-                                            ColorRes.colorF86666
-                                                .withOpacity(1),
-                                            ColorRes.colorF82222
-                                                .withOpacity(1),
+                                            ColorRes.colorF86666.withOpacity(1),
+                                            ColorRes.colorF82222.withOpacity(1),
                                           ],
                                         )),
                                     child: Center(
@@ -260,21 +263,18 @@ class PaymentScreen extends StatelessWidget {
                                 //Edit
                                 InkWell(
                                   onTap: () {
-                                    if (controller
-                                            .listCardModel.data?.length ==
+                                    if (controller.listCardModel.data?.length ==
                                         null) {
                                       errorToast("Card not available");
                                     } else {
-                                      editCardController.cvvController
-                                          .clear();
+                                      editCardController.cvvController.clear();
                                       editCardController.cardNmberController
                                           .clear();
 
                                       Get.to(EditCardScreen(
                                         index: controller
                                                 .listCardModel
-                                                .data?[
-                                                    controller.selectedIndex]
+                                                .data?[controller.selectedIndex]
                                                 .id ??
                                             0,
                                         cardHolder: controller.viewCardModel
@@ -288,20 +288,14 @@ class PaymentScreen extends StatelessWidget {
                                                 .viewCardModel?.data?.expYear
                                                 .toString() ??
                                             "",
-                                        fullName: controller
-                                                .viewCardModel
-                                                ?.data
-                                                ?.cardAddress?[0]
-                                                .fullName ??
+                                        fullName: controller.viewCardModel?.data
+                                                ?.cardAddress?[0].fullName ??
                                             "",
                                         city: controller.viewCardModel?.data
                                                 ?.cardAddress?[0].city ??
                                             "",
-                                        country: controller
-                                                .viewCardModel
-                                                ?.data
-                                                ?.cardAddress?[0]
-                                                .country ??
+                                        country: controller.viewCardModel?.data
+                                                ?.cardAddress?[0].country ??
                                             "",
                                         //cardNmber: controller.viewCardModel.data?.cardNumber ??  "",
                                         postalCode: controller
@@ -310,11 +304,8 @@ class PaymentScreen extends StatelessWidget {
                                                 ?.cardAddress?[0]
                                                 .postalCode ??
                                             "",
-                                        address: controller
-                                                .viewCardModel
-                                                ?.data
-                                                ?.cardAddress?[0]
-                                                .address ??
+                                        address: controller.viewCardModel?.data
+                                                ?.cardAddress?[0].address ??
                                             "",
                                       ));
                                     }
@@ -327,10 +318,8 @@ class PaymentScreen extends StatelessWidget {
                                           Radius.circular(50)),
                                       gradient: LinearGradient(
                                         colors: [
-                                          ColorRes.colorFFED62
-                                              .withOpacity(1),
-                                          ColorRes.colorF9DD08
-                                              .withOpacity(1),
+                                          ColorRes.colorFFED62.withOpacity(1),
+                                          ColorRes.colorF9DD08.withOpacity(1),
                                         ],
                                       ),
                                     ),
@@ -353,10 +342,10 @@ class PaymentScreen extends StatelessWidget {
                           GetBuilder<PaymentController>(
                               id: "img",
                               builder: (controller) {
-                                return (controller
-                                            .listCardModel.data?.length ==
-                                        null || controller
-                                    .listCardModel.data?.length == 0)
+                                return (controller.listCardModel.data?.length ==
+                                            null ||
+                                        controller.listCardModel.data?.length ==
+                                            0)
                                     ? const SizedBox()
                                     : Align(
                                         alignment: Alignment.center,
@@ -364,7 +353,9 @@ class PaymentScreen extends StatelessWidget {
                                           cornerRadius: 30,
                                           height: 6,
                                           width: 6,
-                                          count: controller.listCardModel.data?.length ?? 0,
+                                          count: controller
+                                                  .listCardModel.data?.length ??
+                                              0,
                                           index: controller.selectedIndex,
                                         ),
                                       );
@@ -441,32 +432,36 @@ class PaymentScreen extends StatelessWidget {
                           ),
 
                           // ---------- Transaction
-                         GetBuilder<PaymentController>(id: "payment",
-                           builder: (controller) {
-                           return  (controller.transactionModel.data?.length == null ||
-                               controller.transactionModel.data?.length ==
-                                   0)
-                               ? Column(
-                             children: const [
-                               SizedBox(height: 80),
-                               Center(
-                                 child: Text("No Transaction yet"),
-                               )
-                             ],
-                           )
-                               : ListView.builder(
-                               shrinkWrap: true,
-                               physics:
-                               const NeverScrollableScrollPhysics(),
-                               itemCount: controller
-                                   .transactionModel.data?.length ??
-                                   0,
-                               scrollDirection: Axis.vertical,
-                               itemBuilder: (context, index) {
-                                 return tranzaction(
-                                     controller: controller, index: index);
-                               });
-                         },)
+                          GetBuilder<PaymentController>(
+                            id: "payment",
+                            builder: (controller) {
+                              return (controller.transactionPageModel.length ==
+                                          null ||
+                                      controller.transactionPageModel.length ==
+                                          0)
+                                  ? Column(
+                                      children: const [
+                                        SizedBox(height: 80),
+                                        Center(
+                                          child: Text("No Transaction yet"),
+                                        )
+                                      ],
+                                    )
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      // controller:controller.scrollController ,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: controller
+                                          .transactionPageModel.length,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (context, index) {
+                                        return tranzaction(
+                                            controller: controller,
+                                            index: index);
+                                      });
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -571,13 +566,16 @@ Widget tranzaction({required PaymentController controller, int? index}) {
                 SizedBox(
                   height: Get.height * 0.01997,
                 ),
-                SizedBox(width: 150,
+                SizedBox(
+                  width: 150,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         Text(
-                          controller.transactionModel.data![index!].transactionId.toString() ?? "",
+                          controller.transactionPageModel[index!].transactionId
+                                  .toString() ??
+                              "",
                           style: gilroySemiBoldTextStyle(
                               color: ColorRes.color_434343,
                               fontSize: 14,
@@ -599,8 +597,7 @@ Widget tranzaction({required PaymentController controller, int? index}) {
                 ),
                 Text(
                   controller
-                      .timeAgo(controller
-                          .transactionModel.data![index].createdAt!
+                      .timeAgo(controller.transactionPageModel[index].createdAt!
                           .toLocal())
                       .toString(),
                   style: gilroyMediumTextStyle(
@@ -612,7 +609,7 @@ Widget tranzaction({required PaymentController controller, int? index}) {
             ),
             const Spacer(),
             Text(
-              "£${controller.transactionModel.data?[index].amount.toString() ?? ""}",
+              "£${controller.transactionPageModel[index].amount.toString() ?? ""}",
               style: gilroyMediumTextStyle(color: ColorRes.color_29A435),
             ),
             SizedBox(
@@ -748,7 +745,7 @@ Widget appBar({required final bool showBack}) {
                 addCartController.nameOnCardController.clear();
                 addCartController.cardNmberController.clear();
                 addCartController.expiryYearController.clear();
-               /* addCartController.expiryMonthController.clear();*/
+                /* addCartController.expiryMonthController.clear();*/
                 addCartController.cvvController.clear();
                 addCartController.selectCountry = null;
 

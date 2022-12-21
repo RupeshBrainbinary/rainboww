@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/model/default_crad_model.dart';
 import 'package:rainbow_new/model/list_card_model.dart';
+import 'package:rainbow_new/model/transaction_model.dart' as tr;
 import 'package:rainbow_new/model/remove_card_model.dart';
 import 'package:rainbow_new/model/transaction_model.dart';
 
@@ -17,6 +18,8 @@ import 'add_cart/add_cart_controller.dart';
 class PaymentController extends GetxController {
   PageController pageController =
       PageController(initialPage: 0, viewportFraction: 0.86, keepPage: true);
+  ScrollController scrollController = ScrollController();
+
   int selectedIndex = 0;
   RxBool loader = false.obs;
 
@@ -27,12 +30,25 @@ class PaymentController extends GetxController {
   @override
   void onInit() {
     listCardApi(showToast: true);
-    transactionApi();
+    // transactionApiPagination();
+    init();
     // UserSubscriptionAddApi.userSubscriptionAddApi();
     update();
     super.onInit();
   }
 
+  init() {
+    scrollController.addListener(pagination);
+  }
+
+  void pagination() async {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      await transactionApiPagination();
+      update();
+    }
+    update();
+  }
   /*changeIndex(int index) {
     selectedIndex = index;
     viewCardApi();
@@ -43,11 +59,54 @@ class PaymentController extends GetxController {
   ViewCardModel? viewCardModel = ViewCardModel();
   RemoveCardModel removeCardModel = RemoveCardModel();
   TransactionModel transactionModel = TransactionModel();
-  DefaultCradModel defaultCradModel =DefaultCradModel();
+  List<tr.Datum> transactionPageModel = [];
+  DefaultCradModel defaultCradModel = DefaultCradModel();
 
   navigateToRemove(
-      {required BuildContext context, String? expiryDate, String? expiryYear, String? endingNumber}) async {
-    await showDialog(context: context, builder: (context) => RemoveDialog(expiryDate: expiryDate,expiryYear: expiryYear, endingNumber: endingNumber,));
+      {required BuildContext context,
+      String? expiryDate,
+      String? expiryYear,
+      String? endingNumber}) async {
+    await showDialog(
+        context: context,
+        builder: (context) => RemoveDialog(
+              expiryDate: expiryDate,
+              expiryYear: expiryYear,
+              endingNumber: endingNumber,
+            ));
+  }
+
+  int page = 1;
+
+  transactionApiPagination() async {
+    try {
+      loader.value = true;
+
+      transactionModel = await ListCartApi.transactionApi(page);
+      page++;
+      print(page);
+      transactionPageModel.addAll(transactionModel.data!);
+
+      update(['more']);
+      loader.value = false;
+    } catch (e) {
+      loader.value = false;
+    }
+    update();
+  }
+
+  transactionApi() async {
+    loader.value = true;
+    try {
+      transactionModel = await ListCartApi.transactionApi(page);
+      update(['more']);
+      update(['payment']);
+      loader.value = false;
+    } catch (e) {
+      loader.value = false;
+      // errorToast("No internet connection");
+      debugPrint(e.toString());
+    }
   }
 
   listCardApi({required bool showToast}) async {
@@ -55,13 +114,12 @@ class PaymentController extends GetxController {
       loader.value = true;
       listCardModel = await ListCartApi.listCardsApi(showToast: showToast);
 
-      if(listCardModel.data?[selectedIndex].isPrimary == true){
-
-        await PrefService.setValue(PrefKeys.defaultCard, listCardModel.data?[selectedIndex].id);
-
+      if (listCardModel.data?[selectedIndex].isPrimary == true) {
+        await PrefService.setValue(
+            PrefKeys.defaultCard, listCardModel.data?[selectedIndex].id);
       }
 
-       viewCardApi();
+      viewCardApi();
       loader.value = false;
       update(['more']);
       HomeController homeController = Get.put(HomeController());
@@ -73,7 +131,8 @@ class PaymentController extends GetxController {
     } catch (e) {
       loader.value = false;
       //errorToast("No internet connection");
-      await PrefService.setValue(PrefKeys.defaultCard, listCardModel.data?[selectedIndex].id);
+      await PrefService.setValue(
+          PrefKeys.defaultCard, listCardModel.data?[selectedIndex].id);
 
       debugPrint(e.toString());
     }
@@ -88,7 +147,7 @@ class PaymentController extends GetxController {
       update(['more']);
     } catch (e) {
       loader.value = false;
-     // errorToast("No internet connection");
+      // errorToast("No internet connection");
       debugPrint(e.toString());
     }
   }
@@ -104,20 +163,6 @@ class PaymentController extends GetxController {
     } catch (e) {
       loader.value = false;
       errorToast("No internet connection");
-      debugPrint(e.toString());
-    }
-  }
-
-  transactionApi() async {
-    loader.value = true;
-    try {
-      transactionModel = await ListCartApi.transactionApi();
-      update(['more']);
-      update(['payment']);
-      loader.value = false;
-    } catch (e) {
-      loader.value = false;
-     // errorToast("No internet connection");
       debugPrint(e.toString());
     }
   }
