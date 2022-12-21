@@ -49,10 +49,7 @@ class IdVerificationScreen extends StatelessWidget {
                                   SizedBox(height: Get.height * 0.05),
                                   GestureDetector(
                                     onTap: Get.back,
-                                    child: const Icon(
-                                      Icons.arrow_back_ios_outlined,
-                                      size: 16.72,
-                                    ),
+                                    child:Image.asset(AssetRes.backIcon,height: 16,width: 35,),
                                   ),
                                   SizedBox(height: Get.height * 0.05),
                                   Text(

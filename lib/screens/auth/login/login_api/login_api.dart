@@ -43,6 +43,13 @@ class LoginApi {
         if (status == false) {
           /*  errorToast(jsonDecode(response.body)["message"]);*/
         } else if (status == true) {
+
+          if(jsonDecode(response.body)["data"]["mobile_status"]=="active"&&
+              jsonDecode(response.body)["data"]["selfi_status"]=="active"&&
+              jsonDecode(response.body)["data"]["id_status"]=="active"){
+            await PrefService.setValue(PrefKeys.isLogin, true);
+
+          }
           await PrefService.setValue(PrefKeys.referrallCode,
               jsonDecode(response.body)["data"]["referrall_code"]);
           await PrefService.setValue(
@@ -124,16 +131,18 @@ class LoginApi {
           //Get.offAll(() => const Dashboard());
 
           if (jsonDecode(response.body)["data"]["role"] == "end_user") {
-            await PrefService.setValue(PrefKeys.isLogin, true);
+
 
             return loginModelFromJson(response.body);
           } else {
-            await PrefService.setValue(PrefKeys.isLogin, true);
+
 
             await PrefService.setValue(PrefKeys.advertiserProfileImage,
                 jsonDecode(response.body)["data"]["profile_image"]);
             return advertisersLoginModelFromJson(response.body);
           }
+
+
         } else if (response.statusCode == 500) {
           errorToast(jsonDecode(response.body)["message"]);
         } /*else if(response.statusCode==200){

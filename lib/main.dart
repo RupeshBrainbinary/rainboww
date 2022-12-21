@@ -89,8 +89,7 @@ class MyApp extends StatelessWidget {
       home: /*const GoogleMapScreen()*/ /*SupportDetailsScreen(com: "")*/ !PrefService
               .getBool(PrefKeys.skipBoardingScreen)
           ? SplashScreen()
-          : (PrefService.getBool(PrefKeys.register) ||
-                  PrefService.getBool(PrefKeys.isLogin))
+          : PrefService.getBool(PrefKeys.isLogin)
               ? PrefService.getBool(PrefKeys.showTermsCondition)
                   ? TermsConditionsScreen(showBackBtn: false)
                   : PrefService.getString(PrefKeys.loginRole) == "end_user"

@@ -67,7 +67,7 @@ class AdvirtisersApi {
         } else if (status == true) {
           AdvertiserVerifyController advertiserVerifyController =
               Get.put(AdvertiserVerifyController());
-          PrefService.setValue(PrefKeys.register, true);
+          /*PrefService.setValue(PrefKeys.register, true);*/
           await PrefService.setValue(PrefKeys.phonSaveNumberAdvertiser,
               jsonDecode(response.body)["data"]["phone_number"]);
          /* advertiserVerifyController.phoneNumber =

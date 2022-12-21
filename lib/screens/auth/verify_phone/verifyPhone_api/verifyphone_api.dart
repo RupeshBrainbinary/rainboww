@@ -37,7 +37,7 @@ class VerifyCodeApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          await PrefService.setValue(PrefKeys.register, true);
+         /* await PrefService.setValue(PrefKeys.register, true);*/
           Get.to(() => const NewPasswordScreen());
         }
         return verifyCodeFromJson(response.body);
@@ -113,7 +113,7 @@ class VerifyCodeApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          await PrefService.setValue(PrefKeys.register, true);
+    /*      await PrefService.setValue(PrefKeys.register, true);*/
           await PrefService.setValue(
               PrefKeys.loginRole, jsonDecode(response.body)["data"]["role"]);
 
@@ -155,7 +155,7 @@ class VerifyCodeApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          await PrefService.setValue(PrefKeys.register, true);
+          /*await PrefService.setValue(PrefKeys.register, true);*/
           PrefService.setValue(PrefKeys.showTermsCondition, true);
           Get.to(() => const AdvertiserTermsAndConditionsScreen());
         }

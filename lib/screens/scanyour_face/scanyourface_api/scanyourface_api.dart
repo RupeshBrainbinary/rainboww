@@ -37,7 +37,7 @@ class ScanYourFaceApi {
           await PrefService.setValue(
               PrefKeys.loginRole, jsonDecode(response.body)["data"]["role"]);
           //PrefService.setValue(PrefKeys.showTermsCondition, true);
-          PrefService.setValue(PrefKeys.register, true);
+          /*PrefService.setValue(PrefKeys.register, true);*/
           Get.to(() => TermsConditionsScreen());
           flutterToast(jsonDecode(response.body)["message"]);
         }

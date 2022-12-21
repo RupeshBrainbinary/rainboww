@@ -69,12 +69,13 @@ Widget profileAppbar(
             ),
             const Spacer(),
             show
-                ? InkWell(
+                ? GetBuilder<HomeController>(builder: (controller) {
+                  return InkWell(
                     onTap: () {
                       EditProfileController editController =
-                          Get.put(EditProfileController());
+                      Get.put(EditProfileController());
                       editController.init();
-                      homeController.viewProfile.data?.userType == "free"
+                      controller.viewProfile.data?.userType == "free"
                           ? premiumPopUpBox(context: context)
                           : Get.to(() => const EditProfileScreen());
                       //Get.to(() => const EditProfileScreen());
@@ -84,7 +85,8 @@ Widget profileAppbar(
                       width: 31,
                       child: Image.asset(AssetRes.editIcon),
                     ),
-                  )
+                  );
+                },)
                 : const SizedBox(),
             const SizedBox(
               width: 10,

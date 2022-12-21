@@ -32,7 +32,7 @@ class PhoneNumberApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          await PrefService.setValue(PrefKeys.register, true);
+        /*  await PrefService.setValue(PrefKeys.register, true);*/
           await PrefService.setValue(
               PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
           VerifyPhoneController controller = Get.put(VerifyPhoneController());
@@ -71,7 +71,7 @@ class PhoneNumberApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          await PrefService.setValue(PrefKeys.register, true);
+         /* await PrefService.setValue(PrefKeys.register, true);*/
           await PrefService.setValue(
               PrefKeys.phoneId, jsonDecode(response.body)["data"]["id"]);
           Get.to(() => const RegisterOtpScreen());
