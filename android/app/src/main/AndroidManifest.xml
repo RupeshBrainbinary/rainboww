@@ -11,7 +11,7 @@
         <provider android:authorities="com.facebook.katana.provider.PlatformProvider"/>
     </queries>
     <application
-        android:label="rainbow_new"
+        android:label="rainbow"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

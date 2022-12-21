@@ -222,8 +222,9 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget profileImagesLoad(ProfileController controller, BuildContext context) {
+    print(Get.height);
     return SizedBox(
-      height: Get.height > 865 ? Get.height / 2.6 : Get.height / 2.25,
+      height: Get.height > 865 ? Get.height / 2.6 :  Get.height <645?Get.height/2.25:Get.height / 2.35,
       width: Get.width,
       child: Stack(
         children: [

@@ -203,7 +203,6 @@ class AddCartController extends GetxController {
     } catch (e) {
       loader.value = false;
       controller.loader.value = false;
-      errorToast("No internet connection");
       debugPrint(e.toString());
     }
   }

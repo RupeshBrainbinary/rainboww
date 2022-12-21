@@ -44,8 +44,10 @@ Future<void> main() async {
   NotificationService.init();
   await FirebaseMessaging.instance.getToken().then((value) {
     if (kDebugMode) {
-      print("FCM Token => $value");
+      print("FCM Token Token Token Token => $value");
     }
+    print("FCM Token Token Token Token => $value");
+
   });
   await PrefService.init();
   SystemChrome.setSystemUIOverlayStyle(

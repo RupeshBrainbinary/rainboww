@@ -186,7 +186,7 @@ class LoginController extends GetxController {
         await firebaseFirestore
             .collection("users")
             .doc(uid)
-            .update({"online": true});
+            .update({ "UserToken": token.toString(),"online": true});
       }
     });
   }

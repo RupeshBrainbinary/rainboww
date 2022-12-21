@@ -184,7 +184,7 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                                 style: poppinsMediumBold(fontSize: 14),
                               ),
                               SizedBox(
-                                height: Get.height * 0.0209,
+                                height: Get.height * 0.015,
                               ),
                             ],
                           ),
