@@ -214,8 +214,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                   ),
                   Positioned(
-                    top: Get.height * 0.15,
-                    left: Get.width * 0.44,
+                    top: Get.height<650?Get.height * 0.27:Get.height>850?Get.height *0.25:Get.height * 0.26,
+                    left: Get.height>850?Get.width * 0.43:Get.width * 0.44,
                     child: InkWell(
                         onTap: () {
                           showModalBottomSheet(

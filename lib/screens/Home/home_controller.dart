@@ -114,8 +114,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-   /* await init();*/
-    scrollController.addListener(pagination);
+  /*  await init();*/
+
     await deepLinkInt();
     update(['home']);
     super.onInit();
@@ -323,7 +323,7 @@ class HomeController extends GetxController {
       friendPostViewModel = await MyPostApi.friendPostApi(page, limit);
       page++;
       friendPostListData.addAll(friendPostViewModel.data!);
-      update(['home']);
+ /*     update(['home']);*/
       loader.value = false;
     } catch (e) {
       debugPrint(e.toString());
@@ -337,7 +337,7 @@ class HomeController extends GetxController {
       friendPostViewModel = await MyPostApi.friendPostApi(
           1, pageLength ?? friendPostListData.length);
       friendPostListData = friendPostViewModel.data!;
-      update(['home']);
+  /*    update(['home']);*/
       loader.value = false;
     } catch (e) {
       debugPrint(e.toString());
@@ -369,11 +369,12 @@ class HomeController extends GetxController {
   }
 
   Future<void> refreshCode() async {
+    page = 1;
+    friendPostListData = [];
     await controller.viewProfileDetails();
     await onStory();
     await getNotifications();
-    page = 0;
-    friendPostListData = [];
+
     /*  await friendPostDataWithOutPagination();*/
     await friendPostData();
 
@@ -386,6 +387,7 @@ class HomeController extends GetxController {
     await friendPostData();
     await friendPostDataWithOutPagination();
     await onStory();
+    await getNotifications();
     /*   changeLoader(true);*/
     await checkUserConnection();
     // without loder
@@ -405,7 +407,7 @@ class HomeController extends GetxController {
     countryName();
     countryNationalites();
     // without loder
-    await getNotifications();
+
 
     await connectionsController.callRequestApi();
     /*  changeLoader(false);*/
@@ -433,11 +435,11 @@ class HomeController extends GetxController {
   }
 
   Future<void> getNotifications() async {
- /*   loader.value = true;*/
+    loader.value = true;
     notificationModel = await NotificationApi.getNotificationList();
 
     update(['notification_badge']);
-   /* loader.value = false;*/
+    loader.value = false;
   }
 
   Future<void> onRefresh() async {

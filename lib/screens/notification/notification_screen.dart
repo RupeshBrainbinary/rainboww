@@ -43,9 +43,6 @@ class NotificationScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                SizedBox(
-                  height: Get.height * 0.035,
-                ),
                 appBar(),
                 (controller.notificationList.length == 0)
                     ? SizedBox(
@@ -56,12 +53,14 @@ class NotificationScreen extends StatelessWidget {
                                   fontSize: 16, color: Colors.white)),
                         ),
                       )
-                    : Expanded(
-                        child: ListView.builder(
+                    : GetBuilder<NotificationsController>(id: "Notification",
+                  builder: (controller) {
+                      return Expanded(
+                        child: ListView.builder(padding: EdgeInsets.zero,
                           itemCount: controller.notificationList.length,
                           itemBuilder: (BuildContext context, int index) {
                             NotificationData model =
-                                controller.notificationList[index];
+                            controller.notificationList[index];
                             return Column(
                               children: [
                                 SizedBox(
@@ -95,73 +94,73 @@ class NotificationScreen extends StatelessWidget {
                                                   width: 1),
                                             ),
                                             child: profileController
-                                                            .viewProfile.data ==
-                                                        null ||
-                                                    profileController
-                                                        .viewProfile
-                                                        .data!
-                                                        .profileImage!
-                                                        .isEmpty
+                                                .viewProfile.data ==
+                                                null ||
+                                                profileController
+                                                    .viewProfile
+                                                    .data!
+                                                    .profileImage!
+                                                    .isEmpty
                                                 ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50),
-                                                    child: Container(
-                                                      height: 53,
-                                                      width: 53,
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        image: DecorationImage(
-                                                            image: AssetImage(
-                                                              AssetRes
-                                                                  .portraitPlaceholder,
-                                                            ),
-                                                            fit: BoxFit.cover),
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  50),
+                                              child: Container(
+                                                height: 53,
+                                                width: 53,
+                                                decoration:
+                                                const BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                        AssetRes
+                                                            .portraitPlaceholder,
                                                       ),
-                                                    ),
-                                                  )
+                                                      fit: BoxFit.cover),
+                                                ),
+                                              ),
+                                            )
                                                 : ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50),
-                                                    child: SizedBox(
-                                                      height: 53,
-                                                      width: 53,
-                                                      child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            profileController
-                                                                .viewProfile
-                                                                .data!
-                                                                .profileImage
-                                                                .toString(),
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  50),
+                                              child: SizedBox(
+                                                height: 53,
+                                                width: 53,
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                  profileController
+                                                      .viewProfile
+                                                      .data!
+                                                      .profileImage
+                                                      .toString(),
+                                                  fit: BoxFit.cover,
+                                                  placeholder: ((context,
+                                                      url) =>
+                                                      Image.asset(
+                                                        AssetRes
+                                                            .portraitPlaceholder,
+                                                        height: 53,
+                                                        width: 53,
                                                         fit: BoxFit.cover,
-                                                        placeholder: ((context,
-                                                                url) =>
-                                                            Image.asset(
-                                                              AssetRes
-                                                                  .portraitPlaceholder,
-                                                              height: 53,
-                                                              width: 53,
-                                                              fit: BoxFit.cover,
-                                                            )),
-                                                        errorWidget: ((context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                              AssetRes
-                                                                  .portraitPlaceholder,
-                                                              height: 53,
-                                                              width: 53,
-                                                              fit: BoxFit.cover,
-                                                            )),
-                                                      ),
-                                                    ),
-                                                  ),
+                                                      )),
+                                                  errorWidget: ((context,
+                                                      url, error) =>
+                                                      Image.asset(
+                                                        AssetRes
+                                                            .portraitPlaceholder,
+                                                        height: 53,
+                                                        width: 53,
+                                                        fit: BoxFit.cover,
+                                                      )),
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                           const SizedBox(width: 12),
                                           Expanded(
                                             child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 const SizedBox(
                                                   height: 35,
@@ -170,15 +169,15 @@ class NotificationScreen extends StatelessWidget {
                                                   model.createdAt == null
                                                       ? ''
                                                       : DateFormat('dd/MM/yyyy')
-                                                          .format(
-                                                              model.createdAt!),
+                                                      .format(
+                                                      model.createdAt!),
                                                   style:
-                                                      gilroySemiBoldTextStyle(
-                                                          fontSize: 12),
+                                                  gilroySemiBoldTextStyle(
+                                                      fontSize: 12),
                                                 ),
                                                 Text(
                                                   model.description
-                                                          ?.toString() ??
+                                                      ?.toString() ??
                                                       "",
                                                   style: gilroyMediumTextStyle(
                                                       fontSize: 14,
@@ -201,7 +200,8 @@ class NotificationScreen extends StatelessWidget {
                             );
                           },
                         ),
-                      ),
+                      );
+                    },),
               ],
             ),
           ),
@@ -222,7 +222,7 @@ class NotificationScreen extends StatelessWidget {
       width: Get.width,
       child: Column(
         children: [
-          SizedBox(height: Get.height * 0.02),
+          SizedBox(height: 40),
           Stack(
             children: [
               Center(

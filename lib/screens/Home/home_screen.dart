@@ -47,8 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
       Get.put(NotificationsController());
 
   @override
-  @override
   void initState() {
+    controller.scrollController.addListener(controller.pagination);
     controller.init();
     controller.advertisementListUser();
     super.initState();
@@ -1424,15 +1424,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const Spacer(),
                                   InkWell(
                                     onTap: () async {
+                                      controller.sharePostData(
+                                          controller
+                                              .friendPostListData[index].id
+                                              .toString());
                                       controller.share(controller
                                           .friendPostListData[index].id
                                           .toString());
-                                          controller.sharePostData(
-                                                  controller
-                                                      .friendPostViewModel
-                                                      .data![index]
-                                                      .id
-                                                      .toString());
+
                                     },
                                     child: const SizedBox(
                                         height: 18,

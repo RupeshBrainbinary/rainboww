@@ -38,6 +38,8 @@ class NotificationsController extends GetxController {
     try {
       await NotificationApi.notificationRead();
       await getNotifications();
+
+      update(['Notification']);
     } catch (e) {
       loader.value = false;
     }
