@@ -86,6 +86,7 @@ class PaymentController extends GetxController {
       page++;
       print(page);
       transactionPageModel.addAll(transactionModel.data!);
+      transactionPageModel.toSet();
 
       update(['more']);
       loader.value = false;

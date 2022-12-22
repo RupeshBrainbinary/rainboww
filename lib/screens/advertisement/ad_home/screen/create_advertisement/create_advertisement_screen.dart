@@ -25,6 +25,7 @@ class CreateAdvertisementScreen extends StatelessWidget {
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
+          advertisementController.dropOff();
         },
         child: GetBuilder<CreateAdvertisementController>(
           id: "advertiser",

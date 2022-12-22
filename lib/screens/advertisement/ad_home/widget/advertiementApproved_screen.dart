@@ -77,9 +77,8 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     init();
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xff50369C)
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Color(0xff50369C)));
     return Scaffold(
       body: Obx(
         () {
@@ -92,7 +91,7 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                     child: Container(
                       width: Get.width,
                       height: 790,
-                      decoration:  BoxDecoration(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
                             ColorRes.color_50369C,
@@ -141,9 +140,7 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                 height: 202,
                 child: Stack(
                   children: [
-                    (adHomeController.myAdList[index].itemsList!
-                                .length ==
-                            0)
+                    (adHomeController.myAdList[index].itemsList!.length == 0)
                         ? Image.asset(
                             AssetRes.placeholderImage,
                             width: Get.width,
@@ -151,7 +148,8 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                           )
                         : PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: adHomeController.myAdList[index].itemsList!.length,
+                            itemCount: adHomeController
+                                .myAdList[index].itemsList!.length,
                             onPageChanged: (index) {
                               createAdvertisementController.pageIndex = index;
                               createAdvertisementController.update(["img"]);
@@ -163,7 +161,8 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                                   placeholder: const AssetImage(
                                       AssetRes.placeholderImage),
                                   image: NetworkImage(
-                                    adHomeController.myAdList[index].itemsList![index1]
+                                    adHomeController
+                                        .myAdList[index].itemsList![index1]
                                         .toString(),
                                   ),
                                   width: Get.width - 60,
@@ -205,8 +204,7 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                                 ),
                               ),
                               const Spacer(),
-                              (adHomeController.myAdList[index]
-                                          .adminStatus
+                              (adHomeController.myAdList[index].adminStatus
                                           .toString() ==
                                       'approve')
                                   ? const SizedBox()
@@ -235,11 +233,10 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        (adHomeController.myAdList[index]
-                                        .itemsList!.length ==
+                        (adHomeController.myAdList[index].itemsList!.length ==
                                     1 ||
-                                adHomeController.myAdList[index]
-                                        .itemsList!.length ==
+                                adHomeController
+                                        .myAdList[index].itemsList!.length ==
                                     0)
                             ? const SizedBox()
                             : Padding(
@@ -250,7 +247,8 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                                     cornerRadius: 30,
                                     height: 6,
                                     width: 6,
-                                    count: adHomeController.myAdList[index].itemsList!.length,
+                                    count: adHomeController
+                                        .myAdList[index].itemsList!.length,
                                     index:
                                         createAdvertisementController.pageIndex,
                                   ),
@@ -279,19 +277,19 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
           Row(
             children: [
               Text(
-                adHomeController.myAdList[index].title
-                    .toString(),
+                adHomeController.myAdList[index].title.toString(),
                 style: gilroySemiBoldTextStyle(
                   fontSize: 18,
                 ),
               ),
               const Spacer(),
-              (adHomeController.myAdList[index].adminStatus
-                          .toString() ==
+              (adHomeController.myAdList[index].adminStatus.toString() ==
                       'approve')
                   ? InkWell(
                       onTap: () {
-                        Get.to(() =>  AdvertisementApprovedScreen(traId: traId,));
+                        Get.to(() => AdvertisementApprovedScreen(
+                              traId: traId,
+                            ));
                       },
                       child: Text(
                         Strings.approved,
@@ -299,8 +297,7 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                             fontSize: 18, color: ColorRes.color_49A510),
                       ),
                     )
-                  : (adHomeController.myAdList[index].adminStatus
-                              .toString() ==
+                  : (adHomeController.myAdList[index].adminStatus.toString() ==
                           'pending')
                       ? Text(
                           'Pending',
@@ -309,7 +306,9 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                         )
                       : InkWell(
                           onTap: () {
-                            Get.to(() =>  AdvertisermentRejectedScreen(traId: traId,));
+                            Get.to(() => AdvertisermentRejectedScreen(
+                                  traId: traId,
+                                ));
                           },
                           child: Text(
                             Strings.rejected,
@@ -319,15 +318,17 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                         ),
             ],
           ),
-          Text("£${adHomeController.myAdList[index].amount??""}",style:  gilroySemiBoldTextStyle(
-            fontSize: 18,
-          ),),
+          Text(
+            "£${adHomeController.myAdList[index].amount ?? ""}",
+            style: gilroySemiBoldTextStyle(
+              fontSize: 18,
+            ),
+          ),
           const SizedBox(
             height: 20,
           ),
           ReadMoreText(
-            adHomeController.myAdList[index].description
-                .toString(),
+            adHomeController.myAdList[index].description.toString(),
             trimLines: 3,
             style: gilroyMediumTextStyle(fontSize: 14),
             trimMode: TrimMode.Line,
@@ -356,47 +357,59 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: adHomeController
-                      .myAdList[index].tagsList!.length,
+                  itemCount: adHomeController.myAdList[index].tagsList!.length,
                   itemBuilder: (context, index1) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child:adHomeController
-                        .myAdList[index].tagsList![index1]== " "?const SizedBox() :Container(
-                      height: 25,
-                      width: 80,
-                      decoration: const BoxDecoration(
-                        color: ColorRes.colorECEFF0,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                      ),
-                      child: Center(
-                        child: Container(
-                          width: 75,
-                          alignment: Alignment.center,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Text(
-                                  adHomeController.myAdList[index].tagsList![index1]
-                                      .toString(),
-                                  style: gilroyMediumTextStyle(
-                                      fontSize: 12,
-                                      color: ColorRes.color_696D6D),
+                    child: adHomeController.myAdList[index].tagsList![index1] ==
+                            " "
+                        ? const SizedBox()
+                        : Container(
+                            height: 25,
+                            // width: 80,
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            decoration: const BoxDecoration(
+                              color: ColorRes.colorECEFF0,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(4),
+                              ),
+                            ),
+                            child: Center(
+                              child: Container(
+                                // width: 75,
+                                alignment: Alignment.center,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        adHomeController
+                                            .myAdList[index].tagsList![index1]
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: gilroyMediumTextStyle(
+                                            fontSize: 12,
+                                            color: ColorRes.color_696D6D),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ],
+                              ),
+                              /* Text(
+                          createAdvertisementController.tags[index],
+                          maxLines: 1,
+                          style: gilroyMediumTextStyle(
+                              fontSize: 12, color: ColorRes.color_696D6D),
+                        ),*/
                             ),
                           ),
-                        ), /*Text(
+
+                    /*Text(
                           adHomeController
                               .myAdvertiserModel.data![index].tagsList![index1]
                               .toString(),
                           style: gilroyMediumTextStyle(
                               fontSize: 12, color: ColorRes.color_696D6D),
                         ),*/
-                      ),
-                    ),
                   ),
                 ),
               ),
@@ -413,8 +426,7 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
             height: 10,
           ),
           Text(
-            adHomeController.myAdList[index].callAction
-                .toString(),
+            adHomeController.myAdList[index].callAction.toString(),
             style: gilroyRegularTextStyle(fontSize: 14),
           ),
           const SizedBox(
@@ -439,8 +451,7 @@ class AdvertisementDetailsApprovedScreen extends StatelessWidget {
               }*/
             },
             child: Text(
-              adHomeController.myAdList[index].urlLink
-                  .toString(),
+              adHomeController.myAdList[index].urlLink.toString(),
               style: gilroyRegularTextStyle(fontSize: 14),
             ),
           ),

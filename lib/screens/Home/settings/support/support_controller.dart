@@ -142,7 +142,7 @@ class SupportController extends GetxController {
       loader.value = true;
       await uploadImageData();
       sendSupportModel = await SupportApi.sendSupportApi(
-          id: id, description: yourMsgSendController.text, item: imgIdList);
+          id: id, description: yourMsgSendController.text.toString().trim(), item: imgIdList);
       update(["Support"]);
       yourMsgSendController.clear();
       await viewSupportTicketData(id.toString());

@@ -144,7 +144,9 @@ class AdSupportController extends GetxController {
       loader.value = true;
       await uploadImageData();
       sendSupportModel = await SupportApi.sendSupportApi(
-          id: id, description: yourMsgSendController.text, item: imgIdList);
+          id: id,
+          description: yourMsgSendController.text.toString().trim(),
+          item: imgIdList);
       update(["Support"]);
       yourMsgSendController.clear();
       await viewSupportTicketData(id.toString());
@@ -159,7 +161,7 @@ class AdSupportController extends GetxController {
     loader.value = true;
     var response = await Dio()
         .get(url, options: Options(responseType: ResponseType.bytes));
-  await ImageGallerySaver.saveImage(
+    await ImageGallerySaver.saveImage(
       Uint8List.fromList(response.data),
       quality: 60,
       name: "ra",

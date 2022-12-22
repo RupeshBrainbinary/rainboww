@@ -97,6 +97,12 @@ class CreateAdvertisementController extends GetxController {
 
   bool countryBox = false;
 
+
+  dropOff(){
+      countryBox = false;
+      update(["drop"]);
+  }
+
   dropDownBox() {
     if (countryBox == false) {
       countryBox = true;

@@ -189,6 +189,8 @@ class AddCartController extends GetxController {
       if (addCardModel.status ?? false) {
         final PaymentController controller = Get.find();
         await controller.listCardApi(showToast: false);
+        controller.transactionPageModel.clear();
+        controller.page=1;
         await controller.transactionApiPagination();
         controller.loader.value = true;
 

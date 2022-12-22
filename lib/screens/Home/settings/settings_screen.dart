@@ -9,6 +9,7 @@ import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/connections/connections_screen.dart';
+import 'package:rainbow_new/screens/Home/settings/payment/payment_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/payment/payment_screen.dart';
 import 'package:rainbow_new/screens/Home/settings/settings_controller.dart';
 import 'package:rainbow_new/screens/Home/settings/subscription/subscription_screen.dart';
@@ -365,6 +366,10 @@ class SettingsScreen extends StatelessWidget {
         //payment
         InkWell(
           onTap: () {
+            PaymentController controller = Get.put(PaymentController());
+            controller.transactionPageModel.clear();
+            controller.page = 1;
+            controller.transactionApiPagination();
             Get.to(() => PaymentScreen());
           },
           child: Padding(
