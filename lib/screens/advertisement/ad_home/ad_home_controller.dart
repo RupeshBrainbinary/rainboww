@@ -64,7 +64,7 @@ class AdHomeController extends GetxController {
 
   ScrollController scrollController = ScrollController();
   int page = 1;
-  int limit = 9;
+  int limit = 15;
 
   void pagination() async {
     if (scrollController.position.pixels ==
