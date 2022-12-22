@@ -64,7 +64,7 @@ class AdHomeController extends GetxController {
 
   ScrollController scrollController = ScrollController();
   int page = 1;
-  int limit = 15;
+  int limit = 9;
 
   void pagination() async {
     if (scrollController.position.pixels ==
@@ -179,6 +179,7 @@ class AdHomeController extends GetxController {
       page++;
       print(page);
       myAdList.addAll(myAdvertiserModel.data!);
+      myAdList.toSet();
       moreOption = List.filled(myAdList.length, false);
       update(['more']);
       loader.value = false;
@@ -195,8 +196,15 @@ class AdHomeController extends GetxController {
   PaymentAdvertiseModel paymentAdvertiseModel = PaymentAdvertiseModel();
 
   Future<void> onMenuId(int? id) async {
-    paymentAdvertiseModel = await AdvPaymentApi.advPaymentApi(idAd: id ?? 0);
-    update(['more']);
+   try{
+     loader.value = false;
+     paymentAdvertiseModel = await AdvPaymentApi.advPaymentApi(idAd: id ?? 0);
+     update(['more']);
+     loader.value = false;
+   }catch(e){
+     loader.value = false;
+     print(e.toString());
+   }
   }
 
   Future<void> myAdvertiserListDataWithOutPagination({int? pageLength}) async {
