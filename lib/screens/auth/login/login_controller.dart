@@ -47,26 +47,34 @@ class LoginController extends GetxController {
     // Get.off(() => AdviserRegisterScreen(), );
   }
 
-
   void onLoginTap(context) {
     HomeController homeController = Get.put(HomeController());
     AdHomeController adHomeController = Get.put(AdHomeController());
-    AccountInformationController accountInformationController = Get.put(AccountInformationController());
+    AccountInformationController accountInformationController =
+        Get.put(AccountInformationController());
 
     //adHomeController.viewAdvertiserModel.data?.profilePhoto = null;
-    adHomeController.viewAdvertiserModel.data?.fullName = "";
-    //adHomeController.viewAdvertiserModel.data?.profileImage = "";
-    adHomeController.viewAdvertiserModel.data?.email = "";
+
+    if (adHomeController.viewAdvertiserModel != null) {
+      adHomeController.viewAdvertiserModel.data?.fullName = "";
+      //adHomeController.viewAdvertiserModel.data?.profileImage = "";
+      adHomeController.viewAdvertiserModel.data?.email = "";
+    }
+
     accountInformationController.imagePath = null;
-    
-    homeController.viewProfile.data = null;
-    homeController.controller.viewProfile.data?.profileImage = null;
-    homeController.controller.viewProfile.data?.profileImage = null;
 
-    homeController.controller.viewProfile.data?.profileImage = "";
+    if (homeController.viewProfile.data != null) {
+      homeController.viewProfile.data = null;
+      homeController.controller.viewProfile.data?.profileImage = null;
+      homeController.controller.viewProfile.data?.profileImage = null;
+      homeController.controller.viewProfile.data?.profileImage = "";
+    }
 
-    homeController.viewStoryController.storyModel.friendsStory = null;
-    homeController.viewStoryController.storyModel.friendsStory?.length = 0;
+    if (homeController.viewStoryController.storyModel.friendsStory != null) {
+      homeController.viewStoryController.storyModel.friendsStory = null;
+      homeController.viewStoryController.storyModel.friendsStory?.length = 0;
+    }
+
     homeController.friendPostListData = [];
 
     FocusScopeNode currentfocus = FocusScope.of(context);
@@ -86,10 +94,8 @@ class LoginController extends GetxController {
   void onTapShowPassword() {
     if (showPassword == false) {
       showPassword = true;
-
     } else {
       showPassword = false;
-
     }
     update(["login_form"]);
   }
@@ -140,7 +146,6 @@ class LoginController extends GetxController {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
       if (userCredential.user != null) {
-
         userUid = userCredential.user!.uid;
         await PrefService.setValue(PrefKeys.uid, userCredential.user!.uid);
         await addUser(userCredential.user!.uid);
@@ -152,7 +157,6 @@ class LoginController extends GetxController {
         //Get.to(() => const UserListScreen());
       }
     } on FirebaseAuthException catch (e) {
-
       if (e.code == "user-not-found") {
         // Get.snackbar("Error", "User Not Found");
       } else if (e.code == "wrong-password") {
@@ -186,7 +190,7 @@ class LoginController extends GetxController {
         await firebaseFirestore
             .collection("users")
             .doc(uid)
-            .update({"UserToken": token.toString(),"online": true});
+            .update({"UserToken": token.toString(), "online": true});
       }
     });
   }

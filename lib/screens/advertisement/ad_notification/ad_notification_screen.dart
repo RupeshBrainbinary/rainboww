@@ -26,6 +26,7 @@ class AdNotificationsScreen extends StatelessWidget {
       body: Stack(
         children: [
           SingleChildScrollView(
+            
             child: Container(
               width: Get.width,
               height: Get.height,
@@ -58,6 +59,7 @@ class AdNotificationsScreen extends StatelessWidget {
                         )
                       : Expanded(
                           child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
                             itemCount: controller.notificationList.length,
                             itemBuilder: (BuildContext context, int index) {
                               NotificationData model =
