@@ -89,6 +89,8 @@ class PaymentController extends GetxController {
       transactionPageModel.toSet();
 
       update(['more']);
+      update(['payment']);
+
       loader.value = false;
     } catch (e) {
       loader.value = false;
@@ -123,6 +125,8 @@ class PaymentController extends GetxController {
       viewCardApi();
       loader.value = false;
       update(['more']);
+      update(['payment']);
+
       HomeController homeController = Get.put(HomeController());
       listCardModel.data?.length == null
           ? homeController.viewProfile.data!.userType = "free"
@@ -146,6 +150,8 @@ class PaymentController extends GetxController {
           id: listCardModel.data?[selectedIndex].id ?? 0);
       loader.value = false;
       update(['more']);
+      update(['payment']);
+
     } catch (e) {
       loader.value = false;
       // errorToast("No internet connection");
@@ -159,6 +165,8 @@ class PaymentController extends GetxController {
       removeCardModel = await ListCartApi.removeCardApi(
           id: listCardModel.data?[selectedIndex].id ?? 0);
       update(['more']);
+      update(['payment']);
+
       loader.value = false;
       await listCardApi(showToast: false);
     } catch (e) {

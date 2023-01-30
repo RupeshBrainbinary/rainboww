@@ -98,7 +98,6 @@ class MessageController extends GetxController {
 
   getUid() async {
     userUid = PrefService.getString(PrefKeys.uid).toString();
-
     update(["message"]);
   }
 

@@ -307,7 +307,7 @@ class RegisterController extends GetxController {
         context: ctx,
         initialDate: DateTime(2001),
         firstDate: DateTime(1950),
-        lastDate: DateTime(2100));
+        lastDate: DateTime.now());
     if (pickedDate != null) {
       print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
