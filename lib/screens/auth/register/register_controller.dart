@@ -78,6 +78,7 @@ class RegisterController extends GetxController {
   bool ethnicityDropdown = false;
   bool kidsDropdown = false;
   RxBool loader = false.obs;
+
   Country countryModel = Country.from(json: {
     "e164_cc": "1",
     "iso2_cc": "CA",

@@ -85,7 +85,8 @@ class DashboardState extends State<Dashboard> with WidgetsBindingObserver {
                   ],
                 );
               });
-        } else {
+        }
+        else {
           controller.onBottomBarChange(0);
           setState(() {});
         }

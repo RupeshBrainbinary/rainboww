@@ -162,11 +162,63 @@
           }
         },
         {
+          "client_id": "115304537008-mp5987g29dnfnoap7q0vmfb60e1if5cc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rainbow.app",
+            "certificate_hash": "335ba685e75061f9c0080ec01c960aec2a3fa762"
+          }
+        },
+        {
           "client_id": "115304537008-vatgispjhlrnkoqfria3jumg18liatl0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.rainbow.app",
             "certificate_hash": "97e84ef85a0748f72c7ded52f19638bb13b7aa27"
+          }
+        },
+        {
+          "client_id": "115304537008-8e67mdogp38lj06c7ofk0qds78vkhlei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHDoEBaS6zAHsNvEIvUnQI42mP6_rF10s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115304537008-8e67mdogp38lj06c7ofk0qds78vkhlei.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115304537008-phvvrarcd5k3aeikg4gaud8cm2odbt2h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.application.rainbow"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115304537008:android:77595985efe88068789475",
+        "android_client_info": {
+          "package_name": "com.rainbow.surrogacy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115304537008-kigicf4qn1q1hdt9iai1pdt0g8nfjakh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rainbow.surrogacy",
+            "certificate_hash": "7ddde10cf480b7387f9befbe83e5d422431cf34f"
           }
         },
         {

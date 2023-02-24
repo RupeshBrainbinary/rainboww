@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
     ScanYourFaceController scanYourFaceController =
         Get.put(ScanYourFaceController());
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Rainbow Surrogacy',
       theme: ThemeData(
         primaryColor: ColorRes.themeColor,
         colorScheme: const ColorScheme.dark().copyWith(
