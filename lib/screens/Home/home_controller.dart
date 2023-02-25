@@ -150,10 +150,10 @@ class HomeController extends GetxController {
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(position.latitude, position.longitude);
+      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
 
       Placemark place = placemarks[0];
+
       addCity = place.locality;
       addCountry = place.country;
       addStreet = place.street;
