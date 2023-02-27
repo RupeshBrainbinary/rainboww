@@ -195,18 +195,20 @@ class AuthDashboard extends StatelessWidget {
             ),
           ],
         ),
-        Platform.isIOS? const SizedBox(height: 10):const SizedBox(
+        Platform.isIOS? const SizedBox(height: 20):const SizedBox(
         ),
-        Platform.isIOS? GestureDetector(
+        Platform.isIOS?
+        GestureDetector(
           onTap: () {
             controller.signInWithAppleC(context);
           },
           child: Container(
+            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02667),
             height: Get.height * 0.076,
-            width: Get.width * 0.40,
+            //width: Get.width * 0.80,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 1.5),
-              color: ColorRes.color_4F359B,
+              //border: Border.all(color: Colors.white, width: 1.5),
+              color: ColorRes.black,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -216,14 +218,15 @@ class AuthDashboard extends StatelessWidget {
                 SizedBox(
                   height: 14,
                   child: Image.asset(
-                  AssetRes.appleLogo
+                  AssetRes.appleLogo,
+                    color: ColorRes.white,
                   ),
                 ),
                 const SizedBox(width: 10),
                 SizedBox(
                   height: 14,
                   child: Text(
-                    "Apple Sign In",
+                    "Sign in with Apple",
                     style: gilroyMediumTextStyle(fontSize: 12),
                   ),
                 ),
