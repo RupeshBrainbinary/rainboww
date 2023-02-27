@@ -97,7 +97,7 @@ deletePopup({required BuildContext context}) {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           backgroundColor: Colors.white,
           title: Text(
-            "Delete account",
+            "Delete account successfully",
             style: gilroySemiBoldTextStyle(fontSize: 18, color: Colors.black),
           ),
           content: Text(
@@ -123,6 +123,7 @@ deletePopup({required BuildContext context}) {
                   child: const Text('yes'),
                   onPressed: () async {
                     Navigator.of(context).pop();
+                    Get.offAll(AuthDashboard());
                   },
                 );
               },
@@ -141,7 +142,7 @@ deletePopupAdvertise({required BuildContext context, required GlobalKey<Scaffold
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           backgroundColor: Colors.white,
           title: Text(
-            "Delete account",
+            "Delete account successfully",
             style: gilroySemiBoldTextStyle(fontSize: 18, color: Colors.black),
           ),
           content: Text(
@@ -153,6 +154,7 @@ deletePopupAdvertise({required BuildContext context, required GlobalKey<Scaffold
               child: const Text('No'),
               onPressed: () {
                 Navigator.of(context).pop();
+
               },
             ),
             Container(
@@ -167,6 +169,7 @@ deletePopupAdvertise({required BuildContext context, required GlobalKey<Scaffold
                   child: const Text('yes'),
                   onPressed: () async {
                     Navigator.of(context).pop();
+                    Get.offAll(AuthDashboard());
                   },
                 );
               },

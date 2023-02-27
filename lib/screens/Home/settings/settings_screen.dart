@@ -531,7 +531,8 @@ class SettingsScreen extends StatelessWidget {
         SizedBox(
           height: Get.height * 0.03,
         ),
-        Text(
+       ///ReferralCode
+       /* Text(
           Strings.yourReferralCode,
           style: textStyleFont15White,
         ),
@@ -561,7 +562,7 @@ class SettingsScreen extends StatelessWidget {
               style: gilroyBoldTextStyle(fontSize: 11.9619),
             )),
           ),
-        ),
+        ),*/
         SizedBox(
           height: Get.height * 0.045,
         ),

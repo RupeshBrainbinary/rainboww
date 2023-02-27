@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'package:rainbow_new/common/Widget/text_styles.dart';
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
