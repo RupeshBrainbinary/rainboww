@@ -25,7 +25,7 @@ class RegisterForm extends StatelessWidget {
             controller.dropCloced(context);
           },
           child: Column(children: [
-            controller.isSocial
+            controller.isSocial  && controller.fullNameController.text.isNotEmpty
                 ? Column(
                     children: [
                       Align(

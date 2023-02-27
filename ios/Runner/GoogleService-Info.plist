@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>115304537008-phvvrarcd5k3aeikg4gaud8cm2odbt2h.apps.googleusercontent.com</string>
+	<string>115304537008-vkgars67fh9slmkarib4l064974ek65h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.115304537008-phvvrarcd5k3aeikg4gaud8cm2odbt2h</string>
+	<string>com.googleusercontent.apps.115304537008-vkgars67fh9slmkarib4l064974ek65h</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>115304537008-7udakp002af508ju3oav2k42ge0aopb9.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.application.rainbow</string>
+	<string>com.rainbow.app</string>
 	<key>PROJECT_ID</key>
 	<string>rainbow-99314</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:115304537008:ios:4ec55d4cc3b9a416789475</string>
+	<string>1:115304537008:ios:df16dcf4be319e74789475</string>
 </dict>
 </plist>

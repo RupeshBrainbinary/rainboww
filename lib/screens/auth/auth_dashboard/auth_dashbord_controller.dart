@@ -271,7 +271,7 @@ String? token;
         final userCredential =
         await _firebaseAuth.signInWithCredential(credential);
         final firebaseUser = userCredential.user;
-        if (scopes.contains(Scope.fullName)) {
+     /*   if (scopes.contains(Scope.fullName)) {
           final fullName = appleIdCredential.fullName;
           if (fullName != null &&
               fullName.givenName != null &&
@@ -279,6 +279,43 @@ String? token;
             final displayName = '${fullName.givenName} ${fullName.familyName}';
             await firebaseUser!.updateDisplayName(displayName);
           }
+        }*/
+        final User? user = userCredential.user;
+        try {
+          await GoogleIdVerification.postRegister(userCredential.user!.uid,
+              user: userCredential.user,email: userCredential.user!.email.toString())
+              .then((LoginModel? model) async {
+
+            LoginApi.updateDeviceToken();
+            await firebaseFirestore
+                .collection("users")
+                .doc(user!.uid)
+                .get()
+                .then((value) async {
+              if (value.exists) {
+                await firebaseFirestore
+                    .collection("users")
+                    .doc(user.uid)
+                    .update({"online": true,   "id": model?.data?.id, "UserToken": token.toString()});
+                await PrefService.setValue(PrefKeys.uid, user.uid);
+              } else {
+                await firebaseFirestore.collection("users").doc(user.uid).set({
+                  "id": model?.data?.id,
+                  "email": user.email,
+                  "uid": user.uid,
+                  "name": user.displayName==null?"":user.displayName,
+                  "image": user.photoURL,
+                  "online": true,
+                  "UserToken": token.toString()
+                });
+              }
+            });
+          });
+          print("DisplayNAme==========================###################### ${user!.displayName}");
+        } catch (e) {
+          errorToast(e.toString());
+          debugPrint(e.toString());
+          loading.value = false;
         }
         return firebaseUser!;
       case AuthorizationStatus.error:
@@ -295,5 +332,8 @@ String? token;
       default:
         throw UnimplementedError();
     }
+
   }
+
+
 }

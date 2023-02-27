@@ -36,7 +36,7 @@ class GoogleIdVerification {
           controller.isSocial = true;
           controller.socialId = id;
           controller.emailController.text = user!.email ?? "";
-          controller.fullNameController.text = user.displayName ?? "";
+         /* controller.fullNameController.text = (user.displayName==null? "":user.displayName)!;*/
           controller.phoneController.text = user.phoneNumber ?? "";
           Get.to(() => RegisterScreen());
         } else {

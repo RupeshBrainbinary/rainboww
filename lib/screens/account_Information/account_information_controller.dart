@@ -17,6 +17,7 @@ import '../../common/popup.dart';
 import '../../utils/strings.dart';
 
 class AccountInformationController extends GetxController {
+  ///____________ variables _________________
   RxBool loader = false.obs;
   bool companySelected = false;
   File? imagePath;
@@ -48,6 +49,7 @@ class AccountInformationController extends GetxController {
   AdInformationModel adViewProfile = AdInformationModel();
   UploadImage uploadImage = UploadImage();
   String? idCon = "";
+  ///_______________ country function _____________-
   Country countryModel = Country.from(json: {
     "e164_cc": "1",
     "iso2_cc": "CA",
@@ -67,7 +69,7 @@ class AccountInformationController extends GetxController {
 
     update(["doctor"]);
   }
-
+///___________ get data api_____________-
   Future<void> onGetData() async {
     loader.value = true;
     imageID = PrefService.getInt(PrefKeys.advertiserProfileID);

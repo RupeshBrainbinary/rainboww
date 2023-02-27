@@ -72,6 +72,7 @@ class LoginApi {
               controller.phoneNumber =
                   jsonDecode(response.body)["data"]["phone_number"];
               await controller.sendOtp();
+
               Get.to(() => const RegisterOtpScreen());
             } else if (jsonDecode(response.body)["data"]["id_status"] ==
                 "pending") {

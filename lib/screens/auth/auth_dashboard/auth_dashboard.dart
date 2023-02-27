@@ -1,3 +1,7 @@
+
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/Widget/buttons.dart';
@@ -191,7 +195,7 @@ class AuthDashboard extends StatelessWidget {
             ),
           ],
         ),
-       /* Platform.isIOS? const SizedBox(height: 10):const SizedBox(
+        Platform.isIOS? const SizedBox(height: 10):const SizedBox(
         ),
         Platform.isIOS? GestureDetector(
           onTap: () {
@@ -226,7 +230,7 @@ class AuthDashboard extends StatelessWidget {
               ],
             ),
           ),
-        ):const SizedBox(),*/
+        ):const SizedBox(),
 
       ],
     );
