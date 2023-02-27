@@ -419,6 +419,23 @@ class _AdvertisementDashBordState extends State<AdvertisementDashBord> {
                                   ),
                                 ),
                                 SizedBox(
+                                  height: Get.height * 0.0265,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      right: Get.width * 0.0498),
+                                  child: SubmitButton(
+                                    onTap: () =>
+                                        deletePopupAdvertise(context: context,key :drawerKey),
+                                    child: Text(
+                                      Strings.deleteAccount,
+                                      style: gilroyBoldTextStyle(
+                                          fontSize: 16,
+                                          color: ColorRes.black),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
                                   height: Get.height * 0.0665,
                                 )
                               ],

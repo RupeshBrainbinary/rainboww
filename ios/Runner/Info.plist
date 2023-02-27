@@ -78,13 +78,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>camera description.</string>
+	<string>We would like to access camera for selfie and id verification.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This application requires location services to work</string>
+	<string>Rainbow application requires location permission for to get near by user, to whom you can send friend request</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This application requires location services to work</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Please grant microphone access</string>
+	<string>Rainbow application requires location permission for to get near by user, to whom you can send friend request</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string> photos description.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

@@ -278,6 +278,7 @@ class Strings {
   static const yourReferralCode = "Your Referral Code";
   static const inviteNow = "Invite Now";
   static const logout = "Logout";
+  static const deleteAccount = "Delete account";
   static const connectionRequest = "Connection Request";
   static const suggestedConnection = "Suggested Connection";
   static const addCard = "Add Card";

@@ -173,7 +173,7 @@ class MessageScreen extends StatelessWidget {
                                   stream: FirebaseFirestore.instance
                                       .collection('chats')
                                       .where("uidList",
-                                          arrayContains: controller.userUid)
+                                      arrayContains: controller.userUid)
                                       .snapshots(),
                                   builder: (context, snapshot) {
                                     if (snapshot.data == null ||

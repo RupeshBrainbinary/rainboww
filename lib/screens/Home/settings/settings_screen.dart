@@ -568,6 +568,26 @@ class SettingsScreen extends StatelessWidget {
         GestureDetector(
           onTap: () async {
             //controller.logOutDetails();
+            deletePopup(context: context);
+          },
+          child: Container(
+            alignment: Alignment.center,
+            height: 60,
+            width: Get.width * 0.8,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.67),
+                color: ColorRes.colorFFEC5C),
+            child: Text(Strings.deleteAccount,
+                style: gilroyMediumTextStyle(
+                    color: Colors.black, fontSize: 16)),
+          ),
+        ),
+        SizedBox(
+          height: Get.height * 0.025,
+        ),
+        GestureDetector(
+          onTap: () async {
+            //controller.logOutDetails();
             logoutPopup(context: context);
           },
           child: Container(
@@ -578,19 +598,19 @@ class SettingsScreen extends StatelessWidget {
                 color: ColorRes.colorFFEC5C),
             child: Center(
                 child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                    height: 15, width: 15, child: Image.asset(AssetRes.logout)),
-                const SizedBox(
-                  width: 11,
-                ),
-                Text(Strings.logout,
-                    style: gilroyMediumTextStyle(
-                        color: Colors.black, fontSize: 16)),
-              ],
-            )),
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        height: 15, width: 15, child: Image.asset(AssetRes.logout)),
+                    const SizedBox(
+                      width: 11,
+                    ),
+                    Text(Strings.logout,
+                        style: gilroyMediumTextStyle(
+                            color: Colors.black, fontSize: 16)),
+                  ],
+                )),
           ),
         ),
         const SizedBox(

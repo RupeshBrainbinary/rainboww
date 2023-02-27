@@ -88,6 +88,94 @@ logoutPopup({required BuildContext context}) {
       });
 }
 
+deletePopup({required BuildContext context}) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: Colors.white,
+          title: Text(
+            "Delete account",
+            style: gilroySemiBoldTextStyle(fontSize: 18, color: Colors.black),
+          ),
+          content: Text(
+            "Your account will delete in 24 hours",
+            style: gilroyMediumTextStyle(fontSize: 14, color: Colors.black),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            Container(
+              height: 20,
+              width: 0.5,
+              color: Colors.grey,
+            ),
+            GetBuilder<SettingsController>(
+              id: "setting",
+              builder: (controller) {
+                return TextButton(
+                  child: const Text('yes'),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  },
+                );
+              },
+            ),
+          ],
+        );
+      });
+}
+
+deletePopupAdvertise({required BuildContext context, required GlobalKey<ScaffoldState> key}) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: Colors.white,
+          title: Text(
+            "Delete account",
+            style: gilroySemiBoldTextStyle(fontSize: 18, color: Colors.black),
+          ),
+          content: Text(
+            "Your account will delete in 24 hours",
+            style: gilroyMediumTextStyle(fontSize: 14, color: Colors.black),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            Container(
+              height: 20,
+              width: 0.5,
+              color: Colors.grey,
+            ),
+            GetBuilder<SettingsController>(
+              id: "setting",
+              builder: (controller) {
+                return TextButton(
+                  child: const Text('yes'),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  },
+                );
+              },
+            ),
+          ],
+        );
+      });
+}
+
 logoutPopupAdvertise(
     {required BuildContext context, required GlobalKey<ScaffoldState> key}) {
   return showDialog(
