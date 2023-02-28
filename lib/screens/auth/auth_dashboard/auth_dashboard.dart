@@ -242,7 +242,7 @@ class AuthDashboard extends StatelessWidget {
   Widget alreadyHaveAccount(AuthDashBordController controller) {
     return Column(
       children: [
-        SizedBox(height: Get.height * 0.0788),
+        SizedBox(height: Get.height * 0.0688),
         GestureDetector(
           onTap: controller.onSignInTap,
           child: Row(
@@ -282,7 +282,7 @@ class AuthDashboard extends StatelessWidget {
         sizedBox14(),
         SizedBox(
           width: Get.width * 0.67,
-          height: Get.height * 0.040,
+          height: Get.height * 0.035,
           child: Center(
             child: SizedBox(
               height: Get.height * 0.040,
