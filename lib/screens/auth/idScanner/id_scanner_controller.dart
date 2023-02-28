@@ -23,7 +23,7 @@ class IdScannerController extends GetxController {
 
   GlobalKey widgetKey = GlobalKey();
 
-  /*@override
+  @override
   void onInit() async {
     await getCamera();
     controller = CameraController(
@@ -34,7 +34,7 @@ class IdScannerController extends GetxController {
     initializeControllerFuture = controller!.initialize();
     update();
     super.onInit();
-  }*/
+  }
 
   final String _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';

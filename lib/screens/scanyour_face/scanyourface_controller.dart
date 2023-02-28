@@ -23,7 +23,7 @@ class ScanYourFaceController extends GetxController {
 
   RxBool loader = false.obs;
 
-  /*@override
+  @override
   void onInit() async {
     await getCamera();
     controller = CameraController(
@@ -34,7 +34,7 @@ class ScanYourFaceController extends GetxController {
     update();
     update(["imagePicker"]);
     super.onInit();
-  }*/
+  }
 
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
