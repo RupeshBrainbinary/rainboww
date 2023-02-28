@@ -195,7 +195,7 @@ class AuthDashboard extends StatelessWidget {
             ),
           ],
         ),
-        Platform.isIOS? const SizedBox(height: 20):const SizedBox(
+        Platform.isIOS? const SizedBox(height: 10):const SizedBox(
         ),
         Platform.isIOS?
         GestureDetector(
