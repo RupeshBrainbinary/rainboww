@@ -72,13 +72,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>We would like to access camera for selfie and id verification.</string>
+	<string>We would like to access camera for selfie verification, id verification and profile picture image.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Rainbow application requires location permission for to get near by user, to whom you can send friend request</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Rainbow application requires location permission for to get near by user, to whom you can send friend request</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string> photos description.</string>
+	<string>We would like to access camera for selfie verification, id verification and profile picture image.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
