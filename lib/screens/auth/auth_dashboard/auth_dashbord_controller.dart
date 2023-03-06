@@ -21,7 +21,6 @@ import 'package:rainbow_new/service/notification_service.dart';
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
 import 'package:rainbow_new/utils/strings.dart';
-
 import '../login/login_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
@@ -179,13 +178,13 @@ String? token;
     try {
       loading.value = true;
       token = await NotificationService.getFcmToken();
-      final LoginResult loginResult = await FacebookAuth.instance
-          .login(permissions: ["public_profile", "email"]);
+      final LoginResult loginResult = await FacebookAuth.instance.login(permissions: ["email", "public_profile"]);
       await FacebookAuth.instance.getUserData();
       final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token,);
 
       UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
       final User? user = userCredential.user;
+      print("${userCredential.user!.email.toString()}");
       try {
         await GoogleIdVerification.postRegister(userCredential.user!.uid,
             user: userCredential.user,email: userCredential.user!.email.toString())
@@ -242,7 +241,6 @@ String? token;
   void onSignUpTap() {
     Get.to(() => AdviserRegisterScreen());
   }
-
 
   final _firebaseAuth = FirebaseAuth.instance;
    signInWithAppleC(BuildContext context) async {

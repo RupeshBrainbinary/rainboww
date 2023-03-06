@@ -31,7 +31,7 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb799651911403399</string>
+				<string>fb508602371237576</string>
 			</array>
 		</dict>
 		<dict>
@@ -66,9 +66,9 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>799651911403399</string>
+	<string>508602371237576</string>
 	<key>FacebookClientToken</key>
-	<string>70d1962ecb1c4dc10693a273b339d2d2</string>
+	<string>c97cd27fb01b5c9c9f3e4cb064e6266a</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
