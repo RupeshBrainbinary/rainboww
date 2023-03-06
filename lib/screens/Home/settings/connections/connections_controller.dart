@@ -7,7 +7,6 @@ import 'package:rainbow_new/screens/Home/settings/connections/connections_profil
 import 'package:rainbow_new/screens/Home/settings/connections/connections_profile/connections_profile_screen.dart';
 import 'package:rainbow_new/screens/Profile/acceptFriendRequest_api/accaept_fried_request_api.dart';
 import 'package:rainbow_new/screens/Profile/sendFriendRequest_api/send_friend_request_api.dart';
-
 import '../../../Profile/cancleFriendRequest_api/cancel_friend_request_api.dart';
 
 class ConnectionsController extends GetxController {

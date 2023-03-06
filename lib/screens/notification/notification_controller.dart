@@ -1,14 +1,10 @@
 import 'package:get/get.dart';
-
 import 'package:rainbow_new/screens/notification/api/notification_api.dart';
-
 import '../../model/notification_model.dart';
 
 class NotificationsController extends GetxController {
   RxBool loader = false.obs;
   List<NotificationData> notificationList = [];
-
-
 
   @override
   void onInit() {

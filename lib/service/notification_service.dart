@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -32,8 +31,7 @@ class NotificationService {
         FlutterLocalNotificationsPlugin();
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
@@ -42,6 +40,7 @@ class NotificationService {
 
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
+
       if (notification != null && android != null) {
         _notyController.getNotifications();
         Map<String, dynamic> payload = message!.data;
@@ -92,8 +91,7 @@ class NotificationService {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
     const IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
-            onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+        IOSInitializationSettings(onDidReceiveLocalNotification: onDidReceiveLocalNotification);
     const InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
@@ -147,7 +145,7 @@ class NotificationService {
       SendNotificationModel notification) async {
     await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),
-      headers: <String, String>{
+      headers: <String, String> {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'key=$serverToken',
       },
