@@ -17,7 +17,6 @@ import 'package:rainbow_new/service/notification_service.dart';
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/color_res.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
-
 import 'screens/auth/register/widget/registerVerify_controller.dart';
 
 Future<void> main() async {
