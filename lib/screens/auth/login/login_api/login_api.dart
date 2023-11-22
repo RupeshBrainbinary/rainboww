@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/screens/Home/home_controller.dart';
 import 'package:rainbow_new/screens/advertisement/ad_dashboard/ad_dashboard.dart';
@@ -63,18 +61,26 @@ class LoginApi {
           //flutterToast(jsonDecode(response.body)["message"]);
 
           if (jsonDecode(response.body)["data"]["role"] != "advertisers") {
-            if (jsonDecode(response.body)["data"]["mobile_status"] ==
-                "pending") {
+
               await PrefService.setValue(
                   PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
               await PrefService.setValue(PrefKeys.phonSaveNumberEndUser,
                   jsonDecode(response.body)["data"]["phone_number"]);
               controller.phoneNumber =
                   jsonDecode(response.body)["data"]["phone_number"];
-              await controller.sendOtp();
 
-              Get.to(() => const RegisterOtpScreen());
-            } else if (jsonDecode(response.body)["data"]["id_status"] ==
+            // if (jsonDecode(response.body)["data"]["mobile_status"] == "pending") {
+            //   await PrefService.setValue(
+            //       PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
+            //   await PrefService.setValue(PrefKeys.phonSaveNumberEndUser,
+            //       jsonDecode(response.body)["data"]["phone_number"]);
+            //   controller.phoneNumber =
+            //       jsonDecode(response.body)["data"]["phone_number"];
+            //   await controller.sendOtp();
+            //
+            //   Get.to(() => const RegisterOtpScreen());
+            // } else
+              if (jsonDecode(response.body)["data"]["id_status"] ==
                 "pending") {
               Get.to(() => IdVerificationScreen());
             } else if (jsonDecode(response.body)["data"]["selfi_status"] ==
@@ -111,25 +117,36 @@ class LoginApi {
                 PrefKeys.loginRole, jsonDecode(response.body)["data"]["role"]);
 
             // flutterToast(jsonDecode(response.body)["message"]);
-            if(jsonDecode(response.body)["data"]["mobile_status"]=="active"){
-              await PrefService.setValue(PrefKeys.isLogin, true);
-            }
-            if (jsonDecode(response.body)["data"]["mobile_status"] ==
-                "pending") {
-              advertiserVerifyController.phoneNumberRegister();
-              Get.to(() => const AdvertiserVerifyOtpScreen());
-            } else {
-              // flutterToast(jsonDecode(response.body)["message"]);
-              HomeController homeController = Get.put(HomeController());
-           /*   await homeController.init();*/
 
-              flutterToast(jsonDecode(response.body)["message"]);
+            // if(jsonDecode(response.body)["data"]["mobile_status"]=="active"){
+            //   await PrefService.setValue(PrefKeys.isLogin, true);
+            // }
 
-              Get.offAll(() =>
-                  jsonDecode(response.body)["data"]["role"] == "end_user"
-                      ? const Dashboard()
-                      : AdvertisementDashBord());
-            }
+            await PrefService.setValue(PrefKeys.isLogin, true);
+
+
+            flutterToast(jsonDecode(response.body)["message"]);
+
+            Get.offAll(() =>
+            jsonDecode(response.body)["data"]["role"] == "end_user"
+                ? const Dashboard()
+                : AdvertisementDashBord());
+
+           //  if (jsonDecode(response.body)["data"]["mobile_status"] == "pending") {
+           //    advertiserVerifyController.phoneNumberRegister();
+           //    Get.to(() => const AdvertiserVerifyOtpScreen());
+           //  } else {
+           //    // flutterToast(jsonDecode(response.body)["message"]);
+           //    HomeController homeController = Get.put(HomeController());
+           // /*   await homeController.init();*/
+           //
+           //    flutterToast(jsonDecode(response.body)["message"]);
+           //
+           //    Get.offAll(() =>
+           //        jsonDecode(response.body)["data"]["role"] == "end_user"
+           //            ? const Dashboard()
+           //            : AdvertisementDashBord());
+           //  }
           }
           //Get.offAll(() => const Dashboard());
 

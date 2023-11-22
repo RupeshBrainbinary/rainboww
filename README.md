@@ -7,3 +7,5 @@ key alias -> key0
 
 flutter.versionName=1.0.0
 flutter.versionCode=1
+
+sdk : 3.3.10

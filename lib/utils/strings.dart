@@ -86,7 +86,7 @@ class Strings {
   static const currentPasswordHint = "current password  is required";
   static const currentPassword = "current password";
   static const submit = "Submit";
-  static const codeSent = "Code is sent to ";
+  static const codeSent = "Code is sent to";
   static const companyNumberDigit = "123 456 789 3123";
   static const captureImageBack = "please capture backgroundImage";
   static const captureImageFront = "please capture  frontImage";

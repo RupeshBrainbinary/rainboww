@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-
 import 'package:rainbow_new/screens/Profile/profile_api/profile_model.dart';
 import 'package:rainbow_new/service/http_services.dart';
 import 'package:rainbow_new/service/pref_services.dart';

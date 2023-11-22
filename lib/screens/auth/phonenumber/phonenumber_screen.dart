@@ -53,7 +53,17 @@ class PhoneNumberScreen extends StatelessWidget {
                                   SizedBox(
                                     height: Get.height * 0.09,
                                   ),
-                                  phoneTextField(context),
+                                  // phoneTextField(context),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+                                    child: AppTextFiled(
+                                      controller: controller.emailController,
+                                      title: Strings.email,
+                                      hintText: Strings.naranataliEmail,
+                                      textInputType: TextInputType.emailAddress,
+                                      fontsize: 16,
+                                    ),
+                                  ),
                                   SizedBox(
                                     height: Get.height * 0.06,
                                   ),

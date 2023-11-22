@@ -40,7 +40,7 @@ class AuthDashboard extends StatelessWidget {
                         children: [
                           logorainbow_new(),
                           continueWithEmail(),
-                          googleFacebook(controller,context),
+                          //googleFacebook(controller,context),
                           alreadyHaveAccount(controller),
                         ],
                       ),
@@ -112,10 +112,10 @@ class AuthDashboard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Text(
-          "OR",
-          style: textStyleFont14White,
-        ),
+        // Text(
+        //   "OR",
+        //   style: textStyleFont14White,
+        // ),
       ],
     );
   }
@@ -195,7 +195,8 @@ class AuthDashboard extends StatelessWidget {
             ),
           ],
         ),
-        Platform.isIOS? const SizedBox(height: 10):const SizedBox(
+        Platform.isIOS
+            ? const SizedBox(height: 10):const SizedBox(
         ),
         Platform.isIOS?
         GestureDetector(

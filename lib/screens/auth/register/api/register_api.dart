@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:rainbow_new/common/popup.dart';
 import 'package:rainbow_new/screens/auth/register/register_json.dart';
 import 'package:rainbow_new/screens/auth/register/widget/RegisterVerifyOtp_Screen.dart';
+import 'package:rainbow_new/screens/idVerification/idverification_screen.dart';
+import 'package:rainbow_new/screens/selfie_verification/selfie_verification_screen.dart';
 import 'package:rainbow_new/service/http_services.dart';
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/end_points.dart';
@@ -51,7 +53,15 @@ class RegisterApi {
         if (status == false) {
           errorToast(jsonDecode(response.body)["message"]);
         } else if (status == true) {
-          Get.to(() => const RegisterOtpScreen());
+          //Get.to(() => const RegisterOtpScreen());
+
+          if (jsonDecode(response.body)["data"]["id_status"] == "pending") {
+            Get.offAll(() => IdVerificationScreen());
+          } else if (jsonDecode(response.body)["data"]["selfi_status"] ==
+              "pending") {
+            Get.offAll(() => const SelfieVerificationScreen());
+          }
+
           await PrefService.setValue(
               PrefKeys.userId, jsonDecode(response.body)["data"]["id"]);
           await PrefService.setValue(PrefKeys.referrallCode,

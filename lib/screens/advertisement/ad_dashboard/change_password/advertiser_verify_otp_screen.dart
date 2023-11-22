@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rainbow_new/screens/advertisement/ad_dashboard/change_password/advertiser_verify_controller.dart';
+import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
 import 'package:rainbow_new/service/pref_services.dart';
 import 'package:rainbow_new/utils/asset_res.dart';
 import 'package:rainbow_new/utils/pref_keys.dart';
@@ -22,6 +23,7 @@ class AdvertiserVerifyOtpScreen extends StatefulWidget {
 class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
   AdvertiserVerifyController controller = Get.put(AdvertiserVerifyController());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AdHomeController adHomeController = Get.put(AdHomeController());
 
   @override
   void initState() {
@@ -33,14 +35,13 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
 
   @override
   void dispose() {
-    controller.verifyController.dispose();
+    //controller.verifyController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    AdvertiserVerifyController controller =
-        Get.put(AdvertiserVerifyController());
+    AdvertiserVerifyController controller = Get.put(AdvertiserVerifyController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(() {
@@ -100,15 +101,28 @@ class _AdvertiserVerifyOtpScreenState extends State<AdvertiserVerifyOtpScreen> {
                                       padding: const EdgeInsets.only(left: 15),
                                       child: Row(
                                         children: [
-                                          Text(
-                                            "${Strings.codeSent} ${PrefService.getString(PrefKeys.phonSaveNumberAdvertiser).toString()}",
-                                            style: TextStyle(
-                                                color: ColorRes.white
-                                                    .withOpacity(0.5),
-                                                fontSize: 14,
-                                                fontFamily: "Gilroy-Light",
-                                                fontWeight: FontWeight.w600),
+                                          SizedBox(
+                                            width: Get.width * 0.85,
+                                            child: Text(
+                                              "${Strings.codeSent} ${adHomeController.viewAdvertiserModel.data!.email.toString()}",
+                                              style: TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                                  color: ColorRes.white
+                                                      .withOpacity(0.5),
+                                                  fontSize: 14,
+                                                  fontFamily: "Gilroy-Light",
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
+                                          // Text(
+                                          //   "${Strings.codeSent} ${PrefService.getString(PrefKeys.phonSaveNumberAdvertiser).toString()}",
+                                          //   style: TextStyle(
+                                          //       color: ColorRes.white
+                                          //           .withOpacity(0.5),
+                                          //       fontSize: 14,
+                                          //       fontFamily: "Gilroy-Light",
+                                          //       fontWeight: FontWeight.w600),
+                                          // ),
                                         ],
                                       ));
                                 },

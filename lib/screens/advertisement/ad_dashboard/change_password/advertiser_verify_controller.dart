@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rainbow_new/common/popup.dart';
+import 'package:rainbow_new/screens/advertisement/ad_home/ad_home_controller.dart';
 import 'package:rainbow_new/screens/auth/phonenumber/phonenumber_api/phonenumber_api.dart';
 import 'package:rainbow_new/screens/auth/verify_phone/verifyPhone_api/verify_phone_json.dart';
 import 'package:rainbow_new/screens/auth/verify_phone/verifyPhone_api/verifyphone_api.dart';
@@ -17,6 +18,8 @@ class AdvertiserVerifyController extends GetxController {
   Timer? _countDown;
   String phoneNumber = "";
   String backScreen = "";
+
+
 
   bool validation() {
     if (verifyController.text.isEmpty) {
@@ -39,12 +42,16 @@ class AdvertiserVerifyController extends GetxController {
     }
   }
 
+  AdHomeController adHomeController = Get.put(AdHomeController());
+
   Future<void> phoneNumberRegister() async {
     try {
       loader.value = true;
-      await PhoneNumberApi.advertiserSendOtp(phoneNumber == ""
-          ? PrefService.getString(PrefKeys.phonSaveNumberAdvertiser).toString()
-          : phoneNumber);
+      // await PhoneNumberApi.advertiserSendOtp(phoneNumber == ""
+      //     ? PrefService.getString(PrefKeys.phonSaveNumberAdvertiser).toString()
+      //     : phoneNumber);
+
+      await PhoneNumberApi.advertiserSendOtp(adHomeController.viewAdvertiserModel.data!.email.toString());
 
       loader.value = false;
     } catch (e) {

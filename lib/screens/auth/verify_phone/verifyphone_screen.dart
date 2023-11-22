@@ -107,14 +107,18 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                             const EdgeInsets.only(left: 15),
                                         child: Row(
                                           children: [
-                                            Text(
-                                              "${Strings.codeSent} +${controller.countryModel.phoneCode}  ${controller.phoneNumber.text.toString()}",
-                                              style: TextStyle(
-                                                  color: ColorRes.white
-                                                      .withOpacity(0.5),
-                                                  fontSize: 14,
-                                                  fontFamily: "Gilroy-Light",
-                                                  fontWeight: FontWeight.w600),
+                                            SizedBox(
+                                              width: Get.width * 0.85,
+                                              child: Text(
+                                                "${Strings.codeSent} ${controller.emailController.text}",
+                                                style: TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    color: ColorRes.white
+                                                        .withOpacity(0.5),
+                                                    fontSize: 14,
+                                                    fontFamily: "Gilroy-Light",
+                                                    fontWeight: FontWeight.w600),
+                                              ),
                                             ),
                                           ],
                                         ));

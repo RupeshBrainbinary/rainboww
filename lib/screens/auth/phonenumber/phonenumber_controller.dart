@@ -8,11 +8,15 @@ import 'package:rainbow_new/utils/strings.dart';
 
 class PhoneNumberController extends GetxController {
   TextEditingController phoneNumber = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   RxBool loader = false.obs;
 
   bool validation() {
-    if (phoneNumber.text.isEmpty) {
+    if (emailController.text.isEmpty) {
       errorToast(Strings.phoneNumberError);
+      return false;
+    }  else if (!GetUtils.isEmail(emailController.text)) {
+      errorToast(Strings.emailValidError);
       return false;
     }
     /*else if (GetUtils.isPhoneNumber(phoneNumber.text)) {
@@ -55,10 +59,21 @@ class PhoneNumberController extends GetxController {
   PhoneNumber phoneNumberModel = Get.put(PhoneNumber());
 
   Future<void> phoneNumberRegister() async {
+    // try {
+    //   loader.value = true;
+    //   await PhoneNumberApi.postRegister(
+    //           "+${countryModel.phoneCode} ${phoneNumber.text}")
+    //       .then((value) => phoneNumberModel = value);
+    //   /*  await PrefService.setValue(
+    //       PrefKeys.id, phoneNumberModel.data!.id.toString();*/
+    //   loader.value = false;
+    // } catch (e) {
+    //   loader.value = false;
+    // }
+
     try {
       loader.value = true;
-      await PhoneNumberApi.postRegister(
-              "+${countryModel.phoneCode} ${phoneNumber.text}")
+      await PhoneNumberApi.postRegister(emailController.text)
           .then((value) => phoneNumberModel = value);
       /*  await PrefService.setValue(
           PrefKeys.id, phoneNumberModel.data!.id.toString();*/

@@ -240,7 +240,7 @@ class SubscriptionScreen extends StatelessWidget {
                         ),
                         SubmitButton(
                           onTap: () {
-                            Get.to(() => SubscriptionPaymentScreen(amount: controller.subscriptionModel.data!.amount.toString(),));
+                            Get.to(() => SubscriptionPaymentScreen(amount: controller.subscriptionModel.data?.amount.toString() ?? "",));
                           },
                           child: Text(
                             Strings.subscribe,

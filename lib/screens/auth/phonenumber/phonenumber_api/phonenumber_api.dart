@@ -14,13 +14,13 @@ import 'package:rainbow_new/utils/pref_keys.dart';
 
 class PhoneNumberApi {
   static Future postRegister(
-    String phoneNumber,
+    String email,
   ) async {
     // List<PhoneNumber> phoneList = [];
     try {
       String url = EndPoints.mobileCheck;
       Map<String, String> param = {
-        'phoneNumber': phoneNumber,
+        'email': email,
       };
 
       http.Response? response = await HttpService.postApi(
@@ -129,7 +129,7 @@ class PhoneNumberApi {
     try {
       String url = EndPoints.mobileCheck;
       Map<String, String> param = {
-        'phoneNumber': phoneNumber,
+        'email': phoneNumber,
       };
 
       http.Response? response = await HttpService.postApi(

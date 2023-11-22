@@ -77,10 +77,16 @@
 	<string>Rainbow application requires location permission for to get near by user, to whom you can send friend request</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Rainbow application requires location permission for to get near by user, to whom you can send friend request</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Rainbow application requires location permission for to get near by user, to whom you can send friend request</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We would like to access camera for selfie verification, id verification and profile picture image.</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Rainbow application requires microphone permission</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

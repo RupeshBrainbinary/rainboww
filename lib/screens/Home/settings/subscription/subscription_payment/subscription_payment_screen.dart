@@ -143,7 +143,7 @@ class SubscriptionPaymentScreen extends StatelessWidget {
                               ),*/
                               GetBuilder<SubscriptionPaymentController>(id:"sub",
                                 builder: (controller) {
-                                return controller.viewCardModel.data == null ?const SizedBox():InkWell(
+                                return controller.viewCardModel.data == null ? const SizedBox():InkWell(
                                   onTap: () {
                                     controller.changeIndex(0);
                                   },
@@ -419,7 +419,7 @@ class SubscriptionPaymentScreen extends StatelessWidget {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                    text: "£$amount",
+                    text: (amount == "") ? "£9.99" : "£$amount",
                     style: interTextMedium(fontSize: 32, color: ColorRes.white),
                   ),
                   TextSpan(
